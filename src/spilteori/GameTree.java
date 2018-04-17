@@ -36,9 +36,9 @@ public interface GameTree {
     
     /**Creates the Tree for the respective game
      * 
-     * @param newGame The game to create a new GameTree of
+     * @param GameBoard ArrayList<Field> representing the current Board of the game
      */
-    public void createTree(Game newGame);
+    public void createTree(ArrayList<Field> GameBoard, Game newGame);
     
     /**Figures out the best move, for the current cursor of the Tree
      * 
@@ -55,6 +55,13 @@ public interface GameTree {
      * @return int pointing to current index
      */
     public int getCursor();
+    
+    /**Points the Cursor to the new given Field
+     * 
+     * @param newMove Field that the cursor needs to point to
+     */
+    public void setCursor(Field newMove);
+    
     
     
 }

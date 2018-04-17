@@ -5,6 +5,8 @@
  */
 package spilteori;
 
+import java.util.ArrayList;
+
 /** This is a class that creates an ew object describing a new game and it's gametree for it's respective players
  * 
  * It contains following variables to describe the game:
@@ -34,5 +36,17 @@ public interface Game {
      * 
      */
     public void createBoard();
+    
+    /**Returns an ArrayList containing the Fields of the Board
+     * 
+     * @return 
+     */
+    public ArrayList<Field> getBoard();
+    
+    /** Returns the amount of field left, that has not been moved to
+     * 
+     * @return 
+     */
+    public int getEmpty();
     
 }

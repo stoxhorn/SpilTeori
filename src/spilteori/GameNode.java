@@ -13,10 +13,11 @@ package spilteori;
  * 
  * int, representing the index of this node in the ArrayList it is to be inserted into
  * 
- * int[], Which holds the percentage chance of winning for each player, in their respective index.
+ * int[][], Each fist index contains the chances of winning for the corresponding player,
+ * with the second index being the chances of each child
  * Chance represented as 10000 = 100
  * 
- * Field[], Containing all possible GameNodes, reachable from here
+ * Field[], Containing all possible GameNodes, reachable from here, children
  * 
  * GameNode[], Contains the optimal GameNode for the player corresponding to index
  * 
@@ -42,7 +43,7 @@ public interface GameNode {
     public int[] getChances();
     
     
-    /**Calculates the chances of winning at this GameNode, and it's parent, recursively
+    /**Calculates the chances of winning at for this GameNode
      * 
      */
     public void calculateChances();
@@ -68,9 +69,9 @@ public interface GameNode {
     
     /**Sets the array of children of this node, to be the given array
      * 
-     * @param childrenArray the array containing the new children
+     * @param ChildrenArray the array containing the new children
      */
-    public void setChildren(GameNode[] childrenArray);
+    public void setChildren(GameNode[] ChildrenArray);
     
 
     /**Returns the parent of this GameNode
