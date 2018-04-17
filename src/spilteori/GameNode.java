@@ -18,6 +18,8 @@ package spilteori;
  * 
  * Field[], Containing all possible GameNodes, reachable from here
  * 
+ * GameNode[], Contains the optimal GameNode for the player corresponding to index
+ * 
  */
 public interface GameNode {
     
@@ -33,7 +35,54 @@ public interface GameNode {
      */
     public void setPosMove(Field newField);
     
+    /**Returns int[] containing chances of the players in each respective index
+     * 
+     * @return int[] of size 0 to 10000, representing percentage chances with 100% = 10000
+     */
+    public int[] getChances();
     
     
+    /**Calculates the chances of winning at this GameNode, and it's parent, recursively
+     * 
+     */
+    public void calculateChances();
+    
+    /**Calculates the optimal move for each player
+     * 
+     * Places the index of the optimal child in the index corresponding to player number.
+     */
+    public void calculateOptimal();
+    
+    /**Returns the array of optimal moves
+     * 
+     * @return GameNode[] each index contains the optimal Node for player corresponding to index
+     */
+    public GameNode[] getOptimal();
+    
+    /**Returns an array containing all the children of this GameNode
+     * 
+     * 
+     * @return GameNode[] an array of nodes with this node as parent
+     */
+    public GameNode[] getChildren();
+    
+    /**Sets the array of children of this node, to be the given array
+     * 
+     * @param childrenArray the array containing the new children
+     */
+    public void setChildren(GameNode[] childrenArray);
+    
+
+    /**Returns the parent of this GameNode
+     * 
+     * @return GameNode representing the Parent of this Node
+     */
+    public GameNode getParent();
+    
+    /**Sets the parent of this GameNode to be the given GameNode
+     * 
+     * @param NewGameNode GameNode representing the new Parent
+     */
+    public void setParent(GameNode NewGameNode);
     
 }

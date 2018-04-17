@@ -17,6 +17,7 @@ package spilteori;
  * 
  * It's value variable, represents a value that represents some meaning, depending on game. Like 1 for X for three in a row, and 0 for O
  * 
+ * Potentially not useful
  * It's Score represents the worth of this field
  * 
  */
@@ -54,6 +55,10 @@ public interface Field {
      */
     public void setValue(int player, int newVal);
     
+    
+    
+    // Potentially not needed, as it is stored in the GameNode Interface more efficiently ------------ ------------ ------------ ------------ ------------ ------------ ------------ 
+    // ------------ ------------ ------------ ------------ ------------ ------------ ------------ ------------ ------------ ------------ ------------ ------------ ------------ 
     /**The int[] representing the score or worth of the field
      * 
      * Index represents which player has which score
