@@ -18,7 +18,7 @@ package spilteori;
  * 
  * each indice represents the GamesTree for each Player
  * 
- * 
+ * it's assumed that Player 1 always starts first, and player 2 is next, and so on.
  *
  * 
  */
