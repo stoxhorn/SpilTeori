@@ -17,9 +17,9 @@ public class ThreeNode implements GameNode{
     
     int index;
     
-    int[][] chances;
+    int[] chances;
     
-    Field[] Children;
+    ThreeNode[] Children;
     
     ThreeNode[] BestNode;
     
@@ -78,6 +78,11 @@ public class ThreeNode implements GameNode{
     @Override
     public void setParent(GameNode NewGameNode) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setChances(int[] newChances) {
+        chances = newChances;
     }
     
 }
