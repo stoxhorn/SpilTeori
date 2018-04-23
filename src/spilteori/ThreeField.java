@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package spilteori;
 
 /**
@@ -14,16 +9,22 @@ public class ThreeField implements Field{
     int value;
     int row;
     int coloumn;
+    int pos;
     
-    public ThreeField(int newValue, int newRow, int newColoumn)
+    public ThreeField(int newValue, int newRow, int newColoumn, int newPos)
     {
         value = newValue;
         coloumn = newColoumn;
         row = newRow;
+        pos = newPos;
     }
     
+    public int calcPos()
+    {
+        System.out.println("Du har valgt position: " + pos);
+        return pos;
+    }
     
-    @Override
     public int getRow() {
         System.out.println("Du har valgt row: " + row);
         return row;
