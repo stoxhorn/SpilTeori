@@ -41,7 +41,7 @@ public interface Game {
      * 
      * @return 
      */
-    public ArrayList<Field> getBoard();
+    public Field[] getBoard();
     
     /** Returns the amount of field left, that has not been moved to
      * 

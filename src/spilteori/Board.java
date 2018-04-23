@@ -93,4 +93,10 @@ public interface Board {
      * @return Field the Field that has the highest score of this board
      */
     public Field getBestMove(int player);
+    
+    /** Returns an array of empty Fields
+     * 
+     * @return an array of Fields containing no value
+     */
+    public Field[] getEmptyFields();
 }
