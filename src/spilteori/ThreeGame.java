@@ -27,6 +27,8 @@ import java.util.ArrayList;
  */
 public class ThreeGame implements Game {
     
+    private GameNode currentNode;
+    
     private ThreeRowGameTree Tree;
     
     private Board currentBoard;
@@ -35,9 +37,13 @@ public class ThreeGame implements Game {
     
     private int playerTurn;
     
+    int[] chances;
+    
     public ThreeGame()
     {
         playerTurn = 0;
+        Tree.createTree(GameBoard, this);
+        currentNode = Tree.getNode(0);
     }
     
     @Override
@@ -79,9 +85,17 @@ public class ThreeGame implements Game {
         // return storage
         return tmp;
     }
+    // kræver viden om hvilken node vi er kommet til
+    // kald nodens egen metode, getOptimal()
+    // Skal rykkes til Game klassen
+    // Mangler metode til at få den nuværende node, getNode
+    public Field getBestMove(int player) {
+        GameNode t = currentNode;
+        Field f = t.getOptimal()[player].getField();
+        return f;
     
     
-    // Skal ogsÃ¥ have fundet ud af
+    // Skal også have fundet ud af
     // returner antallet af tomme felter
     @Override
     public int getEmpty() {
