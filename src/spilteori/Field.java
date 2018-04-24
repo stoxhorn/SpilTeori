@@ -39,5 +39,8 @@ public interface Field {
      * 
      * @return int Representing coloumn 
      */
-   
+   public int getValue();
+   /** a value
+    * yes it is 
+    */
 }

@@ -35,4 +35,7 @@ public class ThreeField implements Field{
         System.out.println("Du har valgt coloumn: " + coloumn);
         return row;
     }
+    public int getValue() {
+        return value;
+    }
 }
