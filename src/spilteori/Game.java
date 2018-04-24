@@ -26,27 +26,42 @@ import java.util.ArrayList;
  */
 public interface Game {
     
-    /**Gets the amount of players required for this game
-     * 
+    /**
+     * Gets the amount of players required for this game
      * @return int represnts amount of players
      */
     public int getPlayerAmount();
    
-    /**Creates a new currentBoard
-     * 
+    /**
+     * Creates a new currentBoard
      */
     public void createBoard();
     
-    /**Returns an ArrayList containing the Fields of the Board
-     * 
+    /**
+     * Returns an ArrayList containing the Fields of the Board
      * @return 
      */
-    public Field[] getBoard();
+    public Board getBoard();
     
-    /** Returns the amount of field left, that has not been moved to
-     * 
+    /** 
+     * Returns the amount of field left, that has not been moved to
      * @return 
      */
     public int getEmpty();
+    
+    /**
+     * Returns an array consisting only of empty fields
+     * @return 
+     */
+    public Field[] getEmptyFields();
+    
+    /**
+     * Returns the player who's turn it currently is
+     * 
+     * will change turn after call
+     * 
+     * @return 
+     */
+    public int getTurn();
     
 }

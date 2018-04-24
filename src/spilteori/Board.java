@@ -7,7 +7,8 @@ package spilteori;
 
 
 
-/** This class represents the board of a game, using an array of Fields
+/** 
+ * This class represents the board of a game, using an array of Fields
  *
  * Rules:
  * Has a variable Field[], which is used to represent the board
@@ -18,14 +19,16 @@ package spilteori;
  */
 public interface Board {
     
-    /**Returns the Field[] that contains the this Board's Fields
+    /**
+     * Returns the Field[] that contains the this Board's Fields
      * 
      * @return a Field[] representing the this Board
      */
     public Field[] getBoard();
     
     
-    /**Create a new Board
+    /**
+     * Create a new Board
      * 
      * If either value is 0, figure out this value, from the other given values
      * 
@@ -41,14 +44,16 @@ public interface Board {
             int height
     );
     
-    /**Overloaded method, that takes only an amount of fields to create a board of one row
+    /**
+     * Overloaded method, that takes only an amount of fields to create a board of one row
      * 
      * @param nullField
      * @param fieldAmount 
      */
     public void createBoard(Field nullField, int fieldAmount);
     
-    /**Overloaded method that only takes width and height into acount
+    /**
+     * Overloaded method that only takes width and height into acount
      * 
      * @param nullField
      * @param width
@@ -60,34 +65,23 @@ public interface Board {
             int height
     );
     
-    /**A Method that adds a move to this Board
+
+    /**
+     * Adds a move to the Board, uhsing a Field parameter
      * 
      * @param player
-     * @param newFieldValue
-     * @param newFieldPos 
+     * @param newField 
      */
     public void newMove(
             int player,
-            int newFieldValue,
-            int newFieldPos
-    );
+            Field newField
+            );
     
     
-    /**An overloaded method that creates a new move, by setting a new value at the position given from it's row and coloumn
-     * 
-     * @param player
-     * @param newFieldValue
-     * @param coloumn
-     * @param row 
-     */
-    public void newMove(
-            int player,
-            int newFieldValue,
-            int coloumn,
-            int row
-    );
     
-    /** Returns the Field with the highest score
+    
+    /**
+     *  Returns the Field with the highest score
      * 
      * @param player int representing the player's score wished for
      * @return Field the Field that has the highest score of this board
@@ -99,4 +93,36 @@ public interface Board {
      * @return an array of Fields containing no value
      */
     public Field[] getEmptyFields();
+    
+    
+    // Unused: ==============================================================================================================================================================================================
+    
+    /**
+     * An overloaded method that creates a new move, by setting a new value at the position given from it's row and coloumn
+     * 
+     * @param player
+     * @param newFieldValue
+     * @param coloumn
+     * @param row 
+     */
+    public void newMove(
+            int player,
+            int newFieldValue,
+            int coloumn,
+            int row
+            );
+    
+    /**
+     * A Method that adds a move to this Board
+     * 
+     * @param player
+     * @param newFieldValue
+     * @param newFieldPos 
+     */
+    public void newMove(
+            int player,
+            int newFieldValue,
+            int newFieldPos
+            );
+    
 }
