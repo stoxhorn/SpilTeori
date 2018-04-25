@@ -19,6 +19,7 @@ laves i ThreeNode
 getIndex()
 
 // En værdi der forholder sig til dybde, med relevante getters og setters
+  // Skal måske vente til dybde er taget højde for i træet
 
 _____________________________________________________________________________________________________________
 
@@ -32,7 +33,7 @@ laves i ThreeRowGameTree:
 
 setCursor()
 
-// Lave noget med dybde, sådan at der kan implementers minmax, i opbygningen af træet
+// Lave noget med dybde, sådan at der kan implementers minmax, i opbygningen af træet - Mads: kunne jeg godt tænke mig, da jeg lavede træet
 
 -----------------------
 
