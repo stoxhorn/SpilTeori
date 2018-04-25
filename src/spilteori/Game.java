@@ -26,27 +26,66 @@ import java.util.ArrayList;
  */
 public interface Game {
     
-    /**Gets the amount of players required for this game
-     * 
+    /**
+     * Gets the amount of players required for this game
      * @return int represnts amount of players
      */
     public int getPlayerAmount();
    
-    /**Creates a new currentBoard
-     * 
+    /**
+     * Creates a new currentBoard
      */
     public void createBoard();
     
-    /**Returns an ArrayList containing the Fields of the Board
-     * 
+    /**
+     * Returns an ArrayList containing the Fields of the Board
      * @return 
      */
-    public Field[] getBoard();
+    public Board getBoard();
     
-    /** Returns the amount of field left, that has not been moved to
-     * 
+    /** 
+     * Returns the amount of field left, that has not been moved to
      * @return 
      */
     public int getEmpty();
+    
+    /**
+     * Returns an array consisting only of empty fields
+     * @return 
+     */
+<<<<<<< HEAD
+    public Field[] getEmptyFields();
+=======
+    public ArrayList<Field> getEmptyFields();
+>>>>>>> cc782c93babf76bfcb437d6993813637ab2cb1eb
+    
+    /**
+     * Returns the player who's turn it currently is
+     * 
+     * will change turn after call
+     * 
+     * @return 
+     */
+    public int getTurn();
+    
+<<<<<<< HEAD
+    /**
+     * Returns the Node representing the current game
+     * 
+     * @return 
+     */
+    public GameNode getNode();
+=======
+    /**Returns true if a player has won
+     * 
+     * @return 
+     */
+    public boolean checkWin();
+    
+    /**Makes a move for the ai
+     * 
+     */
+    public void makeMoveAI();
+>>>>>>> cc782c93babf76bfcb437d6993813637ab2cb1eb
     
 }

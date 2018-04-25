@@ -19,7 +19,7 @@ public class ThreeField implements Field{
         pos = newPos;
     }
     
-    public int calcPos()
+    public int getPos()
     {
         System.out.println("Du har valgt position: " + pos);
         return pos;
@@ -34,5 +34,8 @@ public class ThreeField implements Field{
     public int getColoumn() {
         System.out.println("Du har valgt coloumn: " + coloumn);
         return row;
+    }
+    public int getValue() {
+        return value;
     }
 }

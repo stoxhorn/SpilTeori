@@ -5,6 +5,7 @@
  */
 package spilteori;
 
+import java.util.ArrayList;
 /**
  *
  * Rules:
@@ -48,8 +49,36 @@ public class ThreeBoard implements Board {
     }
     
     @Override
-    public Field[] getEmptyFields() {
-        // Jakob Har en algoritme
+    public ArrayList<Field> getEmptyFields() {
+        ArrayList<Field> output = new ArrayList<>();
+        for (Field value : board) {
+            if (value.getValue() == 0) {    //getValue fra ThreeField skal give en int
+                output.add(value);
+            }
+        }
+        return output;
+    }
+
+    @Override
+    public void createBoard(Field nullField, int fieldAmount) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void createBoard(Field nullField, int width, int height) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
+    // Unused methods:==============================================================================================================================================================================================
+    @Override
+    public void newMove(int player, int newFieldValue, int newFieldPos) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void newMove(int player, int newFieldValue, int coloumn, int row) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

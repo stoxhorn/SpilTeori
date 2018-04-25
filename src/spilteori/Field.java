@@ -20,24 +20,42 @@ import java.util.ArrayList;
  */
 public interface Field {
     
-    /*
+<<<<<<< HEAD
+    /**
+     * The int representing position of the Field
+=======
     public int getPos();
     
     /**The int representing position of the Field
+>>>>>>> cc782c93babf76bfcb437d6993813637ab2cb1eb
      * 
      * @return int representing position
      */
+    public int getPos();
     
-    public int getRow();
-    /**The int Representing the Row of the Field
+
+    
+    
+    /**
+     * The int Representing the Row of the Field
      * 
      * @return int Representing Row 
      */
+    public int getRow();
     
-    public int getColoumn();
-    /**The int Representing the coloumn of the Field
+    /**
+     * The int Representing the coloumn of the Field
      * 
      * @return int Representing coloumn 
      */
+<<<<<<< HEAD
+    public int getColoumn();
+    
    
+=======
+   public int getValue();
+   /** a value
+    * yes it is 
+    */
+>>>>>>> cc782c93babf76bfcb437d6993813637ab2cb1eb
 }

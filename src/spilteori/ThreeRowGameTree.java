@@ -31,7 +31,7 @@ public class ThreeRowGameTree implements GameTree {
         
         MainGame = newGame;
         
-        this.createTree(newGame.getBoard(), newGame);
+        this.createTree(newGame);
         
     }
     
@@ -48,14 +48,12 @@ public class ThreeRowGameTree implements GameTree {
     }
 
     @Override
-    public void createTree(ArrayList<Field> GameBoard, Game newGame)
+    public void createTree(Game newGame)
     {
         // Create the RootNode node
         Tree.add(RootNode);
         
         // Gets the amount of possible moves left, in other words, the amount of empty fields
-        // NOTE: ==========================================================================================================================================================================================================
-        // Needs changing if the game can go on forever!
         int movesLeft = newGame.getEmpty();
         
         // Resets the cursor to first index
@@ -119,37 +117,31 @@ public class ThreeRowGameTree implements GameTree {
         // As new nodes require the index they are stored in in the Tree
         int newCursor = Cursor;
         
+        // Creating the array of Fields to add as children
+        Field[] emptyFields = posGame.getBoard().getEmptyFields();
+        
         // Needs to loop as many times as moves left
         // setChildren takes an array of nodes, initialized before loop
-        for(int i = 0; i < moveLeft; i++)
+        // Need an int that increments for each loop to add to the array of newChildren
+        int i = 0;
+        for(Field newField : emptyFields)
         {
-            // Add a New Node to the newChildren array
-            // i equates to the index of the children array
+            // Each field from emptyFields gets called in the loop
             
-        // Creating the new GameNode Object
+            // Each loop increments the newCursor, as it gets added to the tree
+            // Without moving the Cursor to a new index
+            newCursor ++;
             
-            // Requires getting the next empty field from the board
-            // NOTE: ==========================================================================================================================================================================================================
-            // creating an emptyfield here,
-            // since there is currently no way to get a list of currently empty field on the board
-            // I take the last Field on the Board
-            Field emptyField = posGame.getBoard().get(posGame.getBoard().size()-1);
-        
-            // I need to increment Curor, as i am adding a node to Tree
-        
-            
-            
-            // NOTE: ==========================================================================================================================================================================================================
-            // the game interface, returns an arraylist, and not an array of fields
             // NOTE: ==========================================================================================================================================================================================================
             // constructor takes a ThreeNode, and not a GameNode
-            ThreeNode child = new ThreeNode(emptyField, Cursor, parent);
+            ThreeNode child = new ThreeNode(newField, newCursor, parent);
             
             // Adds the child to the tree
             Tree.add(child);
             
-            // Adds the child to the new children
+            // Adds the child to the new children, and increments i
             newChildren[i] = child;            
+            i++;
         }
         
         // sets the new children as the children of the given Parent Node
@@ -165,12 +157,9 @@ public class ThreeRowGameTree implements GameTree {
         // in order to keep track of which Fields has been added,
         // so that a field that has already been added, does not get added again
         
-        // NOTE:==========================================================================================================================================================================================================
-        // Need a method to add a move on the game, instead of only on the Board
-        
         // Will add a move to the board for now, until a method is implemented 
         // Currently returns an arraylist, which is added to, and as such nothing happens
-        tmpGame.getBoard().add(parent.getPosMove());
+        tmpGame.newMove(parent.getPosMove());
         
         // A loop that calls itself on each child, iterating through the array
         // This should create each new branch
@@ -240,7 +229,7 @@ public class ThreeRowGameTree implements GameTree {
         // Need some way to calculate the chances
         // NOTE: ==========================================================================================================================================================================================================
         // Currently i just make up some random-ass method, that returns an int[], as there is no existing method
-        int[] newChances = assChanceMethod(childrenChances);
+        int[] newChances = minMax(childrenChances);
         
         // i get the index to set the appropriate node in the tree
         // NOTE: ==========================================================================================================================================================================================================
@@ -289,25 +278,12 @@ public class ThreeRowGameTree implements GameTree {
 
     @Override
     public void setCursor(Field newMove) {
-        // NOTE:==========================================================================================================================================================================================================
-        // Cannot be done without a new method in Fields
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    /**Needs to check if the game has a winner at the possible sequence at the given index
-     * 
-     * Idea:
-     * Take a Game as parameter, and run a checkWin method from Game interface, and check fro winner
-     * 
-     * @return 
-     */
-    private int checkWin(Game posGame) {
-        // I need the board that i need to check on before i can check it's win.
-        // NOTE:==========================================================================================================================================================================================================
-        // The rule for winning is stated in Game class?
-        // NOTE:==========================================================================================================================================================================================================
-        // Then whats the fucking point of having this method?
-        posGame.getBoard();
+    @Override
+    public GameNode getNode(int index) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

@@ -5,10 +5,6 @@
  */
 package spilteori;
 
-import java.util.ArrayList;
-
-// The rule for winning is stated in Game class?
-
 // Need a method to add a move on the game, instead of only on the Board
 
 
@@ -27,17 +23,23 @@ import java.util.ArrayList;
  */
 public class ThreeGame implements Game {
     
+    private GameNode currentNode;
+    
     private ThreeRowGameTree Tree;
     
     private Board currentBoard;
     
-    private int playerAmount = 2;
+    private final int playerAmount = 2;
     
     private int playerTurn;
+    
+    int[] chances;
     
     public ThreeGame()
     {
         playerTurn = 0;
+        Tree.createTree(GameBoard, this);
+        currentNode = Tree.getNode(0);
     }
     
     @Override
@@ -59,12 +61,17 @@ public class ThreeGame implements Game {
         return tmp;
     }
     
+    @Override
+<<<<<<< HEAD
     public Field[] getEmptyFields()
+=======
+    public ArrayList<Field> getEmptyFields()
+>>>>>>> cc782c93babf76bfcb437d6993813637ab2cb1eb
     {
-        Field[] tmp = currentBoard.getEmptyFields();
-        return tmp;
+        return currentBoard.getEmptyFields();
     }
     
+    @Override
     public int getTurn()
     {
         // Store playerTurn
@@ -79,13 +86,55 @@ public class ThreeGame implements Game {
         // return storage
         return tmp;
     }
+    // kræver viden om hvilken node vi er kommet til
+    // kald nodens egen metode, getOptimal()
+    // Skal rykkes til Game klassen
+    // Mangler metode til at få den nuværende node, getNode
+    public Field getBestMove(int player) {
+        GameNode t = currentNode;
+        Field f = t.getOptimal()[player].getField();
+        return f;
+    }
     
     
-    // Skal også have fundet ud af
+<<<<<<< HEAD
+    
     // returner antallet af tomme felter
     @Override
     public int getEmpty() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int tmp = currentBoard.getEmptyFields().length;
+        return tmp;
+=======
+    // returner antallet af tomme felter
+    @Override
+    public int getEmpty() {
+        return currentBoard.getEmptyFields().size();
+    }
+    
+    //checks if the current player has won
+    //should be called after every move is made
+    //afterwards playerturn should be updated
+    @Override
+    public boolean checkWin() {
+        Field[] t = currentBoard.getBoard();
+        return  t[0].getValue() == playerTurn && t[1].getValue() == playerTurn && t[2].getValue() == playerTurn ||
+                t[3].getValue() == playerTurn && t[4].getValue() == playerTurn && t[5].getValue() == playerTurn ||
+                t[6].getValue() == playerTurn && t[7].getValue() == playerTurn && t[8].getValue() == playerTurn ||
+                
+                t[0].getValue() == playerTurn && t[3].getValue() == playerTurn && t[6].getValue() == playerTurn ||
+                t[1].getValue() == playerTurn && t[4].getValue() == playerTurn && t[7].getValue() == playerTurn ||
+                t[2].getValue() == playerTurn && t[5].getValue() == playerTurn && t[8].getValue() == playerTurn ||
+                
+                t[0].getValue() == playerTurn && t[4].getValue() == playerTurn && t[8].getValue() == playerTurn ||
+                t[2].getValue() == playerTurn && t[4].getValue() == playerTurn && t[6].getValue() == playerTurn;
+    }
+    
+    //makes the most optimal play in the given situation
+    @Override
+    public void makeMoveAI() {
+        Board t = currentBoard;
+        t.newMove(playerTurn, getBestMove(playerTurn));
+>>>>>>> cc782c93babf76bfcb437d6993813637ab2cb1eb
     }
     
 }
