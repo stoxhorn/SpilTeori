@@ -6,17 +6,19 @@ Enten i ThreeRowGameTree eller ThreeNode
 
 MinMax()
 
-
+-------------------
 
 // Ved samme lejlighed måske ændre navne og tal fra chancer og procenter til score eller point
 
 laves i ThreeNode
 
+-------------------
+
 // en getter for index værdien for noden
 
 getIndex()
 
-
+_____________________________________________________________________________________________________________
 
 laves i ThreeRowGameTree:
 
@@ -28,6 +30,7 @@ laves i ThreeRowGameTree:
 
 setCursor()
 
+-----------------------
 
 
 Laves i GameBoard, med en getter i ThreeGame
@@ -36,7 +39,12 @@ Laves i GameBoard, med en getter i ThreeGame
 
 getEmptyFields()
 
+----------------------------------
 
+// En metode der laver boardet, sådan at fields har rigtige kollonner og rækker,samt eri rigtig rækkefølge
+createBoard()
+
+_____________________________________________________________________________________________
 
 Laves i Threegame:
 
@@ -44,14 +52,14 @@ Laves i Threegame:
 
 checkWin()
 
-
+------------------------------------
 
 // En metode der tilføjer et træk
 
 newMove()
 
 
-
+____________________________________________________________________________________________
 
 
 Fra Før:
