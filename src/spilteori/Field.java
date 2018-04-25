@@ -20,7 +20,6 @@ import java.util.ArrayList;
  */
 public interface Field {
     
-    /*
     public int getPos();
     
     /**The int representing position of the Field
