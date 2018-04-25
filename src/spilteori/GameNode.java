@@ -96,4 +96,10 @@ public interface GameNode {
      */
     public int getIndex();
     
+    /**Returns the current Field
+     * 
+     * @return 
+     */
+    public Field getField();
+    
 }
