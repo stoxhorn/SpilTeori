@@ -92,7 +92,7 @@ public interface Board {
      * 
      * @return an array of Fields containing no value
      */
-    public Field[] getEmptyFields();
+    public ArrayList<Field> getEmptyFields();
     
     
     // Unused: ==============================================================================================================================================================================================
