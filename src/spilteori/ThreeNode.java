@@ -119,4 +119,10 @@ public class ThreeNode implements GameNode{
         return index;
     }
     
+    //getter for field
+    @Override
+    public Field getField() {
+        return field;
+    }
+    
 }
