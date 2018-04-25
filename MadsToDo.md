@@ -67,12 +67,12 @@ Fra Før:
 
 
 
+
+
+
+
+FIXED:
+
 ThreeNode constructor tager ikke en GameNode
-
-
-
-
-
-
 
 
