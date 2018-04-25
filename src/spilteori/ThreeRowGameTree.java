@@ -48,13 +48,10 @@ public class ThreeRowGameTree implements GameTree {
     }
 
     @Override
-    public void createTree(Game newGame)
+    public void createTree(Game newGame) 
     {
         // Create the RootNode node
         Tree.add(RootNode);
-        
-        // Gets the amount of possible moves left, in other words, the amount of empty fields
-        int movesLeft = newGame.getEmpty();
         
         // Resets the cursor to first index
         Cursor = 0;
@@ -63,7 +60,7 @@ public class ThreeRowGameTree implements GameTree {
         Game posGame = newGame;
         
         // Fills out the Tree
-        addNodes(movesLeft, Tree.get(0), posGame);
+        addNodes(Tree.get(0), posGame);
     }
     
     /**Recursively adds a new move, as long as there is moves left, and the game has not been lost yet
@@ -72,26 +69,34 @@ public class ThreeRowGameTree implements GameTree {
      * Adds the children Nodes, And their respective Fields
      * 
      * @param moveLeft
-     * @param parent
+     * @param parenttheir
      * @param posGame 
      */
-    private void addNodes(int moveLeft, GameNode parent, Game posGame)
+    private void addNodes(GameNode parent, Game posGame)
     {
         // Copy the given Game
         Game tmpGame = posGame;
         
+        // Getting the depth of the parent 
+        int depth = parent.getDepth();
+        
+        // get the amount of moves left
+        int moveLeft = posGame.getEmptyFields().size();
+        
         // Create an int[] of the same length of the amount of players
         int[] newChances = new int[tmpGame.getPlayerAmount()];
         
+        
+        // Need to account for depth
         // If the given game contains a winner:
-        if(checkWin(posGame) > 0)
+        if(posGame.checkWin())
         {
             // Winner of GameNode parent is the player = checkWin()
             // Add a winning chance of 10000 to the corresponding winner from checkWin()
             
-            // NOTE: ==========================================================================================================================================================================================================
-            // Needs change, as we do not work with chances with minmax
-            newChances[checkWin(posGame)] = 10000;
+            // Uses depth to determine player
+            // 1 for a win
+            newChances[depth%2] = 1;
             
             // Adds the chances to the Node at the current index
             Tree.get(Cursor).setChances(newChances);
@@ -103,7 +108,8 @@ public class ThreeRowGameTree implements GameTree {
         // If no more fields are left, and there has not been found a winner:
         else if(moveLeft < 1)
         {
-            // Add zero chance of winning for every player to parent, int[] are initialized with 0 in each index
+            // Add zero for losing as nobody won 
+            // int[] are initialized with 0 in each index
             Tree.get(Cursor).setChances(newChances);
             
             // since this block only activates, if no possible winner is found, therefore return
@@ -118,7 +124,7 @@ public class ThreeRowGameTree implements GameTree {
         int newCursor = Cursor;
         
         // Creating the array of Fields to add as children
-        Field[] emptyFields = posGame.getBoard().getEmptyFields();
+        ArrayList<Field> emptyFields = posGame.getBoard().getEmptyFields();
         
         // Needs to loop as many times as moves left
         // setChildren takes an array of nodes, initialized before loop
@@ -132,9 +138,11 @@ public class ThreeRowGameTree implements GameTree {
             // Without moving the Cursor to a new index
             newCursor ++;
             
-            // NOTE: ==========================================================================================================================================================================================================
-            // constructor takes a ThreeNode, and not a GameNode
+            // The new node
             ThreeNode child = new ThreeNode(newField, newCursor, parent);
+           
+            // Sets the depth of the node to be +1 from the current depth
+            child.setDepth(depth+1);
             
             // Adds the child to the tree
             Tree.add(child);
@@ -167,7 +175,7 @@ public class ThreeRowGameTree implements GameTree {
         {
             // Note:==========================================================================================================================================================================================================
             // I need a getter for node, to know which index it is stored at
-            addNodes(moveLeft, Tree.get(x.getIndex()),tmpGame);
+            addNodes(Tree.get(x.getIndex()),tmpGame);
         }
         
         
@@ -193,18 +201,20 @@ public class ThreeRowGameTree implements GameTree {
      * @param givenNode
      * @return 
      */
-    public int[] calculateChances(GameNode givenNode)
+    public int[] calculateMinMax(GameNode givenNode)
     {
         // Create copy of given Node
         GameNode localNode = givenNode;
         
 
-        // NOTE:==========================================================================================================================================================================================================
-        // Need some way to determine an empty chance array, this takes two rules, either each index has -1 value, or has a length of 0
-        // Maybe just have a value that tells if this is an "endNode. "
+        // Needs to be redone so that it accounts for depth
         
-        // Basecase; returns the chances of the given Node
-        if (localNode.getChances().length != 0 || localNode.getChances()[0] != -1)
+        // this is depth x
+        // if depth x+2 contains a win for opponent
+        // make x+1 a loss
+        // if depth x+1 contains a win for self, make x-1 a win
+        
+        if (localNode.getChances()[0] != -1)
         {
             return localNode.getChances();
         }
@@ -285,5 +295,5 @@ public class ThreeRowGameTree implements GameTree {
     public GameNode getNode(int index) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

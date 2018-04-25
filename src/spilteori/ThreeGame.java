@@ -7,6 +7,9 @@ package spilteori;
 
 // Need a method to add a move on the game, instead of only on the Board
 
+import java.util.ArrayList;
+
+
 
 /**
  * It contains following variables to describe the game:
@@ -38,7 +41,7 @@ public class ThreeGame implements Game {
     public ThreeGame()
     {
         playerTurn = 0;
-        Tree.createTree(GameBoard, this);
+        Tree.createTree(this);
         currentNode = Tree.getNode(0);
     }
     
@@ -123,6 +126,11 @@ public class ThreeGame implements Game {
     public void makeMoveAI() {
         Board t = currentBoard;
         t.newMove(playerTurn, getBestMove(playerTurn));
+    }
+
+    @Override
+    public GameNode getNode() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
