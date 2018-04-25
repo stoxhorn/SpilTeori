@@ -62,15 +62,7 @@ public class ThreeGame implements Game {
     }
     
     @Override
-<<<<<<< HEAD
-<<<<<<< HEAD
     public Field[] getEmptyFields()
-=======
-    public ArrayList<Field> getEmptyFields()
->>>>>>> cc782c93babf76bfcb437d6993813637ab2cb1eb
-=======
-    public ArrayList<Field> getEmptyFields()
->>>>>>> cc782c93babf76bfcb437d6993813637ab2cb1eb
     {
         return currentBoard.getEmptyFields();
     }
@@ -101,24 +93,11 @@ public class ThreeGame implements Game {
     }
     
     
-<<<<<<< HEAD
-<<<<<<< HEAD
     
     // returner antallet af tomme felter
     @Override
     public int getEmpty() {
-        int tmp = currentBoard.getEmptyFields().length;
-        return tmp;
-=======
-    // returner antallet af tomme felter
-    @Override
-    public int getEmpty() {
-=======
-    // returner antallet af tomme felter
-    @Override
-    public int getEmpty() {
->>>>>>> cc782c93babf76bfcb437d6993813637ab2cb1eb
-        return currentBoard.getEmptyFields().size();
+        return currentBoard.getEmptyFields().length;
     }
     
     //checks if the current player has won
