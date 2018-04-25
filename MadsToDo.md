@@ -33,7 +33,7 @@ laves i ThreeRowGameTree:
 
 setCursor()
 
-// Lave noget med dybde, sådan at der kan implementers minmax, i opbygningen af træet - Mads: kunne jeg godt tænke mig, da jeg lavede træet
+
 
 -----------------------
 
@@ -45,10 +45,6 @@ Laves i GameBoard, med en getter i ThreeGame
 getEmptyFields()
 
 ----------------------------------
-
-// En metode der laver boardet, sådan at fields har rigtige kollonner og rækker,samt eri rigtig rækkefølge
-
-createBoard() - Mads: Jeg er i gang med den her
 
 _____________________________________________________________________________________________
 
@@ -71,7 +67,13 @@ ________________________________________________________________________________
 
 Reserveret:
 
+Mads:
+// Lave noget med dybde, sådan at der kan implementers minmax, i opbygningen af træet - Mads: kunne jeg godt tænke mig, da jeg lavede træet
 
+
+// En metode der laver boardet, sådan at fields har rigtige kollonner og rækker,samt eri rigtig rækkefølge
+
+createBoard() - Mads: Jeg er i gang med den her
 
 ____________________________________________________________________________________________
 ____________________________________________________________________________________________
