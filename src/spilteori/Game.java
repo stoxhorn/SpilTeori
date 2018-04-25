@@ -53,15 +53,8 @@ public interface Game {
      * Returns an array consisting only of empty fields
      * @return 
      */
-<<<<<<< HEAD
-<<<<<<< HEAD
     public Field[] getEmptyFields();
-=======
-    public ArrayList<Field> getEmptyFields();
->>>>>>> cc782c93babf76bfcb437d6993813637ab2cb1eb
-=======
-    public ArrayList<Field> getEmptyFields();
->>>>>>> cc782c93babf76bfcb437d6993813637ab2cb1eb
+
     
     /**
      * Returns the player who's turn it currently is
@@ -72,34 +65,25 @@ public interface Game {
      */
     public int getTurn();
     
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     /**
      * Returns the Node representing the current game
      * 
      * @return 
      */
     public GameNode getNode();
-=======
-    /**Returns true if a player has won
+
+    /**
+     * Returns true if a player has won
      * 
      * @return 
      */
-=======
-    /**Returns true if a player has won
-     * 
-     * @return 
-     */
->>>>>>> cc782c93babf76bfcb437d6993813637ab2cb1eb
     public boolean checkWin();
     
-    /**Makes a move for the ai
+    /**
+     * Makes a move for the ai
      * 
      */
     public void makeMoveAI();
-<<<<<<< HEAD
->>>>>>> cc782c93babf76bfcb437d6993813637ab2cb1eb
-=======
->>>>>>> cc782c93babf76bfcb437d6993813637ab2cb1eb
-    
+
 }
