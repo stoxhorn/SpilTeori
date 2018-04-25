@@ -18,6 +18,8 @@ laves i ThreeNode
 
 getIndex()
 
+// En værdi der forholder sig til dybde, med relevante getters og setters
+
 _____________________________________________________________________________________________________________
 
 laves i ThreeRowGameTree:
@@ -29,6 +31,8 @@ laves i ThreeRowGameTree:
 // Bliver den over hovedet brugt?
 
 setCursor()
+
+// Lave noget med dybde, sådan at der kan implementers minmax, i opbygningen af træet
 
 -----------------------
 
