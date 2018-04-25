@@ -51,26 +51,17 @@ createBoard() - Mads: Jeg er i gang med den her
 
 ____________________________________________________________________________________________
 Jakob:
-Laves i Threegame:
-
-// En metode der checker om spillet er vundet
-
-checkWin()
-
-------------------------------------
-
-// En metode der tilføjer et træk
-
-newMove()
+adding getPos
 ____________________________________________________________________________________________
 
 
 
 FIXED:
-
 ThreeNode constructor takes a gameNode now
 ThreeGame getEmptyFields() now uses ArrayList for all uses
 ThreeGame getEmpty works
+ThreeGame checkWin added
+ThreeGame makeMoveAI added
 ThreeNode getIndex added
 ThreeNode getField added
 
