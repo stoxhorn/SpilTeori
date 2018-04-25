@@ -90,4 +90,10 @@ public interface GameNode {
      */
     public void setParent(GameNode NewGameNode);
     
+    /**Returns the index of the current Node
+     * 
+     * @return 
+     */
+    public int getIndex();
+    
 }
