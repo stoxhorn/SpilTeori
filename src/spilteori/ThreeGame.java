@@ -65,10 +65,10 @@ public class ThreeGame implements Game {
         return tmp;
     }
     
-    public Field[] getEmptyFields()
+    @Override
+    public ArrayList<Field> getEmptyFields()
     {
-        Field[] tmp = currentBoard.getEmptyFields();
-        return tmp;
+        return currentBoard.getEmptyFields();
     }
     
     public int getTurn()
@@ -85,21 +85,20 @@ public class ThreeGame implements Game {
         // return storage
         return tmp;
     }
-    // kræver viden om hvilken node vi er kommet til
+    // krÃ¦ver viden om hvilken node vi er kommet til
     // kald nodens egen metode, getOptimal()
     // Skal rykkes til Game klassen
-    // Mangler metode til at få den nuværende node, getNode
+    // Mangler metode til at fÃ¥ den nuvÃ¦rende node, getNode
     public Field getBestMove(int player) {
         GameNode t = currentNode;
         Field f = t.getOptimal()[player].getField();
         return f;
     
     
-    // Skal også have fundet ud af
     // returner antallet af tomme felter
     @Override
     public int getEmpty() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return currentBoard.getEmptyFields().size();
     }
     
 }
