@@ -103,4 +103,29 @@ public class ThreeGame implements Game {
         return currentBoard.getEmptyFields().size();
     }
     
+    //checks if the current player has won
+    //should be called after every move is made
+    //afterwards playerturn should be updated
+    @Override
+    public boolean checkWin() {
+        Field[] t = currentBoard.getBoard();
+        return  t[0].getValue() == playerTurn && t[1].getValue() == playerTurn && t[2].getValue() == playerTurn ||
+                t[3].getValue() == playerTurn && t[4].getValue() == playerTurn && t[5].getValue() == playerTurn ||
+                t[6].getValue() == playerTurn && t[7].getValue() == playerTurn && t[8].getValue() == playerTurn ||
+                
+                t[0].getValue() == playerTurn && t[3].getValue() == playerTurn && t[6].getValue() == playerTurn ||
+                t[1].getValue() == playerTurn && t[4].getValue() == playerTurn && t[7].getValue() == playerTurn ||
+                t[2].getValue() == playerTurn && t[5].getValue() == playerTurn && t[8].getValue() == playerTurn ||
+                
+                t[0].getValue() == playerTurn && t[4].getValue() == playerTurn && t[8].getValue() == playerTurn ||
+                t[2].getValue() == playerTurn && t[4].getValue() == playerTurn && t[6].getValue() == playerTurn;
+    }
+    
+    //makes the most optimal play in the given situation
+    @Override
+    public void makeMoveAI() {
+        Board t = currentBoard;
+        t.newMove(playerTurn, getBestMove(playerTurn));
+    }
+    
 }
