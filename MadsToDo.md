@@ -37,6 +37,14 @@ setDepth(int)
 Depths skal være 0, ved initialization
 ____________________________________________________________________________________________
 
+Laves i ThreeGame:
+
+// En metode for newMove som kun tager et field som værdi
+newMove(Field)
+
+
+
+
 Reserveret:
 
 Mads:
