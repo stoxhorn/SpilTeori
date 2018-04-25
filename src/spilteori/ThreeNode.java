@@ -113,4 +113,10 @@ public class ThreeNode implements GameNode{
         parent = newGameNode;
     }
     
+    //getter for index
+    @Override
+    public int getIndex() {
+        return index;
+    }
+    
 }
