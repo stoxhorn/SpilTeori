@@ -27,23 +27,16 @@ getNode(int)
 
 -----------------------
 
+
 _____________________________________________________________________________________________
 
-Laves i Threegame:
 
-// En metode der checker om spillet er vundet
-
-checkWin()
-
-------------------------------------
-
-// En metode der tilføjer et træk
-
-newMove()
 
 
 ____________________________________________________________________________________________
-
+Laves i ThreeNode
+// En værdi der forholder sig til dybde, med relevante getters og setters
+  // Skal måske vente til dybde er taget højde for i træet
 ____________________________________________________________________________________________
 
 Reserveret:
@@ -58,6 +51,28 @@ createBoard() - Mads: Jeg er i gang med den her
 
 ____________________________________________________________________________________________
 Jakob:
+Laves i Threegame:
+
+// En metode der checker om spillet er vundet
+
+checkWin()
+
+------------------------------------
+
+// En metode der tilføjer et træk
+
+newMove()
+____________________________________________________________________________________________
+
+
+
+FIXED:
+
+ThreeNode constructor tager ikke en GameNode
+
+ThreeGame getEmptyFields() uses arrayList not []
+
+
 Laves i GameBoard, med en getter i ThreeGame
 
 // giv en liste af alle tomme felte på brættet
@@ -71,17 +86,5 @@ laves i ThreeNode
 // en getter for index værdien for noden
 
 getIndex()
-
-// En værdi der forholder sig til dybde, med relevante getters og setters
-  // Skal måske vente til dybde er taget højde for i træet
-____________________________________________________________________________________________
-
-
-
-FIXED:
-
-ThreeNode constructor tager ikke en GameNode
-
-ThreeGame getEmptyFields() uses arrayList not []
 
 
