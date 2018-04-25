@@ -64,4 +64,15 @@ public interface Game {
      */
     public int getTurn();
     
+    /**Returns true if a player has won
+     * 
+     * @return 
+     */
+    public boolean checkWin();
+    
+    /**Makes a move for the ai
+     * 
+     */
+    public void makeMoveAI();
+    
 }
