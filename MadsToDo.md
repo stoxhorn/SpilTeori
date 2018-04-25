@@ -26,13 +26,6 @@ setCursor()
 getNode(int)
 
 -----------------------
-
-
-_____________________________________________________________________________________________
-
-
-
-
 ____________________________________________________________________________________________
 Laves i ThreeNode
 // En værdi der forholder sig til dybde, med relevante getters og setters
@@ -51,11 +44,7 @@ createBoard() - Mads: Jeg er i gang med den her
 
 ____________________________________________________________________________________________
 Jakob:
-adding getPos
 ____________________________________________________________________________________________
-
-
-
 FIXED:
 ThreeNode constructor takes a gameNode now
 ThreeGame getEmptyFields() now uses ArrayList for all uses
@@ -64,4 +53,5 @@ ThreeGame checkWin added
 ThreeGame makeMoveAI added
 ThreeNode getIndex added
 ThreeNode getField added
+ThreeField getPos added
 
