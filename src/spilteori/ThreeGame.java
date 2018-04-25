@@ -123,10 +123,6 @@ public class ThreeGame implements Game {
     public void makeMoveAI() {
         Board t = currentBoard;
         t.newMove(playerTurn, getBestMove(playerTurn));
-<<<<<<< HEAD
->>>>>>> cc782c93babf76bfcb437d6993813637ab2cb1eb
-=======
->>>>>>> cc782c93babf76bfcb437d6993813637ab2cb1eb
     }
     
 }
