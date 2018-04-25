@@ -10,17 +10,6 @@ MinMax()
 
 // Ved samme lejlighed måske ændre navne og tal fra chancer og procenter til score eller point
 
-laves i ThreeNode
-
--------------------
-
-// en getter for index værdien for noden
-
-getIndex()
-
-// En værdi der forholder sig til dybde, med relevante getters og setters
-  // Skal måske vente til dybde er taget højde for i træet
-
 _____________________________________________________________________________________________________________
 
 laves i ThreeRowGameTree:
@@ -37,15 +26,6 @@ setCursor()
 getNode(int)
 
 -----------------------
-
-
-Laves i GameBoard, med en getter i ThreeGame
-
-// giv en liste af alle tomme felte på brættet
-
-getEmptyFields()
-
-----------------------------------
 
 _____________________________________________________________________________________________
 
@@ -78,7 +58,22 @@ createBoard() - Mads: Jeg er i gang med den her
 
 ____________________________________________________________________________________________
 Jakob:
-ThreeGame getEmptyFields() uses arrayList not []
+Laves i GameBoard, med en getter i ThreeGame
+
+// giv en liste af alle tomme felte på brættet
+
+getEmptyFields()
+
+laves i ThreeNode
+
+-------------------
+
+// en getter for index værdien for noden
+
+getIndex()
+
+// En værdi der forholder sig til dybde, med relevante getters og setters
+  // Skal måske vente til dybde er taget højde for i træet
 ____________________________________________________________________________________________
 
 
@@ -86,5 +81,7 @@ ________________________________________________________________________________
 FIXED:
 
 ThreeNode constructor tager ikke en GameNode
+
+ThreeGame getEmptyFields() uses arrayList not []
 
 
