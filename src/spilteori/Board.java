@@ -8,7 +8,10 @@ package spilteori;
 import java.util.ArrayList;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> cc782c93babf76bfcb437d6993813637ab2cb1eb
 =======
 >>>>>>> cc782c93babf76bfcb437d6993813637ab2cb1eb
 /** 
@@ -81,6 +84,7 @@ public interface Board {
             Field newField
             );
     
+<<<<<<< HEAD
 <<<<<<< HEAD
     
     
