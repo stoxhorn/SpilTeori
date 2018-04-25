@@ -71,6 +71,7 @@ public class ThreeGame implements Game {
         return currentBoard.getEmptyFields();
     }
     
+    @Override
     public int getTurn()
     {
         // Store playerTurn
@@ -93,6 +94,7 @@ public class ThreeGame implements Game {
         GameNode t = currentNode;
         Field f = t.getOptimal()[player].getField();
         return f;
+    }
     
     
     // returner antallet af tomme felter
