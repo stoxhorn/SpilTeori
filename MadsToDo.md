@@ -43,7 +43,7 @@ getEmptyFields()
 
 // En metode der laver boardet, sådan at fields har rigtige kollonner og rækker,samt eri rigtig rækkefølge
 
-createBoard()
+createBoard() - Mads: Jeg er i gang med den her
 
 _____________________________________________________________________________________________
 
