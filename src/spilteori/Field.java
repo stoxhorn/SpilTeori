@@ -21,9 +21,12 @@ import java.util.ArrayList;
 public interface Field {
     
 <<<<<<< HEAD
+<<<<<<< HEAD
     /**
      * The int representing position of the Field
 =======
+=======
+>>>>>>> cc782c93babf76bfcb437d6993813637ab2cb1eb
     public int getPos();
     
     /**The int representing position of the Field
@@ -49,13 +52,19 @@ public interface Field {
      * @return int Representing coloumn 
      */
 <<<<<<< HEAD
+<<<<<<< HEAD
     public int getColoumn();
     
    
 =======
+=======
+>>>>>>> cc782c93babf76bfcb437d6993813637ab2cb1eb
    public int getValue();
    /** a value
     * yes it is 
     */
+<<<<<<< HEAD
+>>>>>>> cc782c93babf76bfcb437d6993813637ab2cb1eb
+=======
 >>>>>>> cc782c93babf76bfcb437d6993813637ab2cb1eb
 }

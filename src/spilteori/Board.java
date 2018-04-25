@@ -118,6 +118,29 @@ public interface Board {
      * @return Field the Field that has the highest score of this board
      */
     public Field getBestMove(int player);
+=======
+>>>>>>> cc782c93babf76bfcb437d6993813637ab2cb1eb
+    
+    /** Returns an array of empty Fields
+     * 
+     * @return an array of Fields containing no value
+     */
+    public ArrayList<Field> getEmptyFields();
+    
+    
+    // Unused: ==============================================================================================================================================================================================
+    
+<<<<<<< HEAD
+>>>>>>> cc782c93babf76bfcb437d6993813637ab2cb1eb
+=======
+    
+    /**
+     *  Returns the Field with the highest score
+     * 
+     * @param player int representing the player's score wished for
+     * @return Field the Field that has the highest score of this board
+     */
+    public Field getBestMove(int player);
     
     /** Returns an array of empty Fields
      * 

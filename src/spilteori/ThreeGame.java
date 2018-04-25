@@ -63,7 +63,11 @@ public class ThreeGame implements Game {
     
     @Override
 <<<<<<< HEAD
+<<<<<<< HEAD
     public Field[] getEmptyFields()
+=======
+    public ArrayList<Field> getEmptyFields()
+>>>>>>> cc782c93babf76bfcb437d6993813637ab2cb1eb
 =======
     public ArrayList<Field> getEmptyFields()
 >>>>>>> cc782c93babf76bfcb437d6993813637ab2cb1eb
@@ -98,6 +102,7 @@ public class ThreeGame implements Game {
     
     
 <<<<<<< HEAD
+<<<<<<< HEAD
     
     // returner antallet af tomme felter
     @Override
@@ -108,6 +113,11 @@ public class ThreeGame implements Game {
     // returner antallet af tomme felter
     @Override
     public int getEmpty() {
+=======
+    // returner antallet af tomme felter
+    @Override
+    public int getEmpty() {
+>>>>>>> cc782c93babf76bfcb437d6993813637ab2cb1eb
         return currentBoard.getEmptyFields().size();
     }
     
@@ -134,6 +144,9 @@ public class ThreeGame implements Game {
     public void makeMoveAI() {
         Board t = currentBoard;
         t.newMove(playerTurn, getBestMove(playerTurn));
+<<<<<<< HEAD
+>>>>>>> cc782c93babf76bfcb437d6993813637ab2cb1eb
+=======
 >>>>>>> cc782c93babf76bfcb437d6993813637ab2cb1eb
     }
     

@@ -57,6 +57,7 @@ public class ThreeBoard implements Board {
             }
         }
         return output;
+<<<<<<< HEAD
     }
 
     @Override
@@ -79,6 +80,8 @@ public class ThreeBoard implements Board {
     @Override
     public void newMove(int player, int newFieldValue, int coloumn, int row) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+=======
+>>>>>>> cc782c93babf76bfcb437d6993813637ab2cb1eb
     }
     
 }
