@@ -47,11 +47,18 @@ Jakob:
 ____________________________________________________________________________________________
 FIXED:
 ThreeNode constructor takes a gameNode now
+
 ThreeGame getEmptyFields() now uses ArrayList for all uses
+
 ThreeGame getEmpty works
+
 ThreeGame checkWin added
+
 ThreeGame makeMoveAI added
+
 ThreeNode getIndex added
+
 ThreeNode getField added
+
 ThreeField getPos added
 
