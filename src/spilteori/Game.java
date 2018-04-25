@@ -53,7 +53,7 @@ public interface Game {
      * Returns an array consisting only of empty fields
      * @return 
      */
-    public Field[] getEmptyFields();
+    public ArrayList<Field> getEmptyFields();
     
     /**
      * Returns the player who's turn it currently is
