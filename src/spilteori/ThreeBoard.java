@@ -48,8 +48,14 @@ public class ThreeBoard implements Board {
     }
     
     @Override
-    public Field[] getEmptyFields() {
-        // Jakob Har en algoritme
+    public ArrayList<Field> getEmptyFields() {
+        ArrayList<Field> output = new ArrayList<>();
+        for (Field value : board) {
+            if (value.getValue() == 0) {    //getValue fra ThreeField skal give en int
+                output.add(value);
+            }
+        }
+        return output;
     }
     
 }
