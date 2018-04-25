@@ -33,7 +33,8 @@ laves i ThreeRowGameTree:
 
 setCursor()
 
-
+// en getter til en node i spiltræet
+getNode(int)
 
 -----------------------
 
