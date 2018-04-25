@@ -68,23 +68,9 @@ ________________________________________________________________________________
 
 FIXED:
 
-ThreeNode constructor tager ikke en GameNode
-
-ThreeGame getEmptyFields() uses arrayList not []
-
-
-Laves i GameBoard, med en getter i ThreeGame
-
-// giv en liste af alle tomme felte på brættet
-
-getEmptyFields()
-
-laves i ThreeNode
-
--------------------
-
-// en getter for index værdien for noden
-
-getIndex()
-
+ThreeNode constructor takes a gameNode now
+ThreeGame getEmptyFields() now uses ArrayList for all uses
+ThreeGame getEmpty works
+ThreeNode getIndex added
+ThreeNode getField added
 
