@@ -5,7 +5,7 @@
  */
 package spilteori;
 
-
+import java.util.ArrayList;
 
 /** 
  * This class represents the board of a game, using an array of Fields
