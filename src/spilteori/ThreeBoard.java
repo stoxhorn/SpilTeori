@@ -5,6 +5,7 @@
  */
 package spilteori;
 
+import java.util.ArrayList;
 /**
  *
  * Rules:
