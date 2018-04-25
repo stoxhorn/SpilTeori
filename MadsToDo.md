@@ -29,7 +29,12 @@ getNode(int)
 ____________________________________________________________________________________________
 Laves i ThreeNode
 // En værdi der forholder sig til dybde, med relevante getters og setters
-  // Skal måske vente til dybde er taget højde for i træet
+
+// Brug for:
+getDepth()
+setDepth(int)
+
+Depths skal være 0, ved initialization
 ____________________________________________________________________________________________
 
 Reserveret:
