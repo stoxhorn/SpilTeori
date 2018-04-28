@@ -124,10 +124,16 @@ public class ThreeGame implements Game {
     //makes the most optimal play in the given situation
     @Override
     public void makeMoveAI() {
-        Board t = currentBoard;
-        t.newMove(playerTurn, getBestMove(playerTurn));
+        currentBoard.newMove(playerTurn, getBestMove(playerTurn));
     }
-
+    
+    /**
+     * @inheritDoc
+     * 
+     * @return 
+     */
+    @Override
+    
     @Override
     public GameNode getNode() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

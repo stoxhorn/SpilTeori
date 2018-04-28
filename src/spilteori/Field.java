@@ -45,9 +45,16 @@ public interface Field {
      */
     public int getColoumn();
     
-   
-   public int getValue();
-   /** a value
-    * yes it is 
+   /**
+    * returns the value of the this Field
+    * @return 
     */
+   public int getValue();
+   
+   /**
+    * Sets the value of this to be the given int 
+     * @param newVal
+    */
+   public void setValue(int newVal);
+   
 }

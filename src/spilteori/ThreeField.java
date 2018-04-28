@@ -19,23 +19,31 @@ public class ThreeField implements Field{
         pos = newPos;
     }
     
+    @Override
     public int getPos()
     {
-        System.out.println("Du har valgt position: " + pos);
         return pos;
     }
     
+    @Override
     public int getRow() {
-        System.out.println("Du har valgt row: " + row);
         return row;
     }
-
     
-    public int getColoumn() {
-        System.out.println("Du har valgt coloumn: " + coloumn);
+    @Override
+    public int getColoumn() {        
         return row;
     }
+    
+    @Override
     public int getValue() {
         return value;
     }
+    
+    @Override
+    public void setValue(int newVal)
+    {
+        value = newVal;
+    }
+    
 }
