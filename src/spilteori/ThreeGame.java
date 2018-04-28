@@ -41,6 +41,7 @@ public class ThreeGame implements Game {
     public ThreeGame()
     {
         playerTurn = 0;
+        createBoard(); 
         Tree.createTree(this);
         currentNode = Tree.getNode(0);
     }
@@ -136,8 +137,8 @@ public class ThreeGame implements Game {
     
     
     @Override
-    public GameNode getNode() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public GameNode getNode(int Index) {
+        return Tree.getNode(Index); 
     }
     
 }

@@ -69,9 +69,10 @@ public interface Game {
     /**
      * Returns the Node representing the current game
      * 
+     * @param Index
      * @return 
      */
-    public GameNode getNode();
+    public GameNode getNode(int Index);
 
     /**
      * Returns true if a player has won

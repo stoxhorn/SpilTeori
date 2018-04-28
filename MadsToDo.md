@@ -27,7 +27,7 @@ Reserveret:
 
 Mads:
 Jeg er gået i gang med at prøve at lave en main class der sætter spillet i gang og spørger efter inputs, osv.
-
+Gør det i den klasse der bare hedder spilteori
 
 
 
