@@ -9,11 +9,12 @@ Need a game
 
 
 Bugfixing:
+Parent has a value of 0, and is used to make a turn
 
 
-
-
-
+Bugs fixed:
+checkWinning() now works, but each move no thinks empty fields are taken already
+newmove was dependant on legalmove and not itself, got confused
 
 
 

@@ -124,7 +124,8 @@ public class ThreeGame implements Game {
     @Override
     public boolean check(int x, int y, int z)
     {
-        return checkLine(x , y, z) && checkLineExist(x,y,z);
+        boolean tmp = checkLine(x , y, z) && checkLineExist(x,y,z) && true;
+        return tmp;
     }
     
     @Override
@@ -148,7 +149,7 @@ public class ThreeGame implements Game {
             {
                 if(z > 0)
                 {
-                    return false;
+                    return true;
                 }
             }
         }
@@ -159,7 +160,12 @@ public class ThreeGame implements Game {
     //makes the most optimal play in the given situation
     @Override
     public void makeMoveAI() {
-        currentBoard.newMove(playerTurn, getBestMove(playerTurn));
+        // currentBoard.newMove(playerTurn, getBestMove(playerTurn));
+        if (newMove(getBestMove(playerTurn)))
+        {
+            System.out.println("Pick a legal move, please.\n");
+            makeMoveAI();
+        }
         
     }
     
@@ -168,7 +174,7 @@ public class ThreeGame implements Game {
     public boolean newMove(Field newMove)
     {
         // check if legalmove
-        if(!legalMove(newMove))
+        if(legalMove(newMove))
         {
             return false;
         }else
@@ -213,12 +219,12 @@ public class ThreeGame implements Game {
         }
         else 
         {
-            if ("n".equals(answer))
-            {
+            /*if ("n".equals(answer))
+            {*/
                 System.out.println("Have a nice day");
-            }
+            /*}
             System.out.println("Please press n or y, moron");
-            newGame();
+            newGame();*/
         }
         
     }
@@ -245,7 +251,7 @@ public class ThreeGame implements Game {
     @Override
     public void gameLoopTwoPlayers() {
         // A loop that breaks if the game is won or if the Board is filled        
-        while(!checkWin() && currentBoard.getEmptyFields().size() > 0)
+        while(!checkWin() && currentBoard.getEmptyFields().size() < 1)
         {
             // Applies the next turn, keeps track of player by itself
             playerMove();
@@ -296,7 +302,7 @@ public class ThreeGame implements Game {
         }
         
         // Game loop that does a player mnove if the iterator is an odd number, and ai move if number is even.
-        while(!checkWin() && currentBoard.getEmptyFields().size() > 0)
+        while(!checkWin() && currentBoard.getEmptyFields().size() < 1)
         {
             if(iterator%2 == 1)
             {
@@ -317,7 +323,7 @@ public class ThreeGame implements Game {
     public void gameLoopTwoAI() {
         
         // A loop that breaks if the game is won or if the Board is filled        
-        while(!checkWin() && currentBoard.getEmptyFields().size() > 0)
+        while(!checkWin() && currentBoard.getEmptyFields().size() < 1)
         {
             // Applies the next turn, keeps track of player by itself
             makeMoveAI();
@@ -342,7 +348,7 @@ public class ThreeGame implements Game {
         Field newField = getPlayerMove();
         
         // add the move to the board
-        if (!newMove(newField))
+        if (newMove(newField))
         {
             System.out.println("Pick a legal move, please.\n");
             playerMove();

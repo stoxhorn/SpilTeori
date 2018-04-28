@@ -20,7 +20,8 @@ public class ThreeRowGameTree implements GameTree {
     private final Game MainGame;
     
     // Root node containing a field that cannot exist, and a Node that is not inside the array
-    private final ThreeNode RootNode = new ThreeNode(new ThreeField(-1,-1,-1,-1), 0);
+    // Cannot have -1 for position, might need to be changed later on, just in case
+    private final ThreeNode RootNode = new ThreeNode(new ThreeField(-1,0,0,0), 0);
     
     public ThreeRowGameTree(Game newGame)
     {
@@ -171,6 +172,8 @@ public class ThreeRowGameTree implements GameTree {
         // Will add a move to the board for now, until a method is implemented 
         // Currently returns an arraylist, which is added to, and as such nothing happens
         tmpGame.newMove(parent.getPosMove());
+        System.out.println(parent.getPosMove().getValue());
+ 
         
         // A loop that calls itself on each child, iterating through the array
         // This should create each new branch

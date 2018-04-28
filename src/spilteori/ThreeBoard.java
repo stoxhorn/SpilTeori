@@ -79,7 +79,9 @@ public class ThreeBoard implements Board {
     @Override
     public ArrayList<Field> getEmptyFields() {
         ArrayList<Field> output = new ArrayList<>();
+        
         for (Field value : board) {
+            //System.out.println(output.size());
             if (value.getValue() == 0) {    //getValue fra ThreeField skal give en int
                 output.add(value);
             }
