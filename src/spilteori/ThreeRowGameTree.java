@@ -286,7 +286,8 @@ public class ThreeRowGameTree implements GameTree {
 
     @Override
     public GameNode getNode(int index) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        GameNode tmp = Tree.get(index);
+        return tmp;
     }
 
 }
