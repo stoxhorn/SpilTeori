@@ -5,13 +5,9 @@ ________________________________________________________________________________
 
 laves i ThreeRowGameTree:
 
-// P.T. tager den et Field som parameter, hvilket ikke giver mening da et Field ikke peger til en GameNode,
 
-// skal nok snarer tage en GameNode eller index
 
-// Bliver den over hovedet brugt?
 
-setCursor()
 
 // en getter til en node i spiltræet
 getNode(int)
@@ -19,6 +15,7 @@ getNode(int)
 -----------------------
 ____________________________________________________________________________________________
 Laves i ThreeNode
+//calculateChances(), tager stadig udgangspunkt i chancer, og den ser ud til at sammenligne hvert index i dens egne chancer, med alle spillere, i stedet for den respektive spiller.
 ____________________________________________________________________________________________
 
 Laves i ThreeGame:
@@ -95,3 +92,6 @@ added to interface as well
 
 // ThreeBoard:
 newMove now adds a value as well
+
+// ThreeRowGameTree:
+setCursor(int)
