@@ -64,9 +64,16 @@ public interface GameTree {
     /**
      * Points the Cursor to the new given Field
      * 
-     * @param newMove Field that the cursor needs to point to
+     * @param newCursor
      */
-    public void setCursor(Field newMove);
+    public void setCursor(int newCursor);
+    
+    /**
+     * gets the node stored at the given index
+     * @param index
+     * @return 
+     */
+    public GameNode getNode(int index);
     
     
     

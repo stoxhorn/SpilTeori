@@ -13,15 +13,15 @@ import java.util.ArrayList;
  */
 public class ThreeRowGameTree implements GameTree {
 
-    ArrayList<GameNode> Tree;
+    private ArrayList<GameNode> Tree;
     
-    int Cursor;
+    private int Cursor;
     
-    Game MainGame;
+    private final Game MainGame;
     
     // An empty Field
     // empty Field
-    ThreeNode RootNode;
+    private ThreeNode RootNode;
     
     public ThreeRowGameTree(Game newGame)
     {
@@ -185,10 +185,6 @@ public class ThreeRowGameTree implements GameTree {
     }
    
     
-    //NOTE: ==========================================================================================================================================================================================================
-    // have to decide if we are going to call this method on each Node, and using a setter for the return value, or make it a void method
-    // Current implementation will essentially be a void recursive method, that returns the chances of the given Node, but will not go deeper than a GameNode with already established chances
-    
     
     /** returns the chance of the given childNodes chances, of the corresponding player index
      * 
@@ -259,14 +255,10 @@ public class ThreeRowGameTree implements GameTree {
     @Override
     public Field getBestMove()
     {
-        // NOTE:==========================================================================================================================================================================================================
-        // The current implementation will return the best move to take, from the current index
         Field bestMove;
         
         GameNode thisNode = Tree.get(Cursor);
         
-        // NOTE:==========================================================================================================================================================================================================
-        // Currently takes an array of GameNodes, with index equalling player, this is subject to change, as player decider has not been made yet
         GameNode[] chances = thisNode.getOptimal();
         
         // NOTE:==========================================================================================================================================================================================================
@@ -288,8 +280,8 @@ public class ThreeRowGameTree implements GameTree {
     }
 
     @Override
-    public void setCursor(Field newMove) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setCursor(int newCursor) {
+        Cursor = newCursor;
     }
 
     @Override
