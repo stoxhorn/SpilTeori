@@ -127,12 +127,13 @@ public class ThreeGame implements Game {
         currentBoard.newMove(playerTurn, getBestMove(playerTurn));
     }
     
-    /**
-     * @inheritDoc
-     * 
-     * @return 
-     */
+    
     @Override
+    public void newMove(Field newMove)
+    {
+        currentBoard.newMove(playerTurn, newMove);
+    }
+    
     
     @Override
     public GameNode getNode() {

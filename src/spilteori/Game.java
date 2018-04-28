@@ -85,5 +85,13 @@ public interface Game {
      * 
      */
     public void makeMoveAI();
+    
+    /**
+     * Adds a new move to the game, identical to the new Field, but with a new value
+     * 
+     * @param newMove 
+     */
+    public void newMove(Field newMove);
+    
 
 }

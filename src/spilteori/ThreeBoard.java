@@ -45,8 +45,15 @@ public class ThreeBoard implements Board {
         // get position
         int pos = newField.getPos();
         
+        // Adding the player number as value,
+        // to represent the players' move
+        newField.setValue(player);
+        
         // set Field into the field
         board[pos] = newField;
+        
+        
+        
     }
 
     // kræver viden om hvilken node vi er kommet til
