@@ -9,8 +9,6 @@ laves i ThreeRowGameTree:
 
 
 
-// en getter til en node i spiltræet
-getNode(int)
 
 -----------------------
 ____________________________________________________________________________________________
@@ -95,3 +93,5 @@ newMove now adds a value as well
 
 // ThreeRowGameTree:
 setCursor(int)
+
+getNode(int)
