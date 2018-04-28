@@ -124,4 +124,9 @@ public interface Game {
      * Prints the current board out to console
      */
     public void printBoard();
+    
+    /**
+     * A method that asks if a new game is to be started or not
+     */
+    public void newGame();
 }

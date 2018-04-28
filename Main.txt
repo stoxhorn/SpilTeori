@@ -9,6 +9,8 @@ Need a game
 Need a method to start a game, and wait for end and ask to start again after
 runGame()
 
+A method to call at the end of runGame, to ask if a new game is to be started
+
 This requires a method that runs the game with proper parameters, players ai and shit
 int representing amount of each, if one player and one ai, needs to ask for who starts
 

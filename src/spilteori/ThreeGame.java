@@ -146,27 +146,41 @@ public class ThreeGame implements Game {
     public void runGame() {
         System.out.println("Please specify amount of players, from 0 - 2:");
         
+        // Starts the game with the amount of player specified in the scanenr input
         Scanner in = new Scanner(System.in);
         int playerAmnt = in.nextInt();
         startGame(playerAmnt);
         
+        // Asks if a new game is to be started
+        newGame();
+    }
+
+    @Override
+    public void newGame() {
         System.out.println("Would you like to try again? \n(y/n)");
+        
+        // Starts the game if answer given is Y
         Scanner getAnswer = new Scanner(System.in);
-        String answer = in.next();
+        String answer = getAnswer.next();
         if("y".equals(answer))
         {
             runGame();
         }
-        else
+        else 
         {
-            System.out.println("Have a nice day");
+            if ("n".equals(answer))
+            {
+                System.out.println("Have a nice day");
+            }
+            System.out.println("Please press n or y, moron");
+            newGame();
         }
         
     }
-
+    
     @Override
     public void startGame(int players) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // I'm supposed to call the proper gameloops
     }
 
     @Override
@@ -188,5 +202,7 @@ public class ThreeGame implements Game {
     public void printBoard() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    
     
 }
