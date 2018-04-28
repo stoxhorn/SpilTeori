@@ -113,4 +113,19 @@ public interface GameNode {
      */
     public Field getField();
     
+    /**
+     * returns the set depth for this Node
+     * 
+     * @return 
+     */
+    public int getDepth();
+    
+    /**
+     * Sets the depth for this node to the given parameter
+     * 
+     * @param newDepth 
+     */
+    public void setDetpth(int newDepth);
+            
+    
 }
