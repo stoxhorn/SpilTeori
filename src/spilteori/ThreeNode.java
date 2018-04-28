@@ -87,6 +87,7 @@ public class ThreeNode implements GameNode{
     //getter for bestNode
     @Override
     public GameNode[] getOptimal() {
+        calculateOptimal();
         return bestNode;
     }
     
