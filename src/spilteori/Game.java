@@ -137,7 +137,6 @@ public interface Game {
     
     /**
      * Announces the game has ended and a winner if any
-     * @param state
      */
-    public void announceEnd(boolean state);
+    public void announceEnd();
 }

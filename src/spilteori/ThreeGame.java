@@ -130,6 +130,7 @@ public class ThreeGame implements Game {
     @Override
     public void makeMoveAI() {
         currentBoard.newMove(playerTurn, getBestMove(playerTurn));
+        playterTurn ++;
     }
     
     
@@ -243,47 +244,42 @@ public class ThreeGame implements Game {
                 try {
                     two = ThreeGame.class.getMethod("playerMove");
                     one = ThreeGame.class.getMethod("makeMoveAI");
-                } catch (NoSuchMethodException ex) {
-                    Logger.getLogger(ThreeGame.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (SecurityException ex) {
+                } catch (NoSuchMethodException | SecurityException ex) {
                     Logger.getLogger(ThreeGame.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
-        playerTurn --;
+        
         while(!checkWin() || currentBoard.getEmptyFields().size() > 0)
         {
-            playerTurn ++;
+            
             // cannot get here without gfetting initialized, will cast nullpoint in case
             one.invoke();
             if (!checkWin() || currentBoard.getEmptyFields().size() > 0)
             {
-                playerTurn ++;
                 // cannot get here without gfetting initialized, will cast nullpoint in case
                 two.invoke();
             }
              
         }
-        System.out.println(this.playerTurn + " has won the game");
+        announceEnd();
     }
 
     @Override
     public void gameLoopTwoAI() {
         
-        // A loop that breaks if the game is won or if the Board is filled
-        playerTurn --;
+        // A loop that breaks if the game is won or if the Board is filled        
         while(!checkWin() || currentBoard.getEmptyFields().size() > 0)
         {
-            playerTurn ++;
+            // Applies the next turn 
             makeMoveAI();
             if (!checkWin() || currentBoard.getEmptyFields().size() > 0)
             {
-                playerTurn ++;
                 makeMoveAI();    
             }
              
         }
-        
+        announceEnd();
     }
 
     
@@ -295,13 +291,13 @@ public class ThreeGame implements Game {
 
     @Override
     public void playerMove() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        playerTurn ++;
     }
 
     @Override
-    public void announceEnd(boolean state) {
+    public void announceEnd() {
         System.out.println("The game has ended");
-        if (state)
+        if (checkWin())
         {
             System.out.println(playerTurn + " has won the game");
         }
