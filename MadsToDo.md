@@ -32,8 +32,7 @@ Reserveret:
 
 Mads:
 
-// En metode for newMove som kun tager et field som værdi
-newMove(Field)
+
 
 
 
@@ -81,3 +80,18 @@ setDepth(int)
 // En metode der laver boardet, sådan at fields har rigtige kollonner og rækker,samt eri rigtig rækkefølge
 
 createBoard() - Mads: Jeg er i gang med den her
+
+// En metode for newMove som kun tager et field som værdi
+newMove(Field)
+
+// I ThreeField:
+setValue()
+
+og fixede nogle linjer, samt det's interface
+
+// ThreeGame:
+newMove(Field)
+added to interface as well
+
+// ThreeBoard:
+newMove now adds a value as well
