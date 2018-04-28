@@ -1,0 +1,28 @@
+Structurizing main class:
+
+Need a game
+	game creeates a board
+		board creates fields
+	game creates a tree
+		tree creates nodes
+// Required to start game:
+Need a method to start a game, and wait for end and ask to start again after
+runGame()
+
+This requires a method that runs the game with proper parameters, players ai and shit
+int representing amount of each, if one player and one ai, needs to ask for who starts
+
+Create different methods for each instance instead of each start
+
+// Required to keep track of turns:
+A loop that adds a move each turn, and ends at game end
+A while loop using boolean?
+
+a method to add a player move, requires input
+and one for ai
+
+Two method calls in the loop, first method call is the first person's start
+method can copy loop and change, and create if else statements to decide which loop to use
+
+// Required to visujalize game:
+A method that returns the board as a string

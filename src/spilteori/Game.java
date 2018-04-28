@@ -94,5 +94,34 @@ public interface Game {
      */
     public void newMove(Field newMove);
     
-
+    /**
+     * A method that starts the game and asks for another round or end
+     */
+    public void runGame();
+    
+    /**
+     * Starts the game with the set amount of players, filling AI for the rest, from 0 to 2
+     * @param players 
+     */
+    public void startGame(int players);
+    
+    /**
+     * The game loop with two players
+     */
+    public void gameLoopTwoPlayers();
+    
+    /**
+     * The game loop with one player and one AI, asks first for who starts
+     */
+    public void gameLoopOnePlayer();
+    
+    /**
+     * The game loop with no players
+     */
+    public void gameLoopTwoAI();
+    
+    /**
+     * Prints the current board out to console
+     */
+    public void printBoard();
 }
