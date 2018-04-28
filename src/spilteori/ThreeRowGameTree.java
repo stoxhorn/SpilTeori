@@ -86,6 +86,8 @@ public class ThreeRowGameTree implements GameTree {
         // Create an int[] of the same length of the amount of players
         int[] newChances = new int[tmpGame.getPlayerAmount()];
         
+        // Inserting a number to represent that it is an unfilled chance
+        newChances[0] = -1;
         
         // Need to account for depth
         // If the given game contains a winner:
@@ -108,8 +110,9 @@ public class ThreeRowGameTree implements GameTree {
         // If no more fields are left, and there has not been found a winner:
         else if(moveLeft < 1)
         {
+            newChances[0] = 0;
             // Add zero for losing as nobody won 
-            // int[] are initialized with 0 in each index
+            // int[] are initialized with 0 in each index, and i've jsut changed the first index back to 0
             Tree.get(Cursor).setChances(newChances);
             
             // since this block only activates, if no possible winner is found, therefore return
@@ -218,7 +221,7 @@ public class ThreeRowGameTree implements GameTree {
         {
             return localNode.getChances();
         }
-        
+        else{
         // Getting an array of children
         GameNode[] childArray = localNode.getChildren();
         
@@ -228,31 +231,29 @@ public class ThreeRowGameTree implements GameTree {
         
         // Calling this method on each child
         // and setting the return value to the apropriate indexes in the 2d array
+        // this is essentially trhe recursive part
         int i = 0;
         for(GameNode x : childArray)
         {
-            childrenChances[i] = calculateChances(x);
+            childrenChances[i] = calculateMinMax(x);
             i++;
         }
         
         
-        // Need some way to calculate the chances
-        // NOTE: ==========================================================================================================================================================================================================
-        // Currently i just make up some random-ass method, that returns an int[], as there is no existing method
-        int[] newChances = minMax(childrenChances);
+        // A method that takes a depth and a set of chances
+        // the 2d array, needs to end as a single array, that shows the win chances for the current depth
+        int[] newChances = minMax(childrenChances, givenNode.getDepth());
         
         // i get the index to set the appropriate node in the tree
-        // NOTE: ==========================================================================================================================================================================================================
-        // I need a getter for index of node
         int index = localNode.getIndex();
         
         // And finally i set the chances for the appropriate GameNode
-        // NOTE: ==========================================================================================================================================================================================================
-        // No setter for chances in gameNode
         Tree.get(index).setChances(newChances);
         
         // and finally i return the chances
         return newChances;
+        }
+        
     }
 
     @Override
