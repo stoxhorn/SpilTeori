@@ -46,4 +46,11 @@ public class ThreeField implements Field{
         value = newVal;
     }
     
+    @Override
+    public String toString()
+    {
+        String tmp = String.valueOf(value);
+        return tmp;
+    }
+    
 }

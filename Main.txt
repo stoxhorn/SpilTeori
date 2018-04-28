@@ -6,10 +6,9 @@ Need a game
 	game creates a tree
 		tree creates nodes
 // Required to start game:
-Need a method to start a game, and wait for end and ask to start again after
-runGame()
+Bugfixing:
 
-A method to call at the end of runGame, to ask if a new game is to be started
+
 
 
 
@@ -22,7 +21,7 @@ A method that returns the board as a string
 
 // Done:
 runGame()
-
+newGame()
 announceEnd()
 playerMove()
 gameloops

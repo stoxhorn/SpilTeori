@@ -87,10 +87,6 @@ public class ThreeBoard implements Board {
         return output;
     }
 
-    @Override
-    public void createBoard(Field nullField, int fieldAmount) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     @Override
     public void createBoard(Field nullField, int width, int height) {
@@ -108,5 +104,27 @@ public class ThreeBoard implements Board {
     public void newMove(int player, int newFieldValue, int coloumn, int row) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public Field[] createBoard(Field nullField, int fieldAmount) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
+    @Override
+    public String toString()
+    {
+        String tmp = "";
+        
+        int i = 0;
+        for(Field x : board)
+        {
+            tmp += x.getValue() + " ";
+            if(i == coloumns)
+            {
+                tmp += "\n";
+            }
+        }
+        
+        return tmp;
+    }
 }

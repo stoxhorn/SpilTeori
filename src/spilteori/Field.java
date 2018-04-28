@@ -57,4 +57,6 @@ public interface Field {
     */
    public void setValue(int newVal);
    
+   @Override
+   public String toString();
 }
