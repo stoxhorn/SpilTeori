@@ -23,8 +23,7 @@ ________________________________________________________________________________
 
 Laves i ThreeGame:
 
-// En metode for newMove som kun tager et field som værdi
-newMove(Field)
+
 
 
 
@@ -33,7 +32,8 @@ Reserveret:
 
 Mads:
 
-
+// En metode for newMove som kun tager et field som værdi
+newMove(Field)
 
 
 
