@@ -36,9 +36,7 @@ Mads:
 
 
 
-// En metode der laver boardet, sådan at fields har rigtige kollonner og rækker,samt eri rigtig rækkefølge
 
-createBoard() - Mads: Jeg er i gang med den her
 
 ____________________________________________________________________________________________
 Jakob:
@@ -79,3 +77,7 @@ Mads:
 getDepth()
 
 setDepth(int)
+
+// En metode der laver boardet, sådan at fields har rigtige kollonner og rækker,samt eri rigtig rækkefølge
+
+createBoard() - Mads: Jeg er i gang med den her
