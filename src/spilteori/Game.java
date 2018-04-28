@@ -136,6 +136,12 @@ public interface Game {
     public void playerMove();
     
     /**
+     * A method that gets the move wished for by the player
+     * @return 
+     */
+    public Field getPlayerMove();
+    
+    /**
      * Announces the game has ended and a winner if any
      */
     public void announceEnd();

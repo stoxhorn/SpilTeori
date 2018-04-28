@@ -130,7 +130,7 @@ public class ThreeGame implements Game {
     @Override
     public void makeMoveAI() {
         currentBoard.newMove(playerTurn, getBestMove(playerTurn));
-        playterTurn ++;
+        
     }
     
     
@@ -138,6 +138,7 @@ public class ThreeGame implements Game {
     public void newMove(Field newMove)
     {
         currentBoard.newMove(playerTurn, newMove);
+        getTurn();
     }
     
     
@@ -203,65 +204,71 @@ public class ThreeGame implements Game {
 
     @Override
     public void gameLoopTwoPlayers() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // A loop that breaks if the game is won or if the Board is filled        
+        while(!checkWin() || currentBoard.getEmptyFields().size() > 0)
+        {
+            // Applies the next turn, keeps track of player by itself
+            playerMove();
+        }
+        // Announces the end of the game and potential winners
+        announceEnd();
+    
     }
 
     @Override
     public void gameLoopOnePlayer() {
+        
+        // int used to decide which method to call in loop
+        int iterator = 0;
+        
+        int inp;
+        
         System.out.println("Who starts? player or ai?\n1 for player 0 for AI.");
         
-        Method one = null;
-        Method two = null;
-        
-        
-        
+        // Getting the relevant user input
         Scanner input = new Scanner(System.in);
-        int inp = input.nextInt();
         
+        // Try statement to catch exceptions
+        try
+        {
+            inp = input.nextInt();
+        }
+        catch(Exception e)
+        {
+            System.err.println(e);
+            return;
+        }
+        // checks if proper input was given
         if(inp > 1 || inp < 0)
         {
             System.out.println("please press either 1 or 0");
             gameLoopOnePlayer();
             return;
         }
+        // increments the iterator or not depending on input
         else
         {
             if(inp == 1)
             {
-                try {
-                    one = ThreeGame.class.getMethod("playerMove");
-                    two = ThreeGame.class.getMethod("makeMoveAI");
-                } catch (NoSuchMethodException ex) {
-                    Logger.getLogger(ThreeGame.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (SecurityException ex) {
-                    Logger.getLogger(ThreeGame.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-
-            }
-            else
-            {
-                try {
-                    two = ThreeGame.class.getMethod("playerMove");
-                    one = ThreeGame.class.getMethod("makeMoveAI");
-                } catch (NoSuchMethodException | SecurityException ex) {
-                    Logger.getLogger(ThreeGame.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                iterator ++;
             }
         }
         
+        // Game loop that does a player mnove if the iterator is an odd number, and ai move if number is even.
         while(!checkWin() || currentBoard.getEmptyFields().size() > 0)
         {
-            
-            // cannot get here without gfetting initialized, will cast nullpoint in case
-            one.invoke();
-            if (!checkWin() || currentBoard.getEmptyFields().size() > 0)
+            if(iterator%2 == 1)
             {
-                // cannot get here without gfetting initialized, will cast nullpoint in case
-                two.invoke();
+                playerMove();
+                iterator++;
+                        
             }
-             
+            else{
+                this.makeMoveAI();
+                iterator++;
+            }
         }
+        // Announces the game has ended and a potential winner
         announceEnd();
     }
 
@@ -271,14 +278,10 @@ public class ThreeGame implements Game {
         // A loop that breaks if the game is won or if the Board is filled        
         while(!checkWin() || currentBoard.getEmptyFields().size() > 0)
         {
-            // Applies the next turn 
+            // Applies the next turn, keeps track of player by itself
             makeMoveAI();
-            if (!checkWin() || currentBoard.getEmptyFields().size() > 0)
-            {
-                makeMoveAI();    
-            }
-             
         }
+        // Announces the end of the game and potential winners
         announceEnd();
     }
 
@@ -291,7 +294,15 @@ public class ThreeGame implements Game {
 
     @Override
     public void playerMove() {
-        playerTurn ++;
+        // Announce the current player
+        System.out.println("It is now player " + playerTurn +"'s turn");
+    
+        // ask for for which field to make a move on
+        Field newMove = getPlayerMove();
+        
+        // add the move to the board
+        newMove(newMove);
+        
     }
 
     @Override
@@ -305,6 +316,20 @@ public class ThreeGame implements Game {
         {
             System.out.println("No winner has been found");
         }
+    }
+
+    @Override
+    public Field getPlayerMove() {
+        System.out.println("Which row would you like to move to?");
+        Scanner inp1 = new Scanner(System.in);
+        int row = inp1.nextInt();
+        
+        System.out.println("Which Coloumn would you like to move to?");
+        Scanner inp2 = new Scanner(System.in);
+        int coloumn = inp2.nextInt();
+        
+        ThreeField tmp = new ThreeField(playerTurn, row, coloumn, (3*row + coloumn +1) );
+        return tmp;
     }
 
     
