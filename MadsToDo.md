@@ -1,14 +1,5 @@
 # Mads' TO DO:
 
-Enten i ThreeRowGameTree eller ThreeNode
-
-// udregning af scoren for hvert node, skal finde ud af om det skal være i træ eller node, eller en kombi
-
-MinMax()
-
--------------------
-
-// Ved samme lejlighed måske ændre navne og tal fra chancer og procenter til score eller point
 
 _____________________________________________________________________________________________________________
 
@@ -57,6 +48,15 @@ createBoard() - Mads: Jeg er i gang med den her
 
 ____________________________________________________________________________________________
 Jakob:
+Enten i ThreeRowGameTree eller ThreeNode
+
+// udregning af scoren for hvert node, skal finde ud af om det skal være i træ eller node, eller en kombi
+
+MinMax()
+
+-------------------
+
+// Ved samme lejlighed måske ændre navne og tal fra chancer og procenter til score eller point
 ____________________________________________________________________________________________
 FIXED:
 ThreeNode constructor takes a gameNode now
