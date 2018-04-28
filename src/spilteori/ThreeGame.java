@@ -181,6 +181,20 @@ public class ThreeGame implements Game {
     @Override
     public void startGame(int players) {
         // I'm supposed to call the proper gameloops
+        if(players != 0)
+            if(players != 1)
+            {
+                gameLoopTwoPlayers();
+            }
+            else
+            {
+                gameLoopOnePlayer();
+            }
+            
+        else
+        {
+            gameLoopTwoAI();
+        }
     }
 
     @Override
