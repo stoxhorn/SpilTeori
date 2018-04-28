@@ -36,16 +36,15 @@ public class ThreeBoard implements Board {
         
         coloumns = width;
         
-        createBoard(fieldAmount, width, height);
+        board = createBoard(fieldAmount, width, height);
     }
     
     // loop der indsætter et tomt felt i hvert index
     // Fow now it ádds 1 to row and coloumn value,
     // in other words, it's not a 0 index array for those values
     @Override
-    public Field [] createBoard(int fieldAmount, int width, int height)
+    public Field[] createBoard(int fieldAmount, int width, int height)
     {
-        
         Field[] newBoard = new Field[9];
         
         // Every time i passes a 3x row is incremented once, and coloumn is reset

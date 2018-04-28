@@ -37,8 +37,9 @@ public interface Board {
      * @param fieldAmount
      * @param width
      * @param height 
+     * @return  
      */
-    public void createBoard(
+    public Field[] createBoard(
             int fieldAmount,
             int width,
             int height
