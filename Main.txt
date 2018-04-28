@@ -26,8 +26,14 @@ and one for ai
 Two method calls in the loop, first method call is the first person's start
 method can copy loop and change, and create if else statements to decide which loop to use
 
+// Required for a player to make a move
+playerMove()
+
 // Required to visujalize game:
 A method that returns the board as a string
 
+
 // Done:
 runGame()
+
+announceEnd()

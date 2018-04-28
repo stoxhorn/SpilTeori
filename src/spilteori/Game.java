@@ -129,4 +129,15 @@ public interface Game {
      * A method that asks if a new game is to be started or not
      */
     public void newGame();
+    
+    /**
+     * Method that starts a move for the current player
+     */
+    public void playerMove();
+    
+    /**
+     * Announces the game has ended and a winner if any
+     * @param state
+     */
+    public void announceEnd(boolean state);
 }

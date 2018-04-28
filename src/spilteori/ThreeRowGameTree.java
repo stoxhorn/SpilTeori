@@ -269,7 +269,7 @@ public class ThreeRowGameTree implements GameTree {
         bestMove = chances[player].getPosMove();
         
         return bestMove;
-    }
+}
 
     @Override
     public int getCursor()

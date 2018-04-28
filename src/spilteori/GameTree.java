@@ -75,6 +75,12 @@ public interface GameTree {
      */
     public GameNode getNode(int index);
     
+    /**
+     * Announces the game has ended and a winner if any
+     * @param state
+     */
+    public void announceEnd(boolean state);
+    
     
     
 }

@@ -7,8 +7,11 @@ package spilteori;
 
 // Need a method to add a move on the game, instead of only on the Board
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 
@@ -180,7 +183,7 @@ public class ThreeGame implements Game {
     
     @Override
     public void startGame(int players) {
-        // I'm supposed to call the proper gameloops
+        // Hierachily calls the methods of incrementing player size
         if(players != 0)
             if(players != 1)
             {
@@ -204,17 +207,108 @@ public class ThreeGame implements Game {
 
     @Override
     public void gameLoopOnePlayer() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Who starts? player or ai?\n1 for player 0 for AI.");
+        
+        Method one = null;
+        Method two = null;
+        
+        
+        
+        Scanner input = new Scanner(System.in);
+        int inp = input.nextInt();
+        
+        if(inp > 1 || inp < 0)
+        {
+            System.out.println("please press either 1 or 0");
+            gameLoopOnePlayer();
+            return;
+        }
+        else
+        {
+            if(inp == 1)
+            {
+                try {
+                    one = ThreeGame.class.getMethod("playerMove");
+                    two = ThreeGame.class.getMethod("makeMoveAI");
+                } catch (NoSuchMethodException ex) {
+                    Logger.getLogger(ThreeGame.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SecurityException ex) {
+                    Logger.getLogger(ThreeGame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+
+            }
+            else
+            {
+                try {
+                    two = ThreeGame.class.getMethod("playerMove");
+                    one = ThreeGame.class.getMethod("makeMoveAI");
+                } catch (NoSuchMethodException ex) {
+                    Logger.getLogger(ThreeGame.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SecurityException ex) {
+                    Logger.getLogger(ThreeGame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        playerTurn --;
+        while(!checkWin() || currentBoard.getEmptyFields().size() > 0)
+        {
+            playerTurn ++;
+            // cannot get here without gfetting initialized, will cast nullpoint in case
+            one.invoke();
+            if (!checkWin() || currentBoard.getEmptyFields().size() > 0)
+            {
+                playerTurn ++;
+                // cannot get here without gfetting initialized, will cast nullpoint in case
+                two.invoke();
+            }
+             
+        }
+        System.out.println(this.playerTurn + " has won the game");
     }
 
     @Override
     public void gameLoopTwoAI() {
+        
+        // A loop that breaks if the game is won or if the Board is filled
+        playerTurn --;
+        while(!checkWin() || currentBoard.getEmptyFields().size() > 0)
+        {
+            playerTurn ++;
+            makeMoveAI();
+            if (!checkWin() || currentBoard.getEmptyFields().size() > 0)
+            {
+                playerTurn ++;
+                makeMoveAI();    
+            }
+             
+        }
+        
+    }
+
+    
+    
+    @Override
+    public void printBoard() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void printBoard() {
+    public void playerMove() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void announceEnd(boolean state) {
+        System.out.println("The game has ended");
+        if (state)
+        {
+            System.out.println(playerTurn + " has won the game");
+        }
+        else
+        {
+            System.out.println("No winner has been found");
+        }
     }
 
     
