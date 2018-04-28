@@ -2,25 +2,26 @@ package spilteori;
 
 public class ThreeNode implements GameNode{
     
-    int depth;
+    private int depth;
 
-    GameNode parent;
+    private GameNode parent;
     
-    Field field;
+    private Field field;
     
-    int index;
+    private int index;
     
-    int[] chances;
+    private int[] chances;
     
-    GameNode[] children;
+    private GameNode[] children;
     
-    GameNode[] bestNode;
+    private GameNode[] bestNode;
     
     //ThreeNode Object
     public ThreeNode(Field newField, int newIndex, GameNode newParent)
     {
         this.field = newField;
         this.index = newIndex;
+        this.depth = 0;
         this.parent = newParent; 
         children = null;        //Null is default and is changed when calling setChildren as we most likely wont know the children when creating the Node
     }
@@ -123,6 +124,19 @@ public class ThreeNode implements GameNode{
     @Override
     public Field getField() {
         return field;
+    }
+    
+    @override
+    public int getDepth()
+    {
+        int tmp = depth;
+        return tmp;
+    }
+    
+    @Override
+    public void setDepth(int newDepth)
+    {
+        Depth = newDepth;
     }
     
 }
