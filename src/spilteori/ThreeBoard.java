@@ -17,7 +17,12 @@ import java.util.ArrayList;
  */
 public class ThreeBoard implements Board {
 
-    Field[] board;
+    private Field[] board;
+    
+    private final int rows;
+    
+    private final int coloumns;
+            
     
     @Override
     public Field[] getBoard() {
@@ -25,19 +30,30 @@ public class ThreeBoard implements Board {
         return tmp;
     }
     
+    public ThreeBoard(int fieldAmount, int width, int height)
+    {
+        rows = height;
+        
+        coloumns = width;
+        
+        createBoard(fieldAmount, width, height);
+    }
+    
     // loop der indsætter et tomt felt i hvert index
     // Fow now it ádds 1 to row and coloumn value,
     // in other words, it's not a 0 index array for those values
     @Override
-    public void createBoard(int fieldAmount, int width, int height) {
-        board = new Field[9];
+    public Field [] createBoard(int fieldAmount, int width, int height)
+    {
+        
+        Field[] newBoard = new Field[9];
         
         // Every time i passes a 3x row is incremented once, and coloumn is reset
         for(int i = 0; i < 9; i++)
         {
-            board[i] = new ThreeField(0, i/3 +1, i%3+1, i);
+            newBoard[i] = new ThreeField(0, i/3 +1, i%3+1, i);
         }
-        
+        return newBoard;
     }    
     
     @Override
@@ -50,10 +66,7 @@ public class ThreeBoard implements Board {
         newField.setValue(player);
         
         // set Field into the field
-        board[pos] = newField;
-        
-        
-        
+        board[pos] = newField;        
     }
 
     // kræver viden om hvilken node vi er kommet til

@@ -19,15 +19,13 @@ public class ThreeRowGameTree implements GameTree {
     
     private final Game MainGame;
     
-    // An empty Field
-    // empty Field
-    private ThreeNode RootNode;
+    // Root node containing a field that cannot exist, and a Node that is not inside the array
+    private final ThreeNode RootNode = new ThreeNode(new ThreeField(-1,-1,-1,-1), 0);
     
     public ThreeRowGameTree(Game newGame)
     {
+        this.Tree = new ArrayList<>();
         Cursor = 0;
-        
-        RootNode = null;
         
         MainGame = newGame;
         
@@ -52,6 +50,8 @@ public class ThreeRowGameTree implements GameTree {
     {
         // Create the RootNode node
         Tree.add(RootNode);
+        
+        
         
         // Resets the cursor to first index
         Cursor = 0;

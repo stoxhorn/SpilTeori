@@ -16,6 +16,16 @@ public class ThreeNode implements GameNode{
     
     private GameNode[] bestNode;
     
+    // Constructor to us on the rootnode
+    
+    public ThreeNode(Field newField, int newIndex)
+    {
+        this.field = newField;
+        this.index = newIndex;
+        this.depth = 0;
+        children = null;        //Null is default and is changed when calling setChildren as we most likely wont know the children when creating the Node
+    }
+    
     //ThreeNode Object
     public ThreeNode(Field newField, int newIndex, GameNode newParent)
     {

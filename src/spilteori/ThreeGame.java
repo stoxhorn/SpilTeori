@@ -45,8 +45,10 @@ public class ThreeGame implements Game {
     public ThreeGame()
     {
         playerTurn = 0;
-        createBoard(); 
-        Tree.createTree(this);
+        currentBoard = new ThreeBoard();
+        createBoard();
+        Tree = new ThreeRowGameTree(this);
+        
         currentNode = Tree.getNode(0);
     }
     
@@ -60,6 +62,7 @@ public class ThreeGame implements Game {
     // Skal have fundet ud af
     @Override
     public void createBoard() {
+        
         currentBoard.createBoard(9,3,3);
     }
 

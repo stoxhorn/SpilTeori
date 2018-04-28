@@ -49,8 +49,9 @@ public interface Board {
      * 
      * @param nullField
      * @param fieldAmount 
+     * @return  
      */
-    public void createBoard(Field nullField, int fieldAmount);
+    public Field[] createBoard(Field nullField, int fieldAmount);
 
     /**
      * Overloaded method that only takes width and height into acount
