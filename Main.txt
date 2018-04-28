@@ -26,3 +26,6 @@ method can copy loop and change, and create if else statements to decide which l
 
 // Required to visujalize game:
 A method that returns the board as a string
+
+// Done:
+runGame()

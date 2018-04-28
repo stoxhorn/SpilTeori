@@ -8,6 +8,7 @@ package spilteori;
 // Need a method to add a move on the game, instead of only on the Board
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 
 
@@ -139,6 +140,53 @@ public class ThreeGame implements Game {
     @Override
     public GameNode getNode(int Index) {
         return Tree.getNode(Index); 
+    }
+
+    @Override
+    public void runGame() {
+        System.out.println("Please specify amount of players, from 0 - 2:");
+        
+        Scanner in = new Scanner(System.in);
+        int playerAmnt = in.nextInt();
+        startGame(playerAmnt);
+        
+        System.out.println("Would you like to try again? \n(y/n)");
+        Scanner getAnswer = new Scanner(System.in);
+        String answer = in.next();
+        if("y".equals(answer))
+        {
+            runGame();
+        }
+        else
+        {
+            System.out.println("Have a nice day");
+        }
+        
+    }
+
+    @Override
+    public void startGame(int players) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void gameLoopTwoPlayers() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void gameLoopOnePlayer() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void gameLoopTwoAI() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void printBoard() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
