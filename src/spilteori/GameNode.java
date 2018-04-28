@@ -42,34 +42,17 @@ public interface GameNode {
      * 
      * @return int[] of size 0 to 10000, representing percentage chances with 100% = 10000
      */
-    public int[] getChances();
+    public int getWinValue();
     
     /** 
      * Adds the chances of this Node, as an int[]
      * 
+     * @param newWinValue
      * @param newChances int[][] containing numbers between 0-10000
      */
-    public void setChances(int[] newChances);
+    public void setWinValue(int newWinValue);
     
-    /**
-     * Calculates the chances of winning at for this GameNode
-     * 
-     */
-    public void calculateChances();
-    
-    /**
-     * Calculates the optimal move for each player
-     * 
-     * Places the index of the optimal child in the index corresponding to player number.
-     */
-    public void calculateOptimal();
-    
-    /**
-     * Returns the array of optimal moves
-     * 
-     * @return GameNode[] each index contains the optimal Node for player corresponding to index
-     */
-    public GameNode[] getOptimal();
+    public GameNode getOptimal();
     
     /**
      * Returns an array containing all the children of this GameNode
