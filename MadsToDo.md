@@ -26,7 +26,7 @@ Laves i ThreeGame:
 Reserveret:
 
 Mads:
-
+Jeg er gået i gang med at prøve at lave en main class der sætter spillet i gang og spørger efter inputs, osv.
 
 
 
