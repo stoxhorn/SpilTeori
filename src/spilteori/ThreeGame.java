@@ -45,8 +45,7 @@ public class ThreeGame implements Game {
     public ThreeGame()
     {
         playerTurn = 0;
-        currentBoard = new ThreeBoard();
-        createBoard();
+        currentBoard = new ThreeBoard(9,3,3);
         Tree = new ThreeRowGameTree(this);
         
         currentNode = Tree.getNode(0);
@@ -59,12 +58,6 @@ public class ThreeGame implements Game {
     }
 
     
-    // Skal have fundet ud af
-    @Override
-    public void createBoard() {
-        
-        currentBoard.createBoard(9,3,3);
-    }
 
     @Override
     public Board getBoard() {
@@ -116,18 +109,52 @@ public class ThreeGame implements Game {
     //afterwards playerturn should be updated
     @Override
     public boolean checkWin() {
-        Field[] t = currentBoard.getBoard();
-        return  t[0].getValue() == playerTurn && t[1].getValue() == playerTurn && t[2].getValue() == playerTurn ||
-                t[3].getValue() == playerTurn && t[4].getValue() == playerTurn && t[5].getValue() == playerTurn ||
-                t[6].getValue() == playerTurn && t[7].getValue() == playerTurn && t[8].getValue() == playerTurn ||
-                
-                t[0].getValue() == playerTurn && t[3].getValue() == playerTurn && t[6].getValue() == playerTurn ||
-                t[1].getValue() == playerTurn && t[4].getValue() == playerTurn && t[7].getValue() == playerTurn ||
-                t[2].getValue() == playerTurn && t[5].getValue() == playerTurn && t[8].getValue() == playerTurn ||
-                
-                t[0].getValue() == playerTurn && t[4].getValue() == playerTurn && t[8].getValue() == playerTurn ||
-                t[2].getValue() == playerTurn && t[4].getValue() == playerTurn && t[6].getValue() == playerTurn;
+        
+        
+        return  check(0,1,2)||
+                check(3,4,5)||
+                check(6,7,8)||
+                check(0,3,6)||
+                check(1,4,7)||
+                check(2,5,8)||
+                check(0,4,8)||
+                check(2,4,6);
     }
+    
+    @Override
+    public boolean check(int x, int y, int z)
+    {
+        return checkLine(x , y, z) && checkLineExist(x,y,z);
+    }
+    
+    @Override
+    public boolean checkLine(int x, int y, int z) {
+        Field[] t = currentBoard.getBoard();
+        return t[3].getValue() == playerTurn && t[4].getValue() == playerTurn && t[5].getValue() == playerTurn;
+    }
+    
+    
+    @Override
+    public boolean checkLineExist(int x, int y, int z)
+    {
+        Field[] t = currentBoard.getBoard();
+        x = t[3].getValue();
+        y = t[4].getValue();
+        z = t[5].getValue();
+        
+        if (x > 0)
+        {
+            if (y > 0)
+            {
+                if(z > 0)
+                {
+                    return false;
+                }
+            }
+        }
+        return false;
+    }
+    
     
     //makes the most optimal play in the given situation
     @Override
@@ -138,10 +165,20 @@ public class ThreeGame implements Game {
     
     
     @Override
-    public void newMove(Field newMove)
+    public boolean newMove(Field newMove)
     {
-        currentBoard.newMove(playerTurn, newMove);
-        getTurn();
+        // check if legalmove
+        if(!legalMove(newMove))
+        {
+            return false;
+        }else
+        {
+            currentBoard.newMove(playerTurn+1, newMove);
+            getTurn();
+            printBoard();
+            return true;
+        }
+            
     }
     
     
@@ -208,10 +245,11 @@ public class ThreeGame implements Game {
     @Override
     public void gameLoopTwoPlayers() {
         // A loop that breaks if the game is won or if the Board is filled        
-        while(!checkWin() || currentBoard.getEmptyFields().size() > 0)
+        while(!checkWin() && currentBoard.getEmptyFields().size() > 0)
         {
             // Applies the next turn, keeps track of player by itself
             playerMove();
+            System.out.println(checkWin());
         }
         // Announces the end of the game and potential winners
         announceEnd();
@@ -258,7 +296,7 @@ public class ThreeGame implements Game {
         }
         
         // Game loop that does a player mnove if the iterator is an odd number, and ai move if number is even.
-        while(!checkWin() || currentBoard.getEmptyFields().size() > 0)
+        while(!checkWin() && currentBoard.getEmptyFields().size() > 0)
         {
             if(iterator%2 == 1)
             {
@@ -279,7 +317,7 @@ public class ThreeGame implements Game {
     public void gameLoopTwoAI() {
         
         // A loop that breaks if the game is won or if the Board is filled        
-        while(!checkWin() || currentBoard.getEmptyFields().size() > 0)
+        while(!checkWin() && currentBoard.getEmptyFields().size() > 0)
         {
             // Applies the next turn, keeps track of player by itself
             makeMoveAI();
@@ -292,7 +330,7 @@ public class ThreeGame implements Game {
     
     @Override
     public void printBoard() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println(currentBoard.toString());
     }
 
     @Override
@@ -301,10 +339,14 @@ public class ThreeGame implements Game {
         System.out.println("It is now player " + playerTurn +"'s turn");
     
         // ask for for which field to make a move on
-        Field newMove = getPlayerMove();
+        Field newField = getPlayerMove();
         
         // add the move to the board
-        newMove(newMove);
+        if (!newMove(newField))
+        {
+            System.out.println("Pick a legal move, please.\n");
+            playerMove();
+        }
         
     }
 
@@ -331,9 +373,22 @@ public class ThreeGame implements Game {
         Scanner inp2 = new Scanner(System.in);
         int coloumn = inp2.nextInt();
         
-        ThreeField tmp = new ThreeField(playerTurn, row, coloumn, (3*row + coloumn +1) );
+        ThreeField tmp = new ThreeField(playerTurn, row, coloumn, (3*row + coloumn) );
         return tmp;
     }
+
+    @Override
+    public void createBoard() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean legalMove(Field newField) {
+        int x = getBoard().getBoard()[newField.getPos()].getValue();
+        return x <= 0;
+    }
+
+    
 
     
     

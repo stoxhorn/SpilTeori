@@ -50,7 +50,7 @@ public class ThreeBoard implements Board {
         // Every time i passes a 3x row is incremented once, and coloumn is reset
         for(int i = 0; i < 9; i++)
         {
-            newBoard[i] = new ThreeField(0, i/3 +1, i%3+1, i);
+            newBoard[i] = new ThreeField(0, i/3, i%3, i);
         }
         return newBoard;
     }    
@@ -59,7 +59,7 @@ public class ThreeBoard implements Board {
     public void newMove(int player, Field newField) {
         // get position
         int pos = newField.getPos();
-        
+        System.out.println(pos);
         // Adding the player number as value,
         // to represent the players' move
         newField.setValue(player);
@@ -119,8 +119,10 @@ public class ThreeBoard implements Board {
         for(Field x : board)
         {
             tmp += x.getValue() + " ";
-            if(i == coloumns)
+            i++;
+            if(i%coloumns == 0)
             {
+                System.out.println("asd");
                 tmp += "\n";
             }
         }

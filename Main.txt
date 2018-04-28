@@ -5,7 +5,9 @@ Need a game
 		board creates fields
 	game creates a tree
 		tree creates nodes
-// Required to start game:
+
+
+
 Bugfixing:
 
 
@@ -16,7 +18,7 @@ Bugfixing:
 
 
 // Required to visujalize game:
-A method that returns the board as a string
+
 
 
 // Done:
@@ -26,3 +28,6 @@ announceEnd()
 playerMove()
 gameloops
 startGame()
+legalMove()
+
+toString() for board

@@ -91,8 +91,9 @@ public interface Game {
      * Adds a new move to the game, identical to the new Field, but with a new value
      * 
      * @param newMove 
+     * @return  
      */
-    public void newMove(Field newMove);
+    public boolean newMove(Field newMove);
     
     /**
      * A method that starts the game and asks for another round or end
@@ -145,4 +146,39 @@ public interface Game {
      * Announces the game has ended and a winner if any
      */
     public void announceEnd();
+    
+    /**
+     * returns true if the given field is a legal move in the board
+     * @param checkField
+     * @return 
+     */
+    public boolean legalMove(Field checkField);
+    
+    /**
+     * returns true if the given representation of lines has three in a row
+     * 
+     * @param x
+     * @param y
+     * @param z
+     * @return 
+     */
+    public boolean checkLine(int x, int y, int z);
+    
+    /**
+     * returns true if all fields has a value higher than 0
+     * @param x
+     * @param y
+     * @param z
+     * @return 
+     */
+    public boolean checkLineExist(int x, int y, int z);
+    
+    /**
+     * returns true if the game has a winner
+     * @param x
+     * @param y
+     * @param z
+     * @return 
+     */
+    public boolean check(int x, int y, int z);
 }
