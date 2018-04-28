@@ -125,7 +125,7 @@ public interface GameNode {
      * 
      * @param newDepth 
      */
-    public void setDetpth(int newDepth);
+    public void setDepth(int newDepth);
             
     
 }

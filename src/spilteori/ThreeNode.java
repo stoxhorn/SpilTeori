@@ -126,7 +126,7 @@ public class ThreeNode implements GameNode{
         return field;
     }
     
-    @override
+    @Override
     public int getDepth()
     {
         int tmp = depth;
@@ -136,7 +136,7 @@ public class ThreeNode implements GameNode{
     @Override
     public void setDepth(int newDepth)
     {
-        Depth = newDepth;
+        depth = newDepth;
     }
     
 }
