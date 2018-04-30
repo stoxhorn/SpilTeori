@@ -85,10 +85,10 @@ public class ThreeRowGameTree implements GameTree {
         int moveLeft = posGame.getEmptyFields().size();
         
         // Create an int[] of the same length of the amount of players
-        int[] newChances = new int[tmpGame.getPlayerAmount()];
+        int newWinValue;
         
         // Inserting a number to represent that it is an unfilled chance
-        newChances[0] = -1;
+        newWinValue = -1;
         
         // Need to account for depth
         // If the given game contains a winner:
@@ -99,10 +99,15 @@ public class ThreeRowGameTree implements GameTree {
             
             // Uses depth to determine player
             // 1 for a win
-            newChances[depth%2] = 1;
+            if (depth % 2 == 0) {
+                newWinValue = 1;
+            }
+            else {
+                newWinValue = 2;
+            }
             
             // Adds the chances to the Node at the current index
-            Tree.get(Cursor).setChances(newChances);
+            Tree.get(Cursor).setWinValue(newWinValue);
             
             // and then return
             return;
@@ -111,10 +116,9 @@ public class ThreeRowGameTree implements GameTree {
         // If no more fields are left, and there has not been found a winner:
         else if(moveLeft < 1)
         {
-            newChances[0] = 0;
+            newWinValue = 0;
             // Add zero for losing as nobody won 
-            // int[] are initialized with 0 in each index, and i've jsut changed the first index back to 0
-            Tree.get(Cursor).setChances(newChances);
+            Tree.get(Cursor).setWinValue(newWinValue);
             
             // since this block only activates, if no possible winner is found, therefore return
             return;
@@ -253,6 +257,38 @@ public class ThreeRowGameTree implements GameTree {
         return newChances;
         }
         
+    }
+    
+    //returns the best chance for the player who will play on the given turn
+    public int minMax(int[] childrenChances, int depth) {
+        int player1 = 0;    //takes 1 as win
+        int player2 = 0;    //takes 2 as win
+        
+        for (int chance : childrenChances) {
+            if (depth % 2 == 0) {
+                if (chance == 1) {
+                    player1 = chance;
+                }
+                else if (chance == 0) {
+                    player1 = chance;
+                }
+            }
+            else {
+                if (chance == 2) {
+                    player2 = chance;
+                }
+                else if (chance == 0) {
+                    player2 = chance;
+                }
+            }
+        }
+        
+        if (depth % 2 == 0) {
+            return player1;
+        }
+        else {
+            return player2;
+        }
     }
 
     @Override
