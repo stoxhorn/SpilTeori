@@ -11,6 +11,18 @@ public class ThreeField implements Field{
     int coloumn;
     int pos;
     
+    public ThreeField(Field copyField)
+    {
+        int tmp = copyField.getValue();
+        value = tmp;
+        int tmp2 = copyField.getColoumn();
+        coloumn = tmp2;
+        int tmp3 = copyField.getRow();
+        row = tmp3;
+        int tmp4 = copyField.getPos();
+        pos = tmp4;
+    }
+    
     public ThreeField(int newValue, int newRow, int newColoumn, int newPos)
     {
         value = newValue;

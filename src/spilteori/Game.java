@@ -154,31 +154,5 @@ public interface Game {
      */
     public boolean legalMove(Field checkField);
     
-    /**
-     * returns true if the given representation of lines has three in a row
-     * 
-     * @param x
-     * @param y
-     * @param z
-     * @return 
-     */
-    public boolean checkLine(int x, int y, int z);
-    
-    /**
-     * returns true if all fields has a value higher than 0
-     * @param x
-     * @param y
-     * @param z
-     * @return 
-     */
-    public boolean checkLineExist(int x, int y, int z);
-    
-    /**
-     * returns true if the game has a winner
-     * @param x
-     * @param y
-     * @param z
-     * @return 
-     */
-    public boolean check(int x, int y, int z);
+
 }

@@ -19,9 +19,9 @@ public class ThreeBoard implements Board {
 
     private Field[] board;
     
-    private final int rows;
+    private final int rows = 3;
     
-    private final int coloumns;
+    private final int coloumns = 3;
             
     
     @Override
@@ -30,12 +30,27 @@ public class ThreeBoard implements Board {
         return tmp;
     }
     
-    public ThreeBoard(int fieldAmount, int width, int height)
+    public ThreeBoard(Field[] newArray)
     {
-        rows = height;
+        Field[] tmp = new Field[newArray.length];
+        int i = 0;
+        for(Field x : newArray)
+        {
+            Field z = new ThreeField(x);
+            tmp[i] = z;
+        }
         
-        coloumns = width;
-        
+        board = tmp;
+    }
+    
+    public ThreeBoard(Board newBoard)
+    {
+        Field[] tmp = newBoard.getBoard();
+        board = tmp;
+    }
+    
+    public ThreeBoard(int fieldAmount, int width, int height)
+    {   
         board = createBoard(fieldAmount, width, height);
     }
     
@@ -59,7 +74,6 @@ public class ThreeBoard implements Board {
     public void newMove(int player, Field newField) {
         // get position
         int pos = newField.getPos();
-        System.out.println(pos);
         // Adding the player number as value,
         // to represent the players' move
         newField.setValue(player);
@@ -95,22 +109,30 @@ public class ThreeBoard implements Board {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    @Override
+    public boolean newMove(Field newMove, int turn)
+    {
+        // check if legalmove
+        if(!legalMove(newMove))
+        {
+            System.out.println("asd");
+            return false;
+        }else
+        {
+            newMove(turn, newMove);
+            System.out.println(toString());
+            return true;
+        }
+    }
     
-
     @Override
-    public void newMove(int player, int newFieldValue, int newFieldPos) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean legalMove(Field newField) {
+        int x = getBoard()[newField.getPos()].getValue();
+        // returns true, only if the given field has no value
+        return x <= 0;
     }
 
-    @Override
-    public void newMove(int player, int newFieldValue, int coloumn, int row) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
-    @Override
-    public Field[] createBoard(Field nullField, int fieldAmount) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
     @Override
     public String toString()
@@ -124,11 +146,69 @@ public class ThreeBoard implements Board {
             i++;
             if(i%coloumns == 0)
             {
-                System.out.println("asd");
                 tmp += "\n";
             }
         }
         
         return tmp;
+    }
+    
+    @Override
+    public boolean checkWin(int turn) {
+        
+        //System.out.println(turn);
+        return  check(0,1,2, turn)||
+                check(3,4,5, turn)||
+                check(6,7,8, turn)||
+                check(0,3,6, turn)||
+                check(1,4,7, turn)||
+                check(2,5,8, turn)||
+                check(0,4,8, turn)||
+                check(2,4,6, turn);
+    }
+    
+    @Override
+    public boolean check(int x, int y, int z, int turn)
+    {
+        boolean tmp = checkLine(x , y, z, turn) && checkLineExist(x,y,z) && true;
+        //System.out.println(checkLine(x , y, z, turn));
+        
+        return tmp;
+    }
+    
+    @Override
+    public boolean checkLine(int x, int y, int z, int turn) {
+        Field[] t = getBoard();
+        boolean tmp = t[3].getValue() == turn  && t[4].getValue() == turn && t[5].getValue() == turn;
+        
+        return tmp;
+    }
+    
+    
+    @Override
+    public boolean checkLineExist(int x, int y, int z)
+    {
+        Field[] t = getBoard();
+        x = t[3].getValue();
+        y = t[4].getValue();
+        z = t[5].getValue();
+        
+        if (x > 0)
+        {
+            if (y > 0)
+            {
+                if(z > 0)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+
+    @Override
+    public Field[] createBoard(Field nullField, int fieldAmount) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

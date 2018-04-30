@@ -46,7 +46,7 @@ public class ThreeGame implements Game {
     {
         playerTurn = 0;
         currentBoard = new ThreeBoard(9,3,3);
-        Tree = new ThreeRowGameTree(this);
+        Tree = new ThreeRowGameTree();
         
         currentNode = Tree.getNode(0);
     }
@@ -111,50 +111,9 @@ public class ThreeGame implements Game {
     public boolean checkWin() {
         
         
-        return  check(0,1,2)||
-                check(3,4,5)||
-                check(6,7,8)||
-                check(0,3,6)||
-                check(1,4,7)||
-                check(2,5,8)||
-                check(0,4,8)||
-                check(2,4,6);
+        return  currentBoard.checkWin(playerTurn);
     }
     
-    @Override
-    public boolean check(int x, int y, int z)
-    {
-        boolean tmp = checkLine(x , y, z) && checkLineExist(x,y,z) && true;
-        return tmp;
-    }
-    
-    @Override
-    public boolean checkLine(int x, int y, int z) {
-        Field[] t = currentBoard.getBoard();
-        return t[3].getValue() == playerTurn && t[4].getValue() == playerTurn && t[5].getValue() == playerTurn;
-    }
-    
-    
-    @Override
-    public boolean checkLineExist(int x, int y, int z)
-    {
-        Field[] t = currentBoard.getBoard();
-        x = t[3].getValue();
-        y = t[4].getValue();
-        z = t[5].getValue();
-        
-        if (x > 0)
-        {
-            if (y > 0)
-            {
-                if(z > 0)
-                {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
     
     
     //makes the most optimal play in the given situation
@@ -173,17 +132,8 @@ public class ThreeGame implements Game {
     @Override
     public boolean newMove(Field newMove)
     {
-        // check if legalmove
-        if(legalMove(newMove))
-        {
-            return false;
-        }else
-        {
-            currentBoard.newMove(playerTurn+1, newMove);
-            getTurn();
-            printBoard();
-            return true;
-        }
+     
+        return currentBoard.newMove(newMove, getTurn());
             
     }
     
@@ -232,6 +182,7 @@ public class ThreeGame implements Game {
     @Override
     public void startGame(int players) {
         // Hierachily calls the methods of incrementing player size
+        this.printBoard();
         if(players != 0)
             if(players != 1)
             {
@@ -389,10 +340,11 @@ public class ThreeGame implements Game {
     }
 
     @Override
-    public boolean legalMove(Field newField) {
-        int x = getBoard().getBoard()[newField.getPos()].getValue();
-        return x <= 0;
+    public boolean legalMove(Field checkField) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+
 
     
 

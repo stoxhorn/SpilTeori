@@ -94,42 +94,58 @@ public interface Board {
      * @return an array of Fields containing no value
      */
     public ArrayList<Field> getEmptyFields();
-
-
-
+    
     /**
-     * An overloaded method that creates a new move, by setting a new value at the position given from it's row and coloumn
-     * 
-     * @param player
-     * @param newFieldValue
-     * @param coloumn
-     * @param row 
+     * Adds a new move to the board
      */
-    public void newMove(
-            int player,
-            int newFieldValue,
-            int coloumn,
-            int row
-            );
-
-    /**
-     * A Method that adds a move to this Board
-     * 
-     * @param player
-     * @param newFieldValue
-     * @param newFieldPos 
-     */
-    public void newMove(
-            int player,
-            int newFieldValue,
-            int newFieldPos
-            );
-
+    public boolean newMove(Field newMove, int turn);
+            
     /**
      * To string method returning the Board as a strnig, with each row on their own line
      * @return 
      */
+            
     @Override
     public String toString();
+        /**
+     * returns true if the given representation of lines has three in a row
+     * 
+     * @param x
+     * @param y
+     * @param z
+     * @return 
+     */
+    public boolean checkLine(int x, int y, int z, int turn);
+    
+    /**
+     * returns true if all fields has a value higher than 0
+     * @param x
+     * @param y
+     * @param z
+     * @return 
+     */
+    public boolean checkLineExist(int x, int y, int z);
+    
+    /**
+     * returns true if the game has a winner
+     * @param x
+     * @param y
+     * @param z
+     * @return 
+     */
+    public boolean check(int x, int y, int z,  int turn);
+    
+    /**
+     * check for a win and returns true if a win exists
+     * @param turn
+     * @return 
+     */
+    public boolean checkWin(int turn);
 
+    /**
+     * Checks if a given move is legal
+     * @param newField
+     * @return 
+     */
+    public boolean legalMove(Field newField);
 }

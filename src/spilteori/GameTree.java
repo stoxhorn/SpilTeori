@@ -39,9 +39,8 @@ public interface GameTree {
     /**
      * Creates the Tree for the respective game
      * 
-     * @param newGame
      */
-    public void createTree(Game newGame);
+    public void createTree();
     
     /**
      * Figures out the best move, for the current cursor of the Tree
