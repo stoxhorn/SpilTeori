@@ -10,21 +10,9 @@ public class ThreeNode implements GameNode{
     
     private int index;
     
-    private int[] chances;
+    private int winValue;
     
     private GameNode[] children;
-    
-    private GameNode[] bestNode;
-    
-    // Constructor to us on the rootnode
-    
-    public ThreeNode(Field newField, int newIndex)
-    {
-        this.field = newField;
-        this.index = newIndex;
-        this.depth = 0;
-        children = null;        //Null is default and is changed when calling setChildren as we most likely wont know the children when creating the Node
-    }
     
     //ThreeNode Object
     public ThreeNode(Field newField, int newIndex, GameNode newParent)
@@ -49,56 +37,43 @@ public class ThreeNode implements GameNode{
         depth++;            //Updates the depth when a new move is made
     }
     
-    //setter for chances
+    //setter for winValue
     @Override
-    public void setChances(int[] newChances) {
-        chances = newChances;
+    public void setWinValue(int newWinValue) {
+        winValue = newWinValue;
     }
     
-    //getter for chances
+    //getter for winValue
     @Override
-    public int[] getChances() {
-        return chances;
-    }
-
-    @Override
-    public void calculateChances() {
-        //use minimax with winCheck from GameTree
-        //TODO
+    public int getWinValue() {
+        return winValue;
     }
     
-    //Adds values to bestNode
     @Override
-    public void calculateOptimal() {
-        //Initialize values
-        int player1Chance = 0;
-        int player2Chance = 0;
-        
-        int player1Index = 0;
-        int player2Index = 0;
-        
-        //Scans through all values from chances and stores the index and value of the best child for each player
-        for (int i = 0; i < chances.length; i++) {
-            int c = chances[i];
-            if (c > player1Chance) {
-                player1Chance = c;
-                player1Index = i;
-            }
-            if (c < player2Chance) {
-                player2Chance = c;
-                player2Index = i;
+    public GameNode getOptimal() {
+        GameNode best = null;
+        if (depth % 2 == 0) {
+            for (GameNode child : children) {
+                if (child.getWinValue() == 1) {
+                    best = child;
+                }
+                else if (best == null) {
+                    best = child;
+                }
             }
         }
-        //The children with the best value for each player is put into bestNode
-        bestNode[0] = children[player1Index];
-        bestNode[1] = children[player2Index];
-    }
-    
-    //getter for bestNode
-    @Override
-    public GameNode[] getOptimal() {
-        calculateOptimal();
-        return bestNode;
+        
+        else {
+            for (GameNode child : children) {
+                if (child.getWinValue() == 2) {
+                    best = child;
+                }
+                else if (best == null) {
+                    best = child;
+                }
+            }
+        }
+        return best;
     }
     
     //getter for children
