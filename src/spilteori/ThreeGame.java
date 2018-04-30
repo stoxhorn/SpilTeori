@@ -140,6 +140,9 @@ public class ThreeGame implements Game {
     @Override
     public boolean newMove(Field newMove)
     {
+
+        
+        
         System.out.println("position: " + newMove.getPos());
         System.out.println("value: " + newMove.getValue());
         return currentBoard.newMove(newMove, getTurn());
@@ -334,6 +337,18 @@ public class ThreeGame implements Game {
         
         System.out.println(newField.getValue());
         
+        GameNode[] tmp = currentNode.getChildren();
+        if(currentNode.getDepth()<9)
+        {
+            for(GameNode x : tmp)
+            {
+                if(x.getField().getPos() == newField.getPos())
+                {
+                    currentNode = x;
+                }
+
+            }
+        }
         // add the move to the board
         if (!newMove(newField))
         {
