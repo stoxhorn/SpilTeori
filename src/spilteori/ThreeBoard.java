@@ -46,8 +46,25 @@ public class ThreeBoard implements Board {
     public ThreeBoard(Board newBoard)
     {
         Field[] tmp = newBoard.getBoard();
+        tmp = ThreeBoard(tmp);
         board = tmp;
     }
+    
+    
+    public Field[] ThreeBoard(Field[] newArray)
+    {
+        Field[] tmp = new Field[newArray.length];
+        int i = 0;
+        for(Field x : newArray)
+        {
+            Field z = new ThreeField(x);
+            tmp[i] = z;
+            i++;
+        }
+        
+        return tmp;
+    }
+    
     
     public ThreeBoard(int fieldAmount, int width, int height)
     {   
@@ -72,6 +89,7 @@ public class ThreeBoard implements Board {
     
     @Override
     public void newMove(int player, Field newField) {
+        
         // get position
         int pos = newField.getPos();
         // Adding the player number as value,
@@ -95,7 +113,7 @@ public class ThreeBoard implements Board {
         ArrayList<Field> output = new ArrayList<>();
         
         for (Field value : board) {
-            //System.out.println(output.size());
+            
             if (value.getValue() == 0) {    //getValue fra ThreeField skal give en int
                 output.add(value);
             }
@@ -109,13 +127,14 @@ public class ThreeBoard implements Board {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    //newMove for playing the game
     @Override
     public boolean newMove(Field newMove, int turn)
     {
         // check if legalmove
         if(!legalMove(newMove))
         {
-            System.out.println("asd");
+            System.out.println("Wrong move");
             return false;
         }else
         {
@@ -129,7 +148,7 @@ public class ThreeBoard implements Board {
     public boolean legalMove(Field newField) {
         int x = getBoard()[newField.getPos()].getValue();
         // returns true, only if the given field has no value
-        return x <= 0;
+        return x == 0;
     }
 
 
@@ -170,8 +189,8 @@ public class ThreeBoard implements Board {
     @Override
     public boolean check(int x, int y, int z, int turn)
     {
-        boolean tmp = checkLine(x , y, z, turn) && checkLineExist(x,y,z) && true;
-        //System.out.println(checkLine(x , y, z, turn));
+        boolean tmp = (checkLine(x , y, z, turn) && checkLineExist(x,y,z) && true);
+        
         
         return tmp;
     }
@@ -179,7 +198,7 @@ public class ThreeBoard implements Board {
     @Override
     public boolean checkLine(int x, int y, int z, int turn) {
         Field[] t = getBoard();
-        boolean tmp = t[3].getValue() == turn  && t[4].getValue() == turn && t[5].getValue() == turn;
+        boolean tmp = t[x].getValue() == turn  && t[y].getValue() == turn && t[z].getValue() == turn;
         
         return tmp;
     }
@@ -189,9 +208,9 @@ public class ThreeBoard implements Board {
     public boolean checkLineExist(int x, int y, int z)
     {
         Field[] t = getBoard();
-        x = t[3].getValue();
-        y = t[4].getValue();
-        z = t[5].getValue();
+        x = t[x].getValue();
+        y = t[y].getValue();
+        z = t[z].getValue();
         
         if (x > 0)
         {

@@ -42,15 +42,14 @@ public interface GameNode {
      * 
      * @return int[] of size 0 to 10000, representing percentage chances with 100% = 10000
      */
-    public int getWinValue();
+    public int[] getWinValue();
     
     /** 
      * Adds the chances of this Node, as an int[]
      * 
-     * @param newWinValue
-     * @param newChances int[][] containing numbers between 0-10000
+     * @param newWinValue[] 
      */
-    public void setWinValue(int newWinValue);
+    public void setWinValue(int[] newWinValue);
     
     public GameNode getOptimal();
     

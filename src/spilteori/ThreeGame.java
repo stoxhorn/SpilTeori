@@ -7,8 +7,10 @@ package spilteori;
 
 // Need a method to add a move on the game, instead of only on the Board
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,9 +46,9 @@ public class ThreeGame implements Game {
     
     public ThreeGame()
     {
-        playerTurn = 0;
+        playerTurn = 1;
         currentBoard = new ThreeBoard(9,3,3);
-        Tree = new ThreeRowGameTree();
+        Tree = new ThreeRowGameTree(this);
         
         currentNode = Tree.getNode(0);
     }
@@ -77,11 +79,11 @@ public class ThreeGame implements Game {
         // Store playerTurn
         int tmp = playerTurn;
         
-        // increment playerTurn
-        playerTurn ++;
-        
         // Modulo playerTurn
         playerTurn = playerTurn%2;
+        
+        // increment playerTurn
+        playerTurn ++;
         
         // return storage
         return tmp;
@@ -92,7 +94,11 @@ public class ThreeGame implements Game {
     // Mangler metode til at få den nuværende node, getNode
     public Field getBestMove(int player) {
         GameNode t = currentNode;
-        Field f = t.getOptimal()[player].getField();
+        currentNode = t.getOptimal();
+        //System.out.println("WinValue: " + currentNode.getWinValue()[0]);
+        //System.out.println("position: " + currentNode.getField().getPos());
+        System.out.println(Arrays.toString(currentNode.getWinValue()));
+        Field f = currentNode.getField();
         return f;
     }
     
@@ -120,8 +126,10 @@ public class ThreeGame implements Game {
     @Override
     public void makeMoveAI() {
         // currentBoard.newMove(playerTurn, getBestMove(playerTurn));
-        if (newMove(getBestMove(playerTurn)))
+        if (!newMove(getBestMove(playerTurn)))
         {
+            getTurn();
+            System.out.println(currentBoard.toString());
             System.out.println("Pick a legal move, please.\n");
             makeMoveAI();
         }
@@ -132,7 +140,8 @@ public class ThreeGame implements Game {
     @Override
     public boolean newMove(Field newMove)
     {
-     
+        System.out.println("position: " + newMove.getPos());
+        System.out.println("value: " + newMove.getValue());
         return currentBoard.newMove(newMove, getTurn());
             
     }
@@ -202,11 +211,18 @@ public class ThreeGame implements Game {
     @Override
     public void gameLoopTwoPlayers() {
         // A loop that breaks if the game is won or if the Board is filled        
-        while(!checkWin() && currentBoard.getEmptyFields().size() < 1)
+
+        
+        while(true)
         {
             // Applies the next turn, keeps track of player by itself
+            getTurn();
+            if(checkWin() || currentBoard.getEmptyFields().size() < 1)
+            {
+                break;
+            }
+            getTurn();
             playerMove();
-            System.out.println(checkWin());
         }
         // Announces the end of the game and potential winners
         announceEnd();
@@ -234,6 +250,7 @@ public class ThreeGame implements Game {
         catch(Exception e)
         {
             System.err.println(e);
+            gameLoopOnePlayer();
             return;
         }
         // checks if proper input was given
@@ -253,8 +270,14 @@ public class ThreeGame implements Game {
         }
         
         // Game loop that does a player mnove if the iterator is an odd number, and ai move if number is even.
-        while(!checkWin() && currentBoard.getEmptyFields().size() < 1)
+        while(true)
         {
+            getTurn();
+            if(checkWin() || currentBoard.getEmptyFields().size() < 1)
+            {
+                break;
+            }
+            getTurn();
             if(iterator%2 == 1)
             {
                 playerMove();
@@ -265,8 +288,8 @@ public class ThreeGame implements Game {
                 this.makeMoveAI();
                 iterator++;
             }
+            
         }
-        // Announces the game has ended and a potential winner
         announceEnd();
     }
 
@@ -274,11 +297,22 @@ public class ThreeGame implements Game {
     public void gameLoopTwoAI() {
         
         // A loop that breaks if the game is won or if the Board is filled        
-        while(!checkWin() && currentBoard.getEmptyFields().size() < 1)
+        while(true)
         {
             // Applies the next turn, keeps track of player by itself
+            getTurn();
+            if(checkWin() || currentBoard.getEmptyFields().size() < 1)
+            {
+                break;
+            }
+            getTurn();
             makeMoveAI();
+            
+            
+
         }
+        
+        
         // Announces the end of the game and potential winners
         announceEnd();
     }
@@ -298,10 +332,13 @@ public class ThreeGame implements Game {
         // ask for for which field to make a move on
         Field newField = getPlayerMove();
         
+        System.out.println(newField.getValue());
+        
         // add the move to the board
-        if (newMove(newField))
+        if (!newMove(newField))
         {
             System.out.println("Pick a legal move, please.\n");
+            getTurn();
             playerMove();
         }
         
