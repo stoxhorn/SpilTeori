@@ -220,16 +220,16 @@ public class ThreeRowGameTree implements GameTree {
         // make x+1 a loss
         // if depth x+1 contains a win for self, make x-1 a win
         
-        if (localNode.getChances()[0] != -1)
+        if (localNode.getWinValue() != -1)
         {
-            return localNode.getChances();
+            return localNode.getWinValue();
         }
         else{
         // Getting an array of children
         GameNode[] childArray = localNode.getChildren();
         
         // Initializing a 2d int array
-        int[][] childrenChances = null;
+        int[] childrenChances = null;
         
         
         // Calling this method on each child
@@ -245,16 +245,16 @@ public class ThreeRowGameTree implements GameTree {
         
         // A method that takes a depth and a set of chances
         // the 2d array, needs to end as a single array, that shows the win chances for the current depth
-        int[] newChances = minMax(childrenChances, givenNode.getDepth());
+        int newWinValue = minMax(childrenChances, givenNode.getDepth());
         
         // i get the index to set the appropriate node in the tree
         int index = localNode.getIndex();
         
         // And finally i set the chances for the appropriate GameNode
-        Tree.get(index).setChances(newChances);
+        Tree.get(index).setWinValue(newWinValue);
         
         // and finally i return the chances
-        return newChances;
+        return newWinValue;
         }
         
     }
