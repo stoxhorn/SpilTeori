@@ -97,7 +97,7 @@ public class ThreeGame implements Game {
         currentNode = t.getOptimal();
         //System.out.println("WinValue: " + currentNode.getWinValue()[0]);
         //System.out.println("position: " + currentNode.getField().getPos());
-        System.out.println(Arrays.toString(currentNode.getWinValue()));
+        System.out.println(currentNode.getWinValue());
         Field f = currentNode.getField();
         return f;
     }
@@ -143,8 +143,8 @@ public class ThreeGame implements Game {
 
         
         
-        System.out.println("position: " + newMove.getPos());
-        System.out.println("value: " + newMove.getValue());
+        // System.out.println("position: " + newMove.getPos());
+        // System.out.println("value: " + newMove.getValue());
         return currentBoard.newMove(newMove, getTurn());
             
     }

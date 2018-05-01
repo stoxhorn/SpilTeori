@@ -89,7 +89,7 @@ public final class ThreeRowGameTree implements GameTree {
         //System.out.println("moveLeft: " +moveLeft);
         
         // Create an int[] of the same length of the amount of players
-        int[] newWinValue = new int[2];
+        int newWinValue = -1;
         
         // Need to account for depth
         // If the given game contains a winner:
@@ -102,12 +102,11 @@ public final class ThreeRowGameTree implements GameTree {
             // Uses depth to determine player
             // 1 for a win
             if ((depth % 2)+1 == 1) {
-                newWinValue[0] = 1;
+                newWinValue = 1;
             }
             else {
-                newWinValue[0] = 2;
+                newWinValue = 2;
             }
-            newWinValue[1] = depth;
             // Adds the chances to the Node at the current index
             Tree.get(Cursor).setWinValue(newWinValue);
             
@@ -118,8 +117,8 @@ public final class ThreeRowGameTree implements GameTree {
         // If no more fields are left, and there has not been found a winner:
         else if(moveLeft < 1)
         {
-            newWinValue[0] = 0;
-            newWinValue[1] = depth;
+            newWinValue = 0;
+            
             // Add zero for losing as nobody won 
             Tree.get(Cursor).setWinValue(newWinValue);
             
@@ -207,7 +206,7 @@ public final class ThreeRowGameTree implements GameTree {
      * @param givenNode
      * @return 
      */
-    public int[] calculateMinMax(GameNode givenNode)
+    public int calculateMinMax(GameNode givenNode)
     {
         // Create copy of given Node
         GameNode localNode = givenNode;
@@ -220,7 +219,7 @@ public final class ThreeRowGameTree implements GameTree {
         // make x+1 a loss
         // if depth x+1 contains a win for self, make x-1 a win
         
-        if (localNode.getWinValue()[0] != -1)
+        if (localNode.getWinValue() != -1)
         {
             return localNode.getWinValue();
         }
@@ -229,24 +228,30 @@ public final class ThreeRowGameTree implements GameTree {
         GameNode[] childArray = localNode.getChildren();
         
         // Initializing a 2d int array
-        int[][] childrenChances = new int[childArray.length][2];
+        int[] childrenChances = new int[childArray.length];
         
+        int newWinValue = -1;
         
         // Calling this method on each child
         // and setting the return value to the apropriate indexes in the 2d array
         // this is essentially trhe recursive part
+        int depth = -1;
         int i = 0;
         for(GameNode x : childArray)
         {
            
             childrenChances[i] = calculateMinMax(x);
+            
+            newWinValue = newMinMax(newWinValue, localNode.getChildren()[i].getWinValue(), ((localNode.getDepth()%2)+1));
+            depth = (localNode.getDepth()%2)+1;
             i++;
+            localNode.setWinValue(newWinValue);
         }
         
         
         // A method that takes a depth and a set of chances
         // the 2d array, needs to end as a single array, that shows the win chances for the current depth
-        int[] newWinValue = minMax(childrenChances, givenNode.getDepth());
+        //int[] newWinValue = minMax(childrenChances, givenNode.getDepth());
         
         // i get the index to set the appropriate node in the tree
         int index = localNode.getIndex();
@@ -256,6 +261,31 @@ public final class ThreeRowGameTree implements GameTree {
         
         // and finally i return the chances
         return newWinValue;
+        }
+        
+    }
+    
+    public int newMinMax(int oldVal, int newVal, int player)
+    {
+        if(newVal == player)
+        {
+            return player;
+        }
+        else if(oldVal == player)
+        {
+            return player;
+        }    
+        else if(newVal == 0)
+        {
+            return 0;
+        }
+        else if(oldVal == 0)
+        {
+            return 0;
+        }
+        else
+        {
+            return newVal;
         }
         
     }
@@ -330,7 +360,7 @@ public final class ThreeRowGameTree implements GameTree {
         Field bestMove;
         
         GameNode thisNode = Tree.get(Cursor);
-        
+        Cursor++;
         GameNode chances = thisNode.getOptimal();
         
         // NOTE:==========================================================================================================================================================================================================

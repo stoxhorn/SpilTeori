@@ -13,7 +13,7 @@ public class ThreeNode implements GameNode{
     
     private int index;
     
-    private int[] winValue = new int[] {-1, 12};
+    private int winValue = -1;
     
     private GameNode[] children;
     
@@ -44,13 +44,13 @@ public class ThreeNode implements GameNode{
     
     //setter for winValue
     @Override
-    public void setWinValue(int[] newWinValue) {
+    public void setWinValue(int newWinValue) {
         winValue = newWinValue;
     }
     
     //getter for winValue
     @Override
-    public int[] getWinValue() {
+    public int getWinValue() {
         return winValue;
     }
     
@@ -63,14 +63,14 @@ public class ThreeNode implements GameNode{
         
         if ((depth % 2) + 1 == 1) {
             for (GameNode child : children) {
-                System.out.print(child.getWinValue()[0] + " - ");
-                if (child.getWinValue()[0] == 1) {
+                System.out.print(child.getWinValue() + " - ");
+                if (child.getWinValue() == 1) {
                     System.out.println("works");
                     List1.add(child);
-                }else if (child.getWinValue()[0] == 0) {
+                }else if (child.getWinValue() == 0) {
                     List2.add(child);
                 }else 
-                if(child.getWinValue()[0] == 2){
+                if(child.getWinValue() == 2){
                     List3.add(child);
                 }
             }
@@ -78,52 +78,48 @@ public class ThreeNode implements GameNode{
         }
         else {
             for (GameNode child : children) {
-                System.out.print(child.getWinValue()[0] + " - ");
-                if (child.getWinValue()[0] == 2) {
-                    System.out.println("works");
+                System.out.print(child.getWinValue() + " - ");
+                if (child.getWinValue() == 2) {
                     List1.add(child);
-                }else if (child.getWinValue()[0] == 0) {
+                }else if (child.getWinValue() == 0) {
                     List2.add(child);
-                }else if(child.getWinValue()[0] == 1){
+                }else if(child.getWinValue() == 1){
                     List3.add(child);
                 }
             }
 
         }
         System.out.println("");
-        int[] returnValue = null;
+        int returnValue = -1;
         GameNode returnNode = null;
         
         if(!List1.isEmpty()){
             for(GameNode x : List1){
-                if (returnValue == null || x.getWinValue()[1] < returnValue[1]){
-                    returnNode = x;
-                    returnValue = x.getWinValue();
-                    System.out.println(Arrays.toString(returnValue));
+                    return x;
                 }
-            }
             return returnNode;
-        }else if(!List2.isEmpty()){
+            }
+            
+        
+        else if(!List2.isEmpty()){
             for(GameNode x : List2){
-                    if (returnValue == null || x.getWinValue()[1] < returnValue[1]){
-                    returnNode = x;
-                    returnValue = x.getWinValue();
-                    System.out.println(Arrays.toString(returnValue));
+                return x;
                 }
-            }
             return returnNode;
-        }else if(!List3.isEmpty()){
+        }
+            
+        else if(!List3.isEmpty()){
             for(GameNode x : List3){
-                    if (returnValue == null || x.getWinValue()[1] < returnValue[1]){
-                    returnNode = x;
-                    returnValue = x.getWinValue();
+                return x;
                 }
-            }
             return returnNode;            
+            }
+            
+        return returnNode;            
         }
         
-        return returnNode;
-    }
+        
+    
         
     
     //getter for children
