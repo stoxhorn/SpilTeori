@@ -267,19 +267,11 @@ public final class ThreeRowGameTree implements GameTree {
     
     public int newMinMax(int oldVal, int newVal, int player)
     {
-        if(newVal == player)
-        {
-            return player;
-        }
-        else if(oldVal == player)
+        if(newVal == player||oldVal == player)
         {
             return player;
         }    
-        else if(newVal == 0)
-        {
-            return 0;
-        }
-        else if(oldVal == 0)
+        else if(newVal == 0 || oldVal == 0)
         {
             return 0;
         }

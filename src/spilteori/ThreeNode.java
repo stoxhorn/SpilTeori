@@ -56,70 +56,28 @@ public class ThreeNode implements GameNode{
     
     @Override
     public GameNode getOptimal() {
-        
-        ArrayList<GameNode> List1 = new ArrayList<>();
-        ArrayList<GameNode> List2 = new ArrayList<>();
-        ArrayList<GameNode> List3 = new ArrayList<>();
-        
-        if ((depth % 2) + 1 == 1) {
-            for (GameNode child : children) {
-                System.out.print(child.getWinValue() + " - ");
-                if (child.getWinValue() == 1) {
-                    System.out.println("works");
-                    List1.add(child);
-                }else if (child.getWinValue() == 0) {
-                    List2.add(child);
-                }else 
-                if(child.getWinValue() == 2){
-                    List3.add(child);
-                }
+        int player = (depth%2)+1;
+        GameNode bestVal = getChildren()[0];
+        for(GameNode child : getChildren())
+        {
+            if((child.getWinValue() == player) || (bestVal.getWinValue() == player))
+            {
+                return child; 
             }
-            
-        }
-        else {
-            for (GameNode child : children) {
-                System.out.print(child.getWinValue() + " - ");
-                if (child.getWinValue() == 2) {
-                    List1.add(child);
-                }else if (child.getWinValue() == 0) {
-                    List2.add(child);
-                }else if(child.getWinValue() == 1){
-                    List3.add(child);
-                }
+            else if(child.getWinValue() == 0)
+            {
+                bestVal = child;
             }
-
-        }
-        System.out.println("");
-        int returnValue = -1;
-        GameNode returnNode = null;
-        
-        if(!List1.isEmpty()){
-            for(GameNode x : List1){
-                    return x;
-                }
-            return returnNode;
+            else if(bestVal.getWinValue() == 0)
+            {
             }
-            
-        
-        else if(!List2.isEmpty()){
-            for(GameNode x : List2){
-                return x;
-                }
-            return returnNode;
-        }
-            
-        else if(!List3.isEmpty()){
-            for(GameNode x : List3){
-                return x;
-                }
-            return returnNode;            
+            else
+            {
+                bestVal = child;   
             }
-            
-        return returnNode;            
         }
-        
-        
-    
+        return bestVal;
+    }
         
     
     //getter for children
