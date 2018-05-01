@@ -1,88 +1,178 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package spilteori;
 
-/**
- *
- * @author Stoxhorn
- */
-public class ThreeNode implements GameNode{
+import java.util.ArrayList;
+import java.util.Arrays;
 
-    ThreeNode parent;
+public class ThreeNode implements GameNode{
     
-    Field field;
+    private int depth;
+
+    private GameNode parent;
     
-    int index;
+    private Field field;
     
-    int[] chances;
+    private int index;
     
-    ThreeNode[] Children;
+    private int[] winValue = new int[] {-1, 12};
     
-    ThreeNode[] BestNode;
+    private GameNode[] children;
     
-    public ThreeNode(Field newField, int newIndex, ThreeNode newParent)
+    //ThreeNode Object
+    public ThreeNode(Field newField, int newIndex, GameNode newParent)
     {
-        field = newField;
-        index = newIndex;
-        parent = newParent;
+        this.field = new ThreeField(newField);
+        this.index = newIndex;
+        this.depth = 0;
+        this.parent = newParent; 
+        children = null;        //Null is default and is changed when calling setChildren as we most likely wont know the children when creating the Node
     }
+
+
     
+    //getter for field
     @Override
     public Field getPosMove() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return field;
     }
 
+    //setter for field
     @Override
     public void setPosMove(Field newField) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        field = newField;
+        depth++;            //Updates the depth when a new move is made
     }
-
+    
+    //setter for winValue
     @Override
-    public int[] getChances() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setWinValue(int[] newWinValue) {
+        winValue = newWinValue;
     }
-
+    
+    //getter for winValue
     @Override
-    public void calculateChances() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int[] getWinValue() {
+        return winValue;
     }
-
+    
     @Override
-    public void calculateOptimal() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public GameNode getOptimal() {
+        
+        ArrayList<GameNode> List1 = new ArrayList<>();
+        ArrayList<GameNode> List2 = new ArrayList<>();
+        ArrayList<GameNode> List3 = new ArrayList<>();
+        
+        if ((depth % 2) + 1 == 1) {
+            for (GameNode child : children) {
+                System.out.print(child.getWinValue()[0] + " - ");
+                if (child.getWinValue()[0] == 1) {
+                    System.out.println("works");
+                    List1.add(child);
+                }else if (child.getWinValue()[0] == 0) {
+                    List2.add(child);
+                }else 
+                if(child.getWinValue()[0] == 2){
+                    List3.add(child);
+                }
+            }
+            
+        }
+        else {
+            for (GameNode child : children) {
+                System.out.print(child.getWinValue()[0] + " - ");
+                if (child.getWinValue()[0] == 2) {
+                    System.out.println("works");
+                    List1.add(child);
+                }else if (child.getWinValue()[0] == 0) {
+                    List2.add(child);
+                }else if(child.getWinValue()[0] == 1){
+                    List3.add(child);
+                }
+            }
 
-    @Override
-    public GameNode[] getOptimal() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+        System.out.println("");
+        int[] returnValue = null;
+        GameNode returnNode = null;
+        
+        if(!List1.isEmpty()){
+            for(GameNode x : List1){
+                if (returnValue == null || x.getWinValue()[1] < returnValue[1]){
+                    returnNode = x;
+                    returnValue = x.getWinValue();
+                    System.out.println(Arrays.toString(returnValue));
+                }
+            }
+            return returnNode;
+        }else if(!List2.isEmpty()){
+            for(GameNode x : List2){
+                    if (returnValue == null || x.getWinValue()[1] < returnValue[1]){
+                    returnNode = x;
+                    returnValue = x.getWinValue();
+                    System.out.println(Arrays.toString(returnValue));
+                }
+            }
+            return returnNode;
+        }else if(!List3.isEmpty()){
+            for(GameNode x : List3){
+                    if (returnValue == null || x.getWinValue()[1] < returnValue[1]){
+                    returnNode = x;
+                    returnValue = x.getWinValue();
+                }
+            }
+            return returnNode;            
+        }
+        
+        return returnNode;
     }
-
+        
+    
+    //getter for children
     @Override
     public GameNode[] getChildren() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return children;
     }
-
+    
+    //setter for children
     @Override
-    public void setChildren(GameNode[] ChildrenArray) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setChildren(GameNode[] childrenArray) {
+        children = childrenArray;
     }
-
+    
+    //getter for parent
     @Override
     public GameNode getParent() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return parent;
     }
-
+    
+    //setter for parent
     @Override
-    public void setParent(GameNode NewGameNode) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setParent(GameNode newGameNode) {
+        parent = newGameNode;
     }
-
+    
+    //getter for index
     @Override
-    public void setChances(int[] newChances) {
-        chances = newChances;
+    public int getIndex() {
+        return index;
+    }
+    
+    //getter for field
+    @Override
+    public Field getField() {
+        return field;
+    }
+    
+    @Override
+    public int getDepth()
+    {
+        int tmp = depth;
+        return tmp;
+    }
+    
+    @Override
+    public void setDepth(int newDepth)
+    {
+        depth = newDepth;
     }
     
 }

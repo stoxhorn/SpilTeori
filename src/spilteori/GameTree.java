@@ -22,25 +22,29 @@ import java.util.ArrayList;
  */
 public interface GameTree {
     
-    /**Returns the ArrayList containing all the GameNodes of the game
+    /**
+     * Returns the ArrayList containing all the GameNodes of the game
      * 
      * @return ArrayList<GameNode> GameTree of the Gamed
      */
     public ArrayList<GameNode> getTree();
     
-    /** The Parent of all Nodes, is always an Empty Board, so there is only One Parent.
+    /**
+     * The Parent of all Nodes, is always an Empty Board, so there is only One Parent.
      * 
      * @return GameNode that is the Parent for all Nodes in this Tree
      */
     public GameNode getParent();
     
-    /**Creates the Tree for the respective game
+    /**
+     * Creates the Tree for the respective game
      * 
-     * @param GameBoard ArrayList<Field> representing the current Board of the game
+     * @param newGame
      */
-    public void createTree(ArrayList<Field> GameBoard, Game newGame);
+    public void createTree(Game newGame);
     
-    /**Figures out the best move, for the current cursor of the Tree
+    /**
+     * Figures out the best move, for the current cursor of the Tree
      * 
      * Returns an exact copy of the next Optimal Move,
      * Meaning position is the same as the Field that is to be inserted into,
@@ -50,17 +54,28 @@ public interface GameTree {
      */
     public Field getBestMove();
     
-    /**Getter for the int pointing to the current index 
+    /**
+     * Getter for the int pointing to the current index 
      * 
      * @return int pointing to current index
      */
     public int getCursor();
     
-    /**Points the Cursor to the new given Field
+    /**
+     * Points the Cursor to the new given Field
      * 
-     * @param newMove Field that the cursor needs to point to
+     * @param newCursor
      */
-    public void setCursor(Field newMove);
+    public void setCursor(int newCursor);
+    
+    /**
+     * gets the node stored at the given index
+     * @param index
+     * @return 
+     */
+    public GameNode getNode(int index);
+    
+
     
     
     

@@ -1,0 +1,33 @@
+Structurizing main class:
+
+Need a game
+	game creeates a board
+		board creates fields
+	game creates a tree
+		tree creates nodes
+
+
+
+Bugfixing:
+checkwin is fucked
+
+Bugs fixed:
+checkWinning() now works, but each move no thinks empty fields are taken already
+newmove was dependant on legalmove and not itself, got confused
+
+
+
+// Required to visujalize game:
+
+
+
+// Done:
+runGame()
+newGame()
+announceEnd()
+playerMove()
+gameloops
+startGame()
+legalMove()
+
+toString() for board

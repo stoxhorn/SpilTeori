@@ -5,9 +5,10 @@
  */
 package spilteori;
 
+import java.util.ArrayList;
 
-
-/** This class represents the board of a game, using an array of Fields
+/** 
+ * This class represents the board of a game, using an array of Fields
  *
  * Rules:
  * Has a variable Field[], which is used to represent the board
@@ -17,15 +18,17 @@ package spilteori;
  * 
  */
 public interface Board {
-    
-    /**Returns the Field[] that contains the this Board's Fields
+
+    /**
+     * Returns the Field[] that contains the this Board's Fields
      * 
      * @return a Field[] representing the this Board
      */
     public Field[] getBoard();
-    
-    
-    /**Create a new Board
+
+
+    /**
+     * Create a new Board
      * 
      * If either value is 0, figure out this value, from the other given values
      * 
@@ -34,21 +37,25 @@ public interface Board {
      * @param fieldAmount
      * @param width
      * @param height 
+     * @return  
      */
-    public void createBoard(
+    public Field[] createBoard(
             int fieldAmount,
             int width,
             int height
     );
-    
-    /**Overloaded method, that takes only an amount of fields to create a board of one row
+
+    /**
+     * Overloaded method, that takes only an amount of fields to create a board of one row
      * 
      * @param nullField
      * @param fieldAmount 
+     * @return  
      */
-    public void createBoard(Field nullField, int fieldAmount);
-    
-    /**Overloaded method that only takes width and height into acount
+    public Field[] createBoard(Field nullField, int fieldAmount);
+
+    /**
+     * Overloaded method that only takes width and height into acount
      * 
      * @param nullField
      * @param width
@@ -59,38 +66,86 @@ public interface Board {
             int width,
             int height
     );
-    
-    /**A Method that adds a move to this Board
+
+
+    /**
+     * Adds a move to the Board, uhsing a Field parameter
      * 
      * @param player
-     * @param newFieldValue
-     * @param newFieldPos 
+     * @param newField 
      */
     public void newMove(
             int player,
-            int newFieldValue,
-            int newFieldPos
-    );
-    
-    
-    /**An overloaded method that creates a new move, by setting a new value at the position given from it's row and coloumn
-     * 
-     * @param player
-     * @param newFieldValue
-     * @param coloumn
-     * @param row 
-     */
-    public void newMove(
-            int player,
-            int newFieldValue,
-            int coloumn,
-            int row
-    );
-    
-    /** Returns the Field with the highest score
+            Field newField
+            );
+
+
+
+    /**
+     *  Returns the Field with the highest score
      * 
      * @param player int representing the player's score wished for
      * @return Field the Field that has the highest score of this board
      */
     public Field getBestMove(int player);
+
+    /** Returns an array of empty Fields
+     * 
+     * @return an array of Fields containing no value
+     */
+    public ArrayList<Field> getEmptyFields();
+    
+    /**
+     * Adds a new move to the board
+     */
+    public boolean newMove(Field newMove, int turn);
+            
+    /**
+     * To string method returning the Board as a strnig, with each row on their own line
+     * @return 
+     */
+            
+    @Override
+    public String toString();
+        /**
+     * returns true if the given representation of lines has three in a row
+     * 
+     * @param x
+     * @param y
+     * @param z
+     * @return 
+     */
+    public boolean checkLine(int x, int y, int z, int turn);
+    
+    /**
+     * returns true if all fields has a value higher than 0
+     * @param x
+     * @param y
+     * @param z
+     * @return 
+     */
+    public boolean checkLineExist(int x, int y, int z);
+    
+    /**
+     * returns true if the game has a winner
+     * @param x
+     * @param y
+     * @param z
+     * @return 
+     */
+    public boolean check(int x, int y, int z,  int turn);
+    
+    /**
+     * check for a win and returns true if a win exists
+     * @param turn
+     * @return 
+     */
+    public boolean checkWin(int turn);
+
+    /**
+     * Checks if a given move is legal
+     * @param newField
+     * @return 
+     */
+    public boolean legalMove(Field newField);
 }

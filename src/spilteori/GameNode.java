@@ -23,71 +23,91 @@ package spilteori;
  */
 public interface GameNode {
     
-    /**Returns the possible move of the current possibility
+    /**
+     * Returns the possible move of the current possibility
      * 
      * @return Field Representing this move.
      */
     public Field getPosMove();
     
-    /**Sets the possible move value of this GameNode
+    /**
+     * Sets the possible move value of this GameNode
      * 
      * @param newField Field that is to be inserted
      */
     public void setPosMove(Field newField);
     
-    /**Returns int[] containing chances of the players in each respective index
+    /**
+     * Returns int[] containing chances of the players in each respective index
      * 
      * @return int[] of size 0 to 10000, representing percentage chances with 100% = 10000
      */
-    public int[] getChances();
+    public int[] getWinValue();
     
-    /** Adds the chances of this Node, as an int[]
+    /** 
+     * Adds the chances of this Node, as an int[]
      * 
-     * @param newChances int[][] containing numbers between 0-10000
+     * @param newWinValue[] 
      */
-    public void setChances(int[] newChances);
+    public void setWinValue(int[] newWinValue);
     
-    /**Calculates the chances of winning at for this GameNode
-     * 
-     */
-    public void calculateChances();
+    public GameNode getOptimal();
     
-    /**Calculates the optimal move for each player
-     * 
-     * Places the index of the optimal child in the index corresponding to player number.
-     */
-    public void calculateOptimal();
-    
-    /**Returns the array of optimal moves
-     * 
-     * @return GameNode[] each index contains the optimal Node for player corresponding to index
-     */
-    public GameNode[] getOptimal();
-    
-    /**Returns an array containing all the children of this GameNode
+    /**
+     * Returns an array containing all the children of this GameNode
      * 
      * 
      * @return GameNode[] an array of nodes with this node as parent
      */
     public GameNode[] getChildren();
     
-    /**Sets the array of children of this node, to be the given array
+    /**
+     * Sets the array of children of this node, to be the given array
      * 
      * @param ChildrenArray the array containing the new children
      */
     public void setChildren(GameNode[] ChildrenArray);
     
 
-    /**Returns the parent of this GameNode
+    /**
+     * Returns the parent of this GameNode
      * 
      * @return GameNode representing the Parent of this Node
      */
     public GameNode getParent();
     
-    /**Sets the parent of this GameNode to be the given GameNode
+    /**
+     * Sets the parent of this GameNode to be the given GameNode
      * 
      * @param NewGameNode GameNode representing the new Parent
      */
     public void setParent(GameNode NewGameNode);
+    
+    /**Returns the index of the current Node
+     * 
+     * @return 
+     */
+    public int getIndex();
+    
+    /**Returns the current Field
+     * 
+     * @return 
+     */
+    public Field getField();
+    
+    /**
+     * returns the set depth for this Node
+     * 
+     * @return 
+     */
+    public int getDepth();
+    
+    /**
+     * Sets the depth for this node to the given parameter
+     * 
+     * @param newDepth 
+     */
+    public void setDepth(int newDepth);
+            
     
 }
