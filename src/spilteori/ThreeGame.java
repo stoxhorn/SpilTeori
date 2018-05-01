@@ -177,7 +177,7 @@ public class ThreeGame implements Game {
         String answer = getAnswer.next();
         if("y".equals(answer))
         {
-            runGame();
+            new ThreeGame().runGame();
         }
         else 
         {
