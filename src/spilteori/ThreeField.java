@@ -44,7 +44,7 @@ public class ThreeField implements Field{
     
     @Override
     public int getColoumn() {        
-        return row;
+        return coloumn;
     }
     
     @Override

@@ -11,7 +11,7 @@ public class ThreeNode implements GameNode{
     
     private Field field;
     
-    private int index;
+    private final int index;
     
     private int[] winValue = new int[] {-1, 12};
     
@@ -63,34 +63,47 @@ public class ThreeNode implements GameNode{
         
         if ((depth % 2) + 1 == 1) {
             for (GameNode child : children) {
-                System.out.print(child.getWinValue()[0] + " - ");
-                if (child.getWinValue()[0] == 1) {
-                    System.out.println("works");
+                //System.out.print(child.getWinValue()[0] + " - ");
+                if (child.getField().getPos() == 4) {
                     List1.add(child);
-                }else if (child.getWinValue()[0] == 0) {
-                    List2.add(child);
-                }else 
-                if(child.getWinValue()[0] == 2){
-                    List3.add(child);
+                }
+                switch (child.getWinValue()[0]) {
+                    case 1:
+                        List1.add(child);
+                        break;
+                    case 0:
+                        List2.add(child);
+                        break;
+                    case 2:
+                        List3.add(child);
+                        break;
+                    default:
+                        break;
                 }
             }
             
         }
         else {
             for (GameNode child : children) {
-                System.out.print(child.getWinValue()[0] + " - ");
-                if (child.getWinValue()[0] == 2) {
-                    System.out.println("works");
-                    List1.add(child);
-                }else if (child.getWinValue()[0] == 0) {
-                    List2.add(child);
-                }else if(child.getWinValue()[0] == 1){
-                    List3.add(child);
+                //System.out.print(child.getWinValue()[0] + " - ");
+                switch (child.getWinValue()[0]) {
+                    case 2:
+                        System.out.println("works");
+                        List1.add(child);
+                        break;
+                    case 0:
+                        List2.add(child);
+                        break;
+                    case 1:
+                        List3.add(child);
+                        break;
+                    default:
+                        break;
                 }
             }
 
         }
-        System.out.println("");
+        //System.out.println("");
         int[] returnValue = null;
         GameNode returnNode = null;
         

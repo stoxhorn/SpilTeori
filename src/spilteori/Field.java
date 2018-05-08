@@ -1,7 +1,5 @@
 package spilteori;
 
-import java.util.ArrayList;
-
 /** A class that creates an object representing a Field, in a game.
  * Contains variables describing it's position, it's value used for the game, and a score representing it's possible worth for a player.
  * 

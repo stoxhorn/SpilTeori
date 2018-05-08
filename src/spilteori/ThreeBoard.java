@@ -15,9 +15,9 @@ import java.util.ArrayList;
  * 
  * 
  */
-public class ThreeBoard implements Board {
+public final class ThreeBoard implements Board {
 
-    private Field[] board;
+    private final Field[] board;
     
     private final int rows = 3;
     

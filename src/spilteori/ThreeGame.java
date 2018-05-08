@@ -6,14 +6,13 @@
 package spilteori;
 
 // Need a method to add a move on the game, instead of only on the Board
-
-import java.lang.reflect.Array;
-import java.lang.reflect.Method;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 
 
 
@@ -34,15 +33,17 @@ public class ThreeGame implements Game {
     
     private GameNode currentNode;
     
-    private ThreeRowGameTree Tree;
+    private final ThreeRowGameTree Tree;
     
-    private Board currentBoard;
+    private final Board currentBoard;
     
     private final int playerAmount = 2;
     
     private int playerTurn;
     
     int[] chances;
+    
+    public volatile boolean moveMade;
     
     public ThreeGame()
     {
@@ -51,6 +52,8 @@ public class ThreeGame implements Game {
         Tree = new ThreeRowGameTree(this);
         
         currentNode = Tree.getNode(0);
+        
+        moveMade = false;
     }
     
     @Override
@@ -83,7 +86,7 @@ public class ThreeGame implements Game {
         playerTurn = playerTurn%2;
         
         // increment playerTurn
-        playerTurn ++;
+        playerTurn++;
         
         // return storage
         return tmp;
@@ -99,6 +102,7 @@ public class ThreeGame implements Game {
         //System.out.println("position: " + currentNode.getField().getPos());
         System.out.println(Arrays.toString(currentNode.getWinValue()));
         Field f = currentNode.getField();
+        
         return f;
     }
     
@@ -126,7 +130,9 @@ public class ThreeGame implements Game {
     @Override
     public void makeMoveAI() {
         // currentBoard.newMove(playerTurn, getBestMove(playerTurn));
-        if (!newMove(getBestMove(playerTurn)))
+        Field newField = getBestMove(playerTurn);
+        arrayBtn[newField.getRow()][newField.getColoumn()].setText(Integer.toString(playerTurn));
+        if (!newMove(newField))
         {
             getTurn();
             System.out.println(currentBoard.toString());
@@ -140,13 +146,9 @@ public class ThreeGame implements Game {
     @Override
     public boolean newMove(Field newMove)
     {
-
-        
-        
         System.out.println("position: " + newMove.getPos());
         System.out.println("value: " + newMove.getValue());
-        return currentBoard.newMove(newMove, getTurn());
-            
+        return currentBoard.newMove(newMove, getTurn());      
     }
     
     
@@ -158,7 +160,7 @@ public class ThreeGame implements Game {
     @Override
     public void runGame() {
         System.out.println("Please specify amount of players, from 0 - 2:");
-        
+        gridHolder();
         // Starts the game with the amount of player specified in the scanenr input
         Scanner in = new Scanner(System.in);
         int playerAmnt = in.nextInt();
@@ -225,7 +227,7 @@ public class ThreeGame implements Game {
                 break;
             }
             getTurn();
-            playerMove();
+            newPlayerMove();
         }
         // Announces the end of the game and potential winners
         announceEnd();
@@ -283,9 +285,8 @@ public class ThreeGame implements Game {
             getTurn();
             if(iterator%2 == 1)
             {
-                playerMove();
-                iterator++;
-                        
+                newPlayerMove();
+                iterator++;           
             }
             else{
                 this.makeMoveAI();
@@ -319,7 +320,7 @@ public class ThreeGame implements Game {
         // Announces the end of the game and potential winners
         announceEnd();
     }
-
+    
     
     
     @Override
@@ -331,20 +332,21 @@ public class ThreeGame implements Game {
     public void playerMove() {
         // Announce the current player
         System.out.println("It is now player " + playerTurn +"'s turn");
-    
+        
         // ask for for which field to make a move on
+        //Field newField = getPlayerMove();
         Field newField = getPlayerMove();
         
         System.out.println(newField.getValue());
         
-        GameNode[] tmp = currentNode.getChildren();
+        GameNode[] children = currentNode.getChildren();
         if(currentNode.getDepth()<9)
         {
-            for(GameNode x : tmp)
+            for(GameNode child : children)
             {
-                if(x.getField().getPos() == newField.getPos())
+                if(child.getField().getPos() == newField.getPos())
                 {
-                    currentNode = x;
+                    currentNode = child;
                 }
 
             }
@@ -356,7 +358,16 @@ public class ThreeGame implements Game {
             getTurn();
             playerMove();
         }
+    }
+    
+    public void newPlayerMove() {
+        System.out.println("It is now player " + playerTurn +"'s turn");
         
+        //Wait for player move
+        while(moveMade == false){
+            
+        }
+        moveMade = false;
     }
 
     @Override
@@ -383,23 +394,64 @@ public class ThreeGame implements Game {
         int coloumn = inp2.nextInt();
         
         ThreeField tmp = new ThreeField(playerTurn, row, coloumn, (3*row + coloumn) );
+        arrayBtn[tmp.getRow()][tmp.getColoumn()].setText(Integer.toString(playerTurn));
         return tmp;
     }
+    
+    public void getPlayerMoveGrid(int row, int coloumn) {
+        ThreeField newField = new ThreeField(playerTurn, row, coloumn, (3*row + coloumn));
+        arrayBtn[newField.getRow()][newField.getColoumn()].setText(Integer.toString(playerTurn));
+        GameNode[] children = currentNode.getChildren();
+        if(currentNode.getDepth()<9)
+        {
+            for(GameNode child : children)
+            {
+                if(child.getField().getPos() == newField.getPos())
+                {
+                    currentNode = child;
+                }
 
-    @Override
-    public void createBoard() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        }
+        // add the move to the board
+        if (!newMove(newField))
+        {
+            System.out.println("Pick a legal move, please.\n");
+            getTurn();
+            //getPlayerMove()
+            newPlayerMove();
+        }
+        moveMade = true;
     }
+    
+    public JButton[][] arrayBtn;	
+    public void gridHolder() {
+	    
+        // the frame that contains the components
+        JFrame frame = new JFrame();
+	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	// set the size of the frame
+	frame.setSize(450, 450);
+	    
+	// set the rows and cols of the grid, as well the distances between them
+	GridLayout gridlayout = new GridLayout(3, 3, 10, 10);
+	// what layout we want to use for our frame
+	frame.setLayout(gridlayout);
 
-    @Override
-    public boolean legalMove(Field checkField) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	arrayBtn = new JButton[3][3];
+	// add JButtons dynamically
+	for(int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                final int row = i;
+                final int coloumn = j;
+                arrayBtn[i][j] = new JButton();
+                arrayBtn[i][j].addActionListener((ActionEvent ae) -> {
+                    getPlayerMoveGrid(row, coloumn);
+                    System.out.println("row: " +row);
+                });
+                frame.add(arrayBtn[i][j]);
+            }
+            }
+	frame.setVisible(true);
     }
-
-
-
-    
-
-    
-    
 }

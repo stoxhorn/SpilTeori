@@ -97,6 +97,9 @@ public interface Board {
     
     /**
      * Adds a new move to the board
+     * @param newMove
+     * @param turn
+     * @return 
      */
     public boolean newMove(Field newMove, int turn);
             
@@ -113,6 +116,7 @@ public interface Board {
      * @param x
      * @param y
      * @param z
+     * @param turn
      * @return 
      */
     public boolean checkLine(int x, int y, int z, int turn);

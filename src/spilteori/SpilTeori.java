@@ -17,7 +17,5 @@ public class SpilTeori {
     public static void main(String[] args) {
         ThreeGame game = new ThreeGame();
         game.runGame();
-        
-    }
-    
+    } 
 }

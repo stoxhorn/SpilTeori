@@ -102,10 +102,10 @@ public final class ThreeRowGameTree implements GameTree {
             // Uses depth to determine player
             // 1 for a win
             if ((depth % 2)+1 == 1) {
-                newWinValue[0] = 1;
+                newWinValue[0] = 2;
             }
             else {
-                newWinValue[0] = 2;
+                newWinValue[0] = 1;
             }
             newWinValue[1] = depth;
             // Adds the chances to the Node at the current index
@@ -262,8 +262,6 @@ public final class ThreeRowGameTree implements GameTree {
     
     //returns the best chance for the player who will play on the given turn
     public int[] minMax(int[][] childrenChances, int depth) {
-        int[] winValue = new int[] {-1, 30};
-        
         ArrayList<int[]> List1 = new ArrayList<>();
         ArrayList<int[]> List2 = new ArrayList<>();
         ArrayList<int[]> List3 = new ArrayList<>();
@@ -273,25 +271,31 @@ public final class ThreeRowGameTree implements GameTree {
         
         if ((depth%2)+1 == 1) {
             for (int[] chance : childrenChances) {                
-                if(chance[0] == 1){
-                    List1.add(chance);
-                }
-                else if(chance[0] == 0){
-                    List2.add(chance);
-                }else{
-                    List3.add(chance);
+                switch (chance[0]) {
+                    case 1:
+                        List1.add(chance);
+                        break;
+                    case 0:
+                        List2.add(chance);
+                        break;
+                    default:
+                        List3.add(chance);
+                        break;
                 }
             }
         }
         else {
             for (int[] chance : childrenChances) {                
-                if(chance[0] == 2){
-                    List1.add(chance);
-                }
-                else if(chance[0] == 0){
-                    List2.add(chance);
-                }else{
-                    List3.add(chance);
+                switch (chance[0]) {
+                    case 2:
+                        List1.add(chance);
+                        break;
+                    case 0:
+                        List2.add(chance);
+                        break;
+                    default:
+                        List3.add(chance);
+                        break;
                 }
             }
         }

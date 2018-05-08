@@ -31,11 +31,6 @@ public interface Game {
      * @return int represnts amount of players
      */
     public int getPlayerAmount();
-   
-    /**
-     * Creates a new currentBoard
-     */
-    public void createBoard();
     
     /**
      * Returns an ArrayList containing the Fields of the Board
@@ -146,13 +141,6 @@ public interface Game {
      * Announces the game has ended and a winner if any
      */
     public void announceEnd();
-    
-    /**
-     * returns true if the given field is a legal move in the board
-     * @param checkField
-     * @return 
-     */
-    public boolean legalMove(Field checkField);
     
 
 }
