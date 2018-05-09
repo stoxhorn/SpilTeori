@@ -43,7 +43,7 @@ public class ThreeGame implements Game {
     
     int[] chances;
     
-    public volatile boolean moveMade;
+    private volatile boolean moveMade;
     
     public ThreeGame()
     {
