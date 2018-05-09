@@ -1,7 +1,6 @@
 package spilteori;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class ThreeNode implements GameNode{
     
