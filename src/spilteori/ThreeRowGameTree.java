@@ -68,8 +68,6 @@ public final class ThreeRowGameTree implements GameTree {
         // Create the RootNode node
         Tree.add(RootNode);
         
-        
-        
         // Resets the cursor to first index
         Cursor = 0;
         
@@ -80,9 +78,10 @@ public final class ThreeRowGameTree implements GameTree {
         addNodes(Tree.get(0), posBoard);
     }
     
-    /**Recursively adds a new move, as long as there is moves left, and the game has not been lost yet
+    /**
+     * Recursively adds a new move, as long as there is moves left, and the game has not been lost yet
      * 
-     * Takes a Node as a parent.
+     * Takes a Node as the current node, which it bases the tree from, as this will be the starting node.
      * Adds the children Nodes, And their respective Fields
      * 
      * @param moveLeft
@@ -91,74 +90,78 @@ public final class ThreeRowGameTree implements GameTree {
      */
     private void addNodes(GameNode currentNode, Board posBoard)
     {
-        // Copy the given Game
+        // Copy the given board
         Board tmpBoard = new ThreeBoard(posBoard);
         
-        // Getting the depth of the parent 
+        // Getting the depth of the currentNode 
         int depth = currentNode.getDepth();
+        
+        // Getting the player's who's turn it was for the currentNode
+        int player = currentNode.getPlayer();
         
         // get the amount of moves left
         int moveLeft = posBoard.getEmptyFields().size();
-        //System.out.println("moveLeft: " +moveLeft);
         
         // Create an int[] of the same length of the amount of players
-        int[] newWinValue = new int[2];
+        int[] newWinValue = new int[MainGame.getPlayerAmount()];
         
-        // Need to account for depth
-        // If the given game contains a winner:
-        if(posBoard.checkWin((depth+1)%2+1))
+        
+        // If the given game contains a winner for the given player:
+        if(posBoard.checkWin(player))
         {
-            //System.out.println("checkwin");
-            // Winner of GameNode parent is the player = checkWin()
-            // Add a winning chance of 10000 to the corresponding winner from checkWin()
             
-            // Uses depth to determine player
-            // 1 for a win
-            if ((depth % 2)+1 == 1) {
-                newWinValue[0] = 2;
-            }
-            else {
-                newWinValue[0] = 1;
-            }
+            // Sets the win value to the currentPlayer
+            newWinValue[0] = player;
+            
+            // adds the depth to the winvalue array
             newWinValue[1] = depth;
-            // Adds the chances to the Node at the current index
+            
+            // adds the winvalue to the actual node in Tree
             Tree.get(Cursor).setWinValue(newWinValue);
             
-            // and then return
+            // returns, as the game has won, and no more nodes needs to be added.
             return;
         }
         
         // If no more fields are left, and there has not been found a winner:
         else if(moveLeft < 1)
         {
+            // Add zero as win value, as it's a draw
             newWinValue[0] = 0;
+            
+            // and set the depth
             newWinValue[1] = depth;
-            // Add zero for losing as nobody won 
+            
+            // Sets the winvalue to the actual node in the tree
             Tree.get(Cursor).setWinValue(newWinValue);
             
-            // since this block only activates, if no possible winner is found, therefore return
+            // returns as there are no more possible moves left
             return;
         }
         
         // The array of children, to be added to the given node
         GameNode[] newChildren = new GameNode[moveLeft];
         
-        // Creating the array of Fields to add as children
+        // Getting the empty fields which also equates to possible moves
         ArrayList<Field> emptyFields = posBoard.getEmptyFields();
         
-        // Needs to loop as many times as moves left
-        // setChildren takes an array of nodes, initialized before loop
-        // Need an int that increments for each loop to add to the array of newChildren
+        // A loop that adds an empty field to a new board, that is used for another call of addNodes
+        // such that a new node represents a change in the board
         int i = 0;
         for(Field newField : emptyFields)
         {
-            // Each field from emptyFields gets called in the loop
+           
             
-            // Each loop increments the newCursor, as it gets added to the tree
-            // Without moving the Cursor to a new index
+            
+            // Incrementing the cursor, as a recursive call will continue all the way to the first time a game ends
+            // and when it goes a call depth up, will add to the next index in the array
+            // Point is, Cursor points to index in array, and not to a depth or place in abstract tree, which the list is supposed to represent
             Cursor ++;
             
-            // The new node
+            // Constructing a new node, with the parameters gotten so far
+            // the empty field representing it's move
+            // the cursor to represents it's placement
+            // and it's parent which is the currentNode
             ThreeNode child = new ThreeNode(newField, Cursor, currentNode);
            
             // Sets the depth of the node to be +1 from the current depth
@@ -167,87 +170,59 @@ public final class ThreeRowGameTree implements GameTree {
             // Adds the child to the tree
             Tree.add(child);
             
-            // Adds the child to the new children, and increments i
+            // Adds the child to the array of children, and increments i
             newChildren[i] = child;      
-            //System.out.println("depth: " +depth);
+            i++;
+            
+            // copies the given board, so that the given board can be reused for the next loop
             Board tmp = new ThreeBoard(tmpBoard);
             
-            //System.out.println("Position: " + child.getField().getPos());
-            //System.out.println("Value: " + child.getField().getValue());
-            tmp.newMove((depth%2)+1, child.getField());
+            // adds a new move of the current player to the new child created in this loop
+            tmp.newMove(player, child.getField());
             
-            //System.out.println(currentNode.getPosMove().getValue());
-            //System.out.println(tmp.toString());
- 
+            // Does a recursive call to finish a branch of the tree
             addNodes(child, tmp);
-            
-            i++;
         }
         
-        // sets the new children as the children of the given Parent Node
+        // As the loop has now created all the children for currentNode, they can be added to the currentNode
         currentNode.setChildren(newChildren);
-        
-        // Increments the cursor
-        
-        
-        
-        // Adds the move of the parent to the possible board,
-        // in order to keep track of which Fields has been added,
-        // so that a field that has already been added, does not get added again
-        
-        // Will add a move to the board for now, until a method is implemented 
-        // Currently returns an arraylist, which is added to, and as such nothing happens
-        
-        
-        
-        
-        
     }
    
     
     
-    /** returns the chance of the given childNodes chances, of the corresponding player index
+    /**
+     * A recursive method that adds the winValue to the given node, by going through each node below this one
      * 
-     * Currently:
-     *      Takes a GameNode, as these point to subnodes, this method iterates through these to calculate chances
-     *      Can be used as a void method on the RooteNode, or on a given Node, and it will return and/or calculate the given nodes chance, and it's children if necessary
-     *      
-     *      in short:
-     *          If given node contains chances, return them.
-     *          Otherwise it will call this method on children Nodes, until nodes with chances are found for each branch of calls.
-     *          And these recursions will be used to calculate the given Nodes chacnes, and return them
+     * Adds a winValue to the given node, by going through each node below it, down to every leaf, and calculated each winValue,
+     * using minMax, and adding to each value, making sure that each node below the first call has a winValue
      * 
      * @param givenNode
      * @return 
      */
     public int[] calculateMinMax(GameNode givenNode)
     {
+       
         // Create copy of given Node
         GameNode localNode = givenNode;
         
-
-        // Needs to be redone so that it accounts for depth
-        
-        // this is depth x
-        // if depth x+2 contains a win for opponent
-        // make x+1 a loss
-        // if depth x+1 contains a win for self, make x-1 a win
-        
+        // If the given node is a leaf, and as such is already given a winValue from the createTree method
         if (localNode.getWinValue()[0] != -1)
         {
+            // Return the currently already stored winValue
             return localNode.getWinValue();
         }
-        else{
-        // Getting an array of children
+            
+        // Gets the children of the given node
         GameNode[] childArray = localNode.getChildren();
         
-        // Initializing a 2d int array
+        // Initializes a 2d array to contain the new chances of the children, with a size of chridren and 2
+        // as winValue contains 2 values to describe and priritize a winValue
         int[][] childrenChances = new int[childArray.length][2];
         
         
-        // Calling this method on each child
-        // and setting the return value to the apropriate indexes in the 2d array
-        // this is essentially trhe recursive part
+        // The recursive call on each children
+        // adding to the return to the next index for each loop
+        // as this node does not have a winValue already
         int i = 0;
         for(GameNode x : childArray)
         {
@@ -256,12 +231,11 @@ public final class ThreeRowGameTree implements GameTree {
             i++;
         }
         
+        // The method that calculates the current chances of winning for this array
+        int[] newWinValue = minMax(childrenChances, givenNode.getPlayer());
         
-        // A method that takes a depth and a set of chances
-        // the 2d array, needs to end as a single array, that shows the win chances for the current depth
-        int[] newWinValue = minMax(childrenChances, givenNode.getDepth());
-        
-        // i get the index to set the appropriate node in the tree
+        // Getting the index of the currentNode
+        // so that i can add the result to the ACTUAL node in the Tree.
         int index = localNode.getIndex();
         
         // And finally i set the chances for the appropriate GameNode
@@ -269,20 +243,21 @@ public final class ThreeRowGameTree implements GameTree {
         
         // and finally i return the chances
         return newWinValue;
-        }
-        
     }
     
-    //returns the best chance for the player who will play on the given turn
-    public int[] minMax(int[][] childrenChances, int depth) {
+    // Returns the value the player taking a turn at the given depth will prioritize, 
+    public int[] minMax(int[][] childrenChances, int player) {
+        
+        // initializing the three arayLists for getting optimal depth
         ArrayList<int[]> List1 = new ArrayList<>();
         ArrayList<int[]> List2 = new ArrayList<>();
         ArrayList<int[]> List3 = new ArrayList<>();
         
         
         
-        
-        if ((depth%2)+1 == 1) {
+        // If given player is player 1
+        if (player%2 == 1) {
+            // The loop adding the amount of each winValue of the children to the appropriate lists
             for (int[] chance : childrenChances) {                
                 switch (chance[0]) {
                     case 1:
@@ -297,7 +272,9 @@ public final class ThreeRowGameTree implements GameTree {
                 }
             }
         }
+        // If the given player is player 2
         else {
+            // The loop adding the amount of each winValue of the children to the appropriate lists
             for (int[] chance : childrenChances) {                
                 switch (chance[0]) {
                     case 2:
@@ -313,16 +290,22 @@ public final class ThreeRowGameTree implements GameTree {
             }
         }
         
+        // Initializing the value to be returned, null as default
         int[] returnValue = null;
         
+        // If the list of the most important value is not empty
         if(!List1.isEmpty()){
+            // set returnValue to be the one with the lowest depth of the list
             for(int[] x : List1){
                 if (returnValue == null || x[1] < returnValue[1]){
                     returnValue = x;
                 }
             }
             return returnValue;
-        }else if(!List2.isEmpty()){
+        }
+        // Else if the list of the second most important value is not empty
+        else if(!List2.isEmpty()){
+            // set returnValue to be the one with the lowest depth of the list
             for(int[] x : List2){
                 if (returnValue == null || x[1] < returnValue[1]){
                     returnValue = x;
@@ -330,7 +313,10 @@ public final class ThreeRowGameTree implements GameTree {
             }
             
             return returnValue;
-        }else if(!List3.isEmpty()){
+        }
+        // Else if the list of the second most important value is not empty
+        else if(!List3.isEmpty()){
+            // set returnValue to be the one with the lowest depth of the list
             for(int[] x : List3){
                 if (returnValue == null || x[1] < returnValue[1]){
                     returnValue = x;
@@ -378,5 +364,6 @@ public final class ThreeRowGameTree implements GameTree {
         GameNode tmp = Tree.get(index);
         return tmp;
     }
+
     
 }
