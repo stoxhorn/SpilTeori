@@ -108,6 +108,8 @@ public interface GameNode {
      * @param newDepth 
      */
     public void setDepth(int newDepth);
+    
+    public int getPlayer();
             
     
 }

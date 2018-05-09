@@ -55,6 +55,7 @@ public class ThreeNode implements GameNode{
     }
     
     //getter for player at current depth
+    @Override
     public int getPlayer() {
         int tmp = (depth % 2) + 1;
         return tmp;
@@ -76,10 +77,6 @@ public class ThreeNode implements GameNode{
                 
             }
         }
-    }
-    
-    private GameNode getOptimalP2() {
-        
     }
     
     //Returns the child with the lowest depth. Should only be called on the winning value for a player.
