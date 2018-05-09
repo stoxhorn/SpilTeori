@@ -8,30 +8,43 @@ package spilteori;
 import java.util.ArrayList;
 
 /**
- *
- * @author Stoxhorn
+ * A gameTree for Three in a row
+ * 
  */
 public final class ThreeRowGameTree implements GameTree {
 
+    
+    // The arraylist containing all the Nodes
     private final ArrayList<GameNode> Tree;
     
+    // A cursor that points at the current index of the tree, with the index being of the arraylist "Tree"
     private int Cursor;
     
+    // The game this tree belongs to, barely used
     private final Game MainGame;
     
     // Root node containing a field that cannot exist, and a Node that is not inside the array
-    // Cannot have -1 for position, might need to be changed later on, just in case
-    private final ThreeNode RootNode = new ThreeNode(new ThreeField(-1,0,0,0), 0, null);
+    // has a value of -1, as it does not have a value yet
+    private final ThreeNode RootNode; 
     
     public ThreeRowGameTree(Game newGame)
     {
+        // initialize the arraylist tree
         this.Tree = new ArrayList<>();
+        
+        // Set the cursor at start
         Cursor = 0;
         
+        // Store the game from the constructor
         MainGame = newGame;
         
+        // Creates the rootnode
+        RootNode = new ThreeNode(new ThreeField(-1,0,0,0), 0, null);
+        
+        // Creates the tree 
         this.createTree(newGame);
         
+        // Calcutales the minmax, and provides a winvalue for all the nodes in the tree
         calculateMinMax(RootNode);
 
         

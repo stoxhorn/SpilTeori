@@ -47,7 +47,8 @@ public class ThreeField implements Field{
     @Override
     public int getPos()
     {
-        return pos;
+        int tmp = pos;
+        return tmp;
     }
     
     @Override
@@ -59,7 +60,8 @@ public class ThreeField implements Field{
     
     @Override
     public int getRow() {
-        return row;
+        int tmp = row;
+        return tmp;
     }
     
     @Override
@@ -70,7 +72,8 @@ public class ThreeField implements Field{
     
     @Override
     public int getColoumn() {        
-        return coloumn;
+        int tmp = coloumn;
+        return tmp;
     }
     
      @Override
@@ -82,7 +85,8 @@ public class ThreeField implements Field{
     
     @Override
     public int getValue() {
-        return value;
+        int tmp = value;
+        return tmp;
     }
     
     @Override
