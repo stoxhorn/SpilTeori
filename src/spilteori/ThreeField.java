@@ -2,7 +2,7 @@ package spilteori;
 
 /**
  *
- * @author jonas
+ * 
  */
 public class ThreeField implements Field{
 
@@ -11,6 +11,11 @@ public class ThreeField implements Field{
     int coloumn;
     int pos;
     
+    /**
+     * Constructor for copying another field
+     * 
+     * @param copyField 
+     */
     public ThreeField(Field copyField)
     {
         int tmp = copyField.getValue();
@@ -23,6 +28,14 @@ public class ThreeField implements Field{
         pos = tmp4;
     }
     
+    /**
+     * Simple constructor that sets all the value 
+     * 
+     * @param newValue
+     * @param newRow
+     * @param newColoumn
+     * @param newPos 
+     */
     public ThreeField(int newValue, int newRow, int newColoumn, int newPos)
     {
         value = newValue;
@@ -38,8 +51,21 @@ public class ThreeField implements Field{
     }
     
     @Override
+    public void setPos(int newPos)
+    {
+        int tmp = newPos;
+        pos = tmp;
+    }
+    
+    @Override
     public int getRow() {
         return row;
+    }
+    
+    @Override
+    public void setRow(int newRow) {
+        int tmp = newRow;
+        pos = tmp;
     }
     
     @Override
@@ -47,15 +73,23 @@ public class ThreeField implements Field{
         return coloumn;
     }
     
+     @Override
+    public void setCol(int newCol) {        
+        int tmp = newCol;
+        pos = tmp;
+    }
+    
+    
     @Override
     public int getValue() {
         return value;
     }
     
     @Override
-    public void setValue(int newVal)
+    public void setVal(int newVal)
     {
-        value = newVal;
+        int tmp = newVal;
+        value = tmp;
     }
     
     @Override

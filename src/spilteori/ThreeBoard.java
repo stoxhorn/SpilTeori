@@ -94,7 +94,7 @@ public final class ThreeBoard implements Board {
         int pos = newField.getPos();
         // Adding the player number as value,
         // to represent the players' move
-        newField.setValue(player);
+        newField.setVal(player);
         
         // set Field into the field
         board[pos] = newField;        

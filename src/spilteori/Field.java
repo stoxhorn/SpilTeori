@@ -26,7 +26,13 @@ public interface Field {
      */
     public int getPos();
     
-
+    /**
+     * The int to set for the position of this field
+     * 
+     * @param newPos 
+     */
+    public void setPos(int newPos);
+    
     
     
     /**
@@ -35,6 +41,14 @@ public interface Field {
      * @return int Representing Row 
      */
     public int getRow();
+
+    /**
+     * The int to set for the position of this field
+     * 
+     * @param newRow 
+     */
+    public void setRow(int newRow);
+
     
     /**
      * The int Representing the coloumn of the Field
@@ -42,6 +56,14 @@ public interface Field {
      * @return int Representing coloumn 
      */
     public int getColoumn();
+
+    /**
+     * The int to set for the position of this field
+     * 
+     * @param newCol
+     */
+    public void setCol(int newCol);
+
     
    /**
     * returns the value of the this Field
@@ -53,7 +75,7 @@ public interface Field {
     * Sets the value of this to be the given int 
      * @param newVal
     */
-   public void setValue(int newVal);
+   public void setVal(int newVal);
    
    @Override
    public String toString();
