@@ -132,6 +132,7 @@ public class ThreeGame implements Game {
         // currentBoard.newMove(playerTurn, getBestMove(playerTurn));
         Field newField = getBestMove(playerTurn);
         arrayBtn[newField.getRow()][newField.getColoumn()].setText(Integer.toString(playerTurn));
+        arrayBtn[newField.getRow()][newField.getColoumn()].setEnabled(false);
         if (!newMove(newField))
         {
             getTurn();
@@ -447,7 +448,7 @@ public class ThreeGame implements Game {
                 arrayBtn[i][j] = new JButton();
                 arrayBtn[i][j].addActionListener((ActionEvent ae) -> {
                     getPlayerMoveGrid(row, coloumn);
-                    System.out.println("row: " +row);
+                    arrayBtn[row][coloumn].setEnabled(false);
                 });
                 frame.add(arrayBtn[i][j]);
             }
