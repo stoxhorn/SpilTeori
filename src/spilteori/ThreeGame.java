@@ -97,7 +97,7 @@ public class ThreeGame implements Game {
     // Mangler metode til at få den nuværende node, getNode
     public Field getBestMove(int player) {
         GameNode t = currentNode;
-        currentNode = t.getOptimal();
+        currentNode = t.getOptimal(currentNode.getPlayer());
         //System.out.println("WinValue: " + currentNode.getWinValue()[0]);
         //System.out.println("position: " + currentNode.getField().getPos());
         System.out.println(Arrays.toString(currentNode.getWinValue()));

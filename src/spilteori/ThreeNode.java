@@ -61,21 +61,36 @@ public class ThreeNode implements GameNode{
         return tmp;
     }
     
-    public GameNode getOptimalP1(int player) {
-        ArrayList<GameNode> childrenArray = new ArrayList<>();
+    @Override
+    public GameNode getOptimal(int player) {
+        ArrayList<GameNode> childrenArray1 = new ArrayList<>();
+        ArrayList<GameNode> childrenArray2 = new ArrayList<>();
+        ArrayList<GameNode> childrenArray3 = new ArrayList<>();
         
         for (GameNode child : children) {
             //Checks if the middle is a child and takes it as a move for player 1 as it is the optimal start. The AI wont pick it itself as it sees a draw no matter what from the starting position given that both players play optimally.
             if( child.getField().getPos() == 4) {
                 return child;
             }
-            //C
+
             if (child.getWinValue()[0] == player) {
-                childrenArray.add(child);
+                childrenArray1.add(child);
             }
-            else if (child.getWinValue()[0] == 0 && childrenArray.get(0).getWinValue()[0] == player){
-                
+            else if (child.getWinValue()[0] == 0){
+                childrenArray2.add(child);
             }
+            else if (child.getWinValue()[0] == (player % 2 + 1)) {
+                childrenArray3.add(child);
+            }
+        }
+        if (!childrenArray1.isEmpty()) {
+            return getBestChild(childrenArray1);
+        }
+        else if (!childrenArray2.isEmpty()) {
+            return getBestChild(childrenArray2);
+        }
+        else {
+            return getBestChild(childrenArray3);
         }
     }
     
@@ -94,90 +109,7 @@ public class ThreeNode implements GameNode{
             }
         }
         return bestChild;
-    }
-    
-    @Override
-    public GameNode getOptimal() {
-        ArrayList<GameNode> List1 = new ArrayList<>();
-        ArrayList<GameNode> List2 = new ArrayList<>();
-        ArrayList<GameNode> List3 = new ArrayList<>();
-        
-        if ((depth % 2) + 1 == 1) {
-            for (GameNode child : children) {
-                if (child.getField().getPos() == 4) {
-                    List1.add(child);
-                }
-                switch (child.getWinValue()[0]) {
-                    case 1:
-                        List1.add(child);
-                        break;
-                    case 0:
-                        List2.add(child);
-                        break;
-                    case 2:
-                        List3.add(child);
-                        break;
-                    default:
-                        break;
-                }
-            }
-            
-        }
-        else {
-            for (GameNode child : children) {
-                //System.out.print(child.getWinValue()[0] + " - ");
-                switch (child.getWinValue()[0]) {
-                    case 2:
-                        System.out.println("works");
-                        List1.add(child);
-                        break;
-                    case 0:
-                        List2.add(child);
-                        break;
-                    case 1:
-                        List3.add(child);
-                        break;
-                    default:
-                        break;
-                }
-            }
-
-        }
-        //System.out.println("");
-        int[] returnValue = null;
-        GameNode returnNode = null;
-        
-        if(!List1.isEmpty()){
-            for(GameNode x : List1){
-                if (returnValue == null || x.getWinValue()[1] < returnValue[1]){
-                    returnNode = x;
-                    returnValue = x.getWinValue();
-                    System.out.println(Arrays.toString(returnValue));
-                }
-            }
-            return returnNode;
-        }else if(!List2.isEmpty()){
-            for(GameNode x : List2){
-                    if (returnValue == null || x.getWinValue()[1] < returnValue[1]){
-                    returnNode = x;
-                    returnValue = x.getWinValue();
-                    System.out.println(Arrays.toString(returnValue));
-                }
-            }
-            return returnNode;
-        }else if(!List3.isEmpty()){
-            for(GameNode x : List3){
-                    if (returnValue == null || x.getWinValue()[1] < returnValue[1]){
-                    returnNode = x;
-                    returnValue = x.getWinValue();
-                }
-            }
-            return returnNode;            
-        }
-        
-        return returnNode;
-    }
-        
+    }   
     
     //getter for children
     @Override

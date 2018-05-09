@@ -51,7 +51,7 @@ public interface GameNode {
      */
     public void setWinValue(int[] newWinValue);
     
-    public GameNode getOptimal();
+    public GameNode getOptimal(int player);
     
     /**
      * Returns an array containing all the children of this GameNode

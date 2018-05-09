@@ -334,7 +334,7 @@ public final class ThreeRowGameTree implements GameTree {
         
         GameNode thisNode = Tree.get(Cursor);
         
-        GameNode chances = thisNode.getOptimal();
+        GameNode chances = thisNode.getOptimal(thisNode.getPlayer());
         
         // NOTE:==========================================================================================================================================================================================================
         // Temporary solution to getting an int relating to players, this just gets the amount of players, and as such always the last player
