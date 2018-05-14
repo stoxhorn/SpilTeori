@@ -6,6 +6,7 @@
 package spilteori;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * A gameTree for Three in a row
@@ -248,79 +249,49 @@ public final class ThreeRowGameTree implements GameTree {
     // Returns the value the player taking a turn at the given depth will prioritize, 
     public int[] minMax(int[][] childrenChances, int player) {
         
-        // initializing the three arayLists for getting optimal depth
-        ArrayList<int[]> List1 = new ArrayList<>();
+        // Does not use depth anymore, and still works. 
+        // Fairly sure it will take the optimal move that is at the lowest part of the board, 
+        // as it takes the last index of the arraylist
+        
+        // initializing the two arayLists for getting optimal depth
         ArrayList<int[]> List2 = new ArrayList<>();
         ArrayList<int[]> List3 = new ArrayList<>();
-        
-        
-        
-        // If given player is player 1
-        if (player%2 == 1) {
-            // The loop adding the amount of each winValue of the children to the appropriate lists
-            for (int[] chance : childrenChances) {                
-                switch (chance[0]) {
-                    case 1:
-                        List1.add(chance);
-                        break;
-                    case 0:
-                        List2.add(chance);
-                        break;
-                    default:
-                        List3.add(chance);
-                        break;
-                }
+
+        for (int[] chance : childrenChances) {                
+            if(chance[0] == player)
+            {
+                return chance;
+
+
+            }
+            else if(chance[0] == 0)
+            {
+                    List2.add(chance);
+
+            }
+            else
+            {
+                    List3.add(chance);
+
             }
         }
-        // If the given player is player 2
-        else {
-            // The loop adding the amount of each winValue of the children to the appropriate lists
-            for (int[] chance : childrenChances) {                
-                switch (chance[0]) {
-                    case 2:
-                        List1.add(chance);
-                        break;
-                    case 0:
-                        List2.add(chance);
-                        break;
-                    default:
-                        List3.add(chance);
-                        break;
-                }
-            }
-        }
-        
         // Initializing the value to be returned, null as default
         int[] returnValue = null;
         
-        // If the list of the most important value is not empty
-        if(!List1.isEmpty()){
-            // set returnValue to be the one with the lowest depth of the list
-            for(int[] x : List1){
-                if (returnValue == null || x[1] < returnValue[1]){
-                    returnValue = x;
-                }
-            }
-            return returnValue;
-        }
-        // Else if the list of the second most important value is not empty
-        else if(!List2.isEmpty()){
+        
+        // if the list of the second most important value is not empty
+        if(!List2.isEmpty()){
             // set returnValue to be the one with the lowest depth of the list
             for(int[] x : List2){
-                if (returnValue == null || x[1] < returnValue[1]){
                     returnValue = x;
-                }
             }
-            
             return returnValue;
         }
         // Else if the list of the second most important value is not empty
         else if(!List3.isEmpty()){
             // set returnValue to be the one with the lowest depth of the list
             for(int[] x : List3){
-                if (returnValue == null || x[1] < returnValue[1]){
                     returnValue = x;
-                }
             }
             return returnValue;
         }
@@ -335,10 +306,6 @@ public final class ThreeRowGameTree implements GameTree {
         GameNode thisNode = Tree.get(Cursor);
         
         GameNode chances = thisNode.getOptimal(thisNode.getPlayer());
-        
-        // NOTE:==========================================================================================================================================================================================================
-        // Temporary solution to getting an int relating to players, this just gets the amount of players, and as such always the last player
-        int player = MainGame.getPlayerAmount();
         
         // Sets the bestMove to be the optimal move of the given player
         bestMove = chances.getPosMove();
