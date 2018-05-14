@@ -107,11 +107,11 @@ public class ThreeGame implements Game {
     // Mangler metode til at få den nuværende node, getNode
     public Field getBestMove(int player) {
         GameNode t = currentNode;
-        System.out.println(Arrays.toString(currentNode.getChildren()));
+        
         currentNode = t.getOptimal(currentNode.getPlayer());
         //System.out.println("WinValue: " + currentNode.getWinValue()[0]);
         //System.out.println("position: " + currentNode.getField().getPos());
-        System.out.println(Arrays.toString(currentNode.getWinValue()));
+        
         Field f = currentNode.getField();
         
         return f;
@@ -488,24 +488,21 @@ public class ThreeGame implements Game {
     {
         
         ThreeField newField = new ThreeField(playerTurn, x/3, x%3, x);
-        
+
         GameNode[] children = currentNode.getChildren();
-        System.out.println(Arrays.toString(currentNode.getChildren()));
-        System.out.println();
         if(currentNode.getDepth()<9)
         {
             for(GameNode child : children)
             {
-                
                 if(child.getField().getPos() == newField.getPos())
                 {
-                    System.out.println("child pos " + child.getField().getPos() + " position of new move " + newField.getPos());
                     currentNode = child;
-                    System.out.println(Arrays.toString(child.getChildren()));
-                    break;
                 }
+
             }
         }
+        System.out.println(newField.getValue());
+        System.out.println(playerTurn);
         // add the move to the board
         if (!newMove(newField))
         {
@@ -515,6 +512,7 @@ public class ThreeGame implements Game {
             return -1;
         }
         moveMade = true;
+        
         return newField.getValue();
     }
     
@@ -523,14 +521,10 @@ public class ThreeGame implements Game {
         // currentBoard.newMove(playerTurn, getBestMove(playerTurn));
         Field newField = getBestMove(playerTurn);
         // add the move to the board
+        System.out.println(newField.getValue());
+        System.out.println(playerTurn);
+        newMove(newField);
         
-        if (!newMove(newField))
-        {
-            getTurn();
-            System.out.println(currentBoard.toString());
-            System.out.println("Pick a legal move, please.\n");
-            makeMoveAI();
-        }
         return newField;       
     }    
     

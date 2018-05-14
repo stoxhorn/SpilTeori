@@ -413,6 +413,7 @@ public class GUI extends javax.swing.JFrame {
         checkWin();
         if(aiTurn)
         {
+            System.out.println("autism");
             Field tmp = checkAI();
             
             this.setText(tmp.getValue(), tmp.getPos());
@@ -470,7 +471,6 @@ public class GUI extends javax.swing.JFrame {
     }
     
     private Field aiMove() {
-        System.out.println("asdasd");
         Field tmp = game.makeMoveAIUI();
         return tmp;
     }
