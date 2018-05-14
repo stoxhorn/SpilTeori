@@ -15,7 +15,7 @@ public class SpilTeori {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        ThreeGame game = new ThreeGame();
-        game.runGame();
+        GUI g = new GUI();
+        g.setVisible(true);
     } 
 }

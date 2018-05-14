@@ -176,6 +176,30 @@ public final class ThreeBoard implements Board {
     public boolean checkWin(int turn) {
         
         //System.out.println(turn);
+        
+        boolean bol = check(0,1,2, 1)||
+                check(3,4,5, 1)||
+                check(6,7,8, 1)||
+                check(0,3,6, 1)||
+                check(1,4,7, 1)||
+                check(2,5,8, 1)||
+                check(0,4,8, 1)||
+                check(2,4,6, 1);
+        if(bol)
+        {
+            return bol;
+        }
+        
+        return check(0,1,2, 2)||
+                check(3,4,5, 2)||
+                check(6,7,8, 2)||
+                check(0,3,6, 2)||
+                check(1,4,7, 2)||
+                check(2,5,8, 2)||
+                check(0,4,8, 2)||
+                check(2,4,6, 2);
+        
+        /*
         return  check(0,1,2, turn)||
                 check(3,4,5, turn)||
                 check(6,7,8, turn)||
@@ -184,6 +208,7 @@ public final class ThreeBoard implements Board {
                 check(2,5,8, turn)||
                 check(0,4,8, turn)||
                 check(2,4,6, turn);
+*/
     }
     
     @Override

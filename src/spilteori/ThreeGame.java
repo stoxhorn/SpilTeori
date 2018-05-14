@@ -6,6 +6,7 @@
 package spilteori;
 
 // Need a method to add a move on the game, instead of only on the Board
+import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
@@ -76,6 +77,15 @@ public class ThreeGame implements Game {
         return currentBoard.getEmptyFields();
     }
     
+    public int getAbsTurn()
+    {
+        // Store playerTurn
+        int tmp = playerTurn;
+        
+        // return storage
+        return tmp;
+    }
+    
     @Override
     public int getTurn()
     {
@@ -97,6 +107,7 @@ public class ThreeGame implements Game {
     // Mangler metode til at få den nuværende node, getNode
     public Field getBestMove(int player) {
         GameNode t = currentNode;
+        System.out.println(Arrays.toString(currentNode.getChildren()));
         currentNode = t.getOptimal(currentNode.getPlayer());
         //System.out.println("WinValue: " + currentNode.getWinValue()[0]);
         //System.out.println("position: " + currentNode.getField().getPos());
@@ -142,6 +153,8 @@ public class ThreeGame implements Game {
         }
         
     }
+    
+  
     
     
     @Override
@@ -425,12 +438,25 @@ public class ThreeGame implements Game {
         moveMade = true;
     }
     
+    /**
+     * ============================______=======================================
+     * ==========||===||===========------=======================================
+     * ==========||===||=============||=========================================
+     * ==========||===||=============||=========================================
+     * ==========||___||===========__||__=======================================
+     * ===========-----============------=======================================
+     * =========================================================================
+     */
+    
+    
+    
+    
     public JButton[][] arrayBtn;	
     public void gridHolder() {
 	    
         // the frame that contains the components
-        JFrame frame = new JFrame();
-	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JFrame frame = new JFrame("Tic Tac Toe");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
 	// set the size of the frame
 	frame.setSize(450, 450);
 	    
@@ -455,4 +481,57 @@ public class ThreeGame implements Game {
             }
 	frame.setVisible(true);
     }
+
+
+
+    public int addMoveUI(int x)
+    {
+        
+        ThreeField newField = new ThreeField(playerTurn, x/3, x%3, x);
+        
+        GameNode[] children = currentNode.getChildren();
+        System.out.println(Arrays.toString(currentNode.getChildren()));
+        System.out.println();
+        if(currentNode.getDepth()<9)
+        {
+            for(GameNode child : children)
+            {
+                
+                if(child.getField().getPos() == newField.getPos())
+                {
+                    System.out.println("child pos " + child.getField().getPos() + " position of new move " + newField.getPos());
+                    currentNode = child;
+                    System.out.println(Arrays.toString(child.getChildren()));
+                    break;
+                }
+            }
+        }
+        // add the move to the board
+        if (!newMove(newField))
+        {
+            System.out.println("Pick a legal move, please.\n");
+            getTurn();
+            //getPlayerMove()
+            return -1;
+        }
+        moveMade = true;
+        return newField.getValue();
+    }
+    
+    public Field makeMoveAIUI()
+    {
+        // currentBoard.newMove(playerTurn, getBestMove(playerTurn));
+        Field newField = getBestMove(playerTurn);
+        // add the move to the board
+        
+        if (!newMove(newField))
+        {
+            getTurn();
+            System.out.println(currentBoard.toString());
+            System.out.println("Pick a legal move, please.\n");
+            makeMoveAI();
+        }
+        return newField;       
+    }    
+    
 }

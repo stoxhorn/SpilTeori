@@ -111,5 +111,7 @@ public interface GameNode {
     
     public int getPlayer();
             
+    @Override
+    public String toString();
     
 }

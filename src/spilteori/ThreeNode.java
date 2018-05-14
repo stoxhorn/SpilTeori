@@ -159,4 +159,15 @@ public class ThreeNode implements GameNode{
         depth = newDepth;
     }
     
+    @Override
+    public String toString()
+    {
+        String tmp = "";
+        tmp += getWinValue()[0];
+        tmp += " - pos ";
+        tmp += getField().getPos();
+        return tmp;
+        
+    }
+    
 }
