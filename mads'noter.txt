@@ -1,0 +1,21 @@
+Fairly sure it's not a fixed depth
+
+No need to name the methods or be so detail-oriented here
+Short description of the design/pseudo-code
+then do details with examples
+
+Tree creates nodes for each empty field
+recursions are done on new children
+checks if game is over,
+	in which case it assigns a valeu and returns
+
+any way to make code examples smaller?
+Maybe have some kind of notation like ^1 to comment specifics
+
+do this throughout all examples
+
+// Describe the design
+// Give example
+// Describe example
+
+Have code last? otherwise it can be weird to understand
