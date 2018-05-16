@@ -2,10 +2,6 @@ package spilteori;
 
 import java.util.ArrayList;
 
-/**
- * A gameTree for Three in a row
- * 
- */
 public final class ThreeRowGameTree implements GameTree {
 
     
@@ -40,9 +36,7 @@ public final class ThreeRowGameTree implements GameTree {
         this.createTree(newGame);
         
         // Calcutales the minmax, and provides a winvalue for all the nodes in the tree
-        calculateMinMax(rootNode);
-
-        
+        calculateMinMax(rootNode); 
     }
     
     @Override
@@ -145,9 +139,6 @@ public final class ThreeRowGameTree implements GameTree {
         int i = 0;
         for(Field newField : emptyFields)
         {
-           
-            
-            
             // Incrementing the cursor, as a recursive call will continue all the way to the first time a game ends
             // and when it goes a call depth up, will add to the next index in the array
             // Point is, Cursor points to index in array, and not to a depth or place in abstract tree, which the list is supposed to represent
@@ -323,6 +314,4 @@ public final class ThreeRowGameTree implements GameTree {
         GameNode tmp = tree.get(index);
         return tmp;
     }
-
-    
 }
