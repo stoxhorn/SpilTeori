@@ -1,9 +1,5 @@
 package spilteori;
 
-/**
- *
- * 
- */
 public class ThreeField implements Field{
 
     int value;

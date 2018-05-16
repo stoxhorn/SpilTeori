@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package spilteori;
 
 import java.util.ArrayList;
@@ -217,7 +212,7 @@ public final class ThreeRowGameTree implements GameTree {
         
         // Initializes a 2d array to contain the new chances of the children, with a size of chridren and 2
         // as winValue contains 2 values to describe and priritize a winValue
-        int[][] childrenChances = new int[childArray.length][2];
+        int[][] childrenWinValues = new int[childArray.length][2];
         
         
         // The recursive call on each children
@@ -227,12 +222,12 @@ public final class ThreeRowGameTree implements GameTree {
         for(GameNode x : childArray)
         {
            
-            childrenChances[i] = calculateMinMax(x);
+            childrenWinValues[i] = calculateMinMax(x);
             i++;
         }
         
         // The method that calculates the current chances of winning for this array
-        int[] newWinValue = minMax(childrenChances, givenNode.getPlayer());
+        int[] newWinValue = minMax(childrenWinValues, givenNode.getPlayer());
         
         // Getting the index of the currentNode
         // so that i can add the result to the ACTUAL node in the Tree.
@@ -246,53 +241,51 @@ public final class ThreeRowGameTree implements GameTree {
     }
     
     // Returns the value the player taking a turn at the given depth will prioritize, 
-    public int[] minMax(int[][] childrenChances, int player) {
-        
-        // Does not use depth anymore, and still works. 
-        // Fairly sure it will take the optimal move that is at the lowest part of the board, 
-        // as it takes the last index of the arraylist
-        
-        // initializing the two arayLists for getting optimal depth
+    public int[] minMax(int[][] childrenWinValues, int player) {
+        // initializing arrayLists to compare depth
+        ArrayList<int[]> List1 = new ArrayList<>();
         ArrayList<int[]> List2 = new ArrayList<>();
         ArrayList<int[]> List3 = new ArrayList<>();
 
-        for (int[] chance : childrenChances) {                
-            if(chance[0] == player)
+        for (int[] winValue : childrenWinValues) {                
+            if(winValue[0] == player)
             {
-                return chance;
-
-
+                List1.add(winValue);
             }
-            else if(chance[0] == 0)
+            else if(winValue[0] == 0)
             {
-                    List2.add(chance);
-
+                List2.add(winValue);
             }
             else
             {
-                    List3.add(chance);
-
+                List3.add(winValue);
             }
         }
         // Initializing the value to be returned, null as default
         int[] returnValue = null;
         
-        
-        // if the list of the second most important value is not empty
-        if(!List2.isEmpty()){
-            // set returnValue to be the one with the lowest depth of the list
-            for(int[] x : List2){
-                    returnValue = x;
+        //Finds the quickest win
+        if (!List1.isEmpty()) {
+            returnValue = List1.get(0);
+            for (int[] winValue : List1) {
+                if (winValue[1] < returnValue[1]) {
+                    returnValue = winValue;
+                }
             }
-            return returnValue;
         }
-        // Else if the list of the second most important value is not empty
-        else if(!List3.isEmpty()){
-            // set returnValue to be the one with the lowest depth of the list
-            for(int[] x : List3){
-                    returnValue = x;
+        //Takes the first possible draw
+        else if(!List2.isEmpty()){
+            // set returns the first winValue as all draws have the same depth
+            return List2.get(0);
+        }
+        //Finds the lossing play which draws the game out the longest
+        else if (!List3.isEmpty()) {
+            returnValue = List3.get(0);
+            for (int[] winValue : List1) {
+                if (winValue[1] > returnValue[1]) {
+                    returnValue = winValue;
+                }
             }
-            return returnValue;
         }
         return returnValue;
     }
