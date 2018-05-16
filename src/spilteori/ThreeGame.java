@@ -33,7 +33,7 @@ public class ThreeGame implements Game {
     
     private GameNode currentNode;
     
-    private final ThreeRowGameTree Tree;
+    private final ThreeRowGameTree tree;
     
     private final Board currentBoard;
     
@@ -49,9 +49,9 @@ public class ThreeGame implements Game {
     {
         playerTurn = 1;
         currentBoard = new ThreeBoard(9,3,3);
-        Tree = new ThreeRowGameTree(this);
+        tree = new ThreeRowGameTree(this);
         
-        currentNode = Tree.getNode(0);
+        currentNode = tree.getNode(0);
         
         moveMade = false;
     }
@@ -155,7 +155,7 @@ public class ThreeGame implements Game {
     
     @Override
     public GameNode getNode(int Index) {
-        return Tree.getNode(Index); 
+        return tree.getNode(Index); 
     }
 
     @Override

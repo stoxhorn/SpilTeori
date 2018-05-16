@@ -6,7 +6,6 @@
 package spilteori;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * A gameTree for Three in a row
@@ -16,50 +15,50 @@ public final class ThreeRowGameTree implements GameTree {
 
     
     // The arraylist containing all the Nodes
-    private final ArrayList<GameNode> Tree;
+    private final ArrayList<GameNode> tree;
     
     // A cursor that points at the current index of the tree, with the index being of the arraylist "Tree"
-    private int Cursor;
+    private int cursor;
     
     // The game this tree belongs to, barely used
-    private final Game MainGame;
+    private final Game mainGame;
     
     // Root node containing a field that cannot exist, and a Node that is not inside the array
     // has a value of -1, as it does not have a value yet
-    private final ThreeNode RootNode; 
+    private final ThreeNode rootNode; 
     
     public ThreeRowGameTree(Game newGame)
     {
         // initialize the arraylist tree
-        this.Tree = new ArrayList<>();
+        this.tree = new ArrayList<>();
         
         // Set the cursor at start
-        Cursor = 0;
+        cursor = 0;
         
         // Store the game from the constructor
-        MainGame = newGame;
+        mainGame = newGame;
         
         // Creates the rootnode
-        RootNode = new ThreeNode(new ThreeField(-1,0,0,0), 0, null);
+        rootNode = new ThreeNode(new ThreeField(-1,0,0,0), 0, null);
         
         // Creates the tree 
         this.createTree(newGame);
         
         // Calcutales the minmax, and provides a winvalue for all the nodes in the tree
-        calculateMinMax(RootNode);
+        calculateMinMax(rootNode);
 
         
     }
     
     @Override
     public ArrayList<GameNode> getTree() {
-        ArrayList tmp = Tree;
+        ArrayList tmp = tree;
         return tmp;
     }
 
     @Override
     public GameNode getParent() {
-        GameNode tmp = RootNode;
+        GameNode tmp = rootNode;
         return tmp;
     }
 
@@ -67,16 +66,16 @@ public final class ThreeRowGameTree implements GameTree {
     public void createTree(Game newGame) 
     {
         // Create the RootNode node
-        Tree.add(RootNode);
+        tree.add(rootNode);
         
         // Resets the cursor to first index
-        Cursor = 0;
+        cursor = 0;
         
         // Creates a new game object identical to the given one
         Board posBoard = new ThreeBoard(newGame.getBoard());
         
         // Fills out the Tree
-        addNodes(Tree.get(0), posBoard);
+        addNodes(tree.get(0), posBoard);
     }
     
     /**
@@ -104,7 +103,7 @@ public final class ThreeRowGameTree implements GameTree {
         int moveLeft = posBoard.getEmptyFields().size();
         
         // Create an int[] of the same length of the amount of players
-        int[] newWinValue = new int[MainGame.getPlayerAmount()];
+        int[] newWinValue = new int[mainGame.getPlayerAmount()];
         
         
         // If the given game contains a winner for the given player:
@@ -118,7 +117,7 @@ public final class ThreeRowGameTree implements GameTree {
             newWinValue[1] = depth;
             
             // adds the winvalue to the actual node in Tree
-            Tree.get(Cursor).setWinValue(newWinValue);
+            tree.get(cursor).setWinValue(newWinValue);
             
             // returns, as the game has won, and no more nodes needs to be added.
             return;
@@ -134,7 +133,7 @@ public final class ThreeRowGameTree implements GameTree {
             newWinValue[1] = depth;
             
             // Sets the winvalue to the actual node in the tree
-            Tree.get(Cursor).setWinValue(newWinValue);
+            tree.get(cursor).setWinValue(newWinValue);
             
             // returns as there are no more possible moves left
             return;
@@ -157,19 +156,19 @@ public final class ThreeRowGameTree implements GameTree {
             // Incrementing the cursor, as a recursive call will continue all the way to the first time a game ends
             // and when it goes a call depth up, will add to the next index in the array
             // Point is, Cursor points to index in array, and not to a depth or place in abstract tree, which the list is supposed to represent
-            Cursor ++;
+            cursor ++;
             
             // Constructing a new node, with the parameters gotten so far
             // the empty field representing it's move
             // the cursor to represents it's placement
             // and it's parent which is the currentNode
-            ThreeNode child = new ThreeNode(newField, Cursor, currentNode);
+            ThreeNode child = new ThreeNode(newField, cursor, currentNode);
            
             // Sets the depth of the node to be +1 from the current depth
             child.setDepth(depth+1);
             
             // Adds the child to the tree
-            Tree.add(child);
+            tree.add(child);
             
             // Adds the child to the array of children, and increments i
             newChildren[i] = child;      
@@ -240,7 +239,7 @@ public final class ThreeRowGameTree implements GameTree {
         int index = localNode.getIndex();
         
         // And finally i set the chances for the appropriate GameNode
-        Tree.get(index).setWinValue(newWinValue);
+        tree.get(index).setWinValue(newWinValue);
         
         // and finally i return the chances
         return newWinValue;
@@ -303,7 +302,7 @@ public final class ThreeRowGameTree implements GameTree {
     {
         Field bestMove;
         
-        GameNode thisNode = Tree.get(Cursor);
+        GameNode thisNode = tree.get(cursor);
         
         GameNode chances = thisNode.getOptimal(thisNode.getPlayer());
         
@@ -316,19 +315,19 @@ public final class ThreeRowGameTree implements GameTree {
     @Override
     public int getCursor()
     {
-        int tmp = Cursor;
+        int tmp = cursor;
         
         return tmp;
     }
 
     @Override
     public void setCursor(int newCursor) {
-        Cursor = newCursor;
+        cursor = newCursor;
     }
 
     @Override
     public GameNode getNode(int index) {
-        GameNode tmp = Tree.get(index);
+        GameNode tmp = tree.get(index);
         return tmp;
     }
 

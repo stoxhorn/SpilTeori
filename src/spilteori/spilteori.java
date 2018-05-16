@@ -9,7 +9,7 @@ package spilteori;
  *
  * @author mads-
  */
-public class SpilTeori {
+public class spilteori {
 
     /**
      * @param args the command line arguments
