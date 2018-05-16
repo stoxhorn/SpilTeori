@@ -83,18 +83,18 @@ public class ThreeNode implements GameNode{
             }
         }
         if (!childrenArray1.isEmpty()) {
-            return getBestChild(childrenArray1);
+            return getBestChild(childrenArray1, player);
         }
         else if (!childrenArray2.isEmpty()) {
-            return getBestChild(childrenArray2);
+            return getBestChild(childrenArray2, player);
         }
         else {
-            return getBestChild(childrenArray3);
+            return getBestChild(childrenArray3, player);
         }
     }
     
     //Returns the child with the lowest depth. Should only be called on the winning value for a player.
-    private GameNode getBestChild(ArrayList<GameNode> childrenArray) {
+    private GameNode getBestChild(ArrayList<GameNode> childrenArray, int player) {
         GameNode bestChild = null;
         for (GameNode child : childrenArray) {
             //For the first for loop run
@@ -102,7 +102,10 @@ public class ThreeNode implements GameNode{
                 bestChild = child;
             }
             else {
-                if (bestChild.getWinValue()[1] > child.getWinValue()[1]) {
+                if (bestChild.getWinValue()[0] == player && bestChild.getWinValue()[1] > child.getWinValue()[1]) {
+                    bestChild = child;
+                }
+                else if (bestChild.getWinValue()[0] != player && bestChild.getWinValue()[1] < child.getWinValue()[1]) {
                     bestChild = child;
                 }
             }
