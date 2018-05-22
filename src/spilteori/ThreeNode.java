@@ -1,6 +1,7 @@
 package spilteori;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ThreeNode implements GameNode{
     
@@ -67,11 +68,7 @@ public class ThreeNode implements GameNode{
         ArrayList<GameNode> childrenArray3 = new ArrayList<>();
         
         for (GameNode child : children) {
-            //Checks if the middle is a child and takes it as a move for player 1 as it is the optimal start. The AI wont pick it itself as it sees a draw no matter what from the starting position given that both players play optimally.
-            if( child.getField().getPos() == 4) {
-                return child;
-            }
-
+            System.out.println(Arrays.toString(child.getWinValue()));
             if (child.getWinValue()[0] == player) {
                 childrenArray1.add(child);
             }
@@ -82,6 +79,7 @@ public class ThreeNode implements GameNode{
                 childrenArray3.add(child);
             }
         }
+        System.out.println("Valgt:");
         if (!childrenArray1.isEmpty()) {
             return getBestChild(childrenArray1, player);
         }
