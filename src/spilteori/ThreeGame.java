@@ -114,8 +114,6 @@ public class ThreeGame implements Game {
     //afterwards playerturn should be updated
     @Override
     public boolean checkWin() {
-        
-        
         return  currentBoard.checkWin(playerTurn);
     }
     
@@ -124,7 +122,6 @@ public class ThreeGame implements Game {
     //makes the most optimal play in the given situation
     @Override
     public void makeMoveAI() {
-        // currentBoard.newMove(playerTurn, getBestMove(playerTurn));
         Field newField = getBestMove(playerTurn);
         arrayBtn[newField.getRow()][newField.getColoumn()].setText(Integer.toString(playerTurn));
         arrayBtn[newField.getRow()][newField.getColoumn()].setEnabled(false);
@@ -179,12 +176,7 @@ public class ThreeGame implements Game {
         }
         else 
         {
-            /*if ("n".equals(answer))
-            {*/
                 System.out.println("Have a nice day");
-            /*}
-            System.out.println("Please press n or y, moron");
-            newGame();*/
         }
         
     }
@@ -307,12 +299,7 @@ public class ThreeGame implements Game {
             }
             getTurn();
             makeMoveAI();
-            
-            
-
         }
-        
-        
         // Announces the end of the game and potential winners
         announceEnd();
     }
@@ -328,7 +315,6 @@ public class ThreeGame implements Game {
     public void playerMove() {
         // Announce the current player
         System.out.println("It is now player " + playerTurn +"'s turn");
-        
         // ask for for which field to make a move on
         //Field newField = getPlayerMove();
         Field newField = getPlayerMove();

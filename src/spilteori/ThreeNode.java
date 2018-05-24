@@ -68,7 +68,6 @@ public class ThreeNode implements GameNode{
         ArrayList<GameNode> childrenArray3 = new ArrayList<>();
         
         for (GameNode child : children) {
-            System.out.println(Arrays.toString(child.getWinValue()));
             if (child.getWinValue()[0] == player) {
                 childrenArray1.add(child);
             }
@@ -79,7 +78,6 @@ public class ThreeNode implements GameNode{
                 childrenArray3.add(child);
             }
         }
-        System.out.println("Valgt:");
         if (!childrenArray1.isEmpty()) {
             return getBestChild(childrenArray1, player);
         }
